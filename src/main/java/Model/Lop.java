@@ -16,24 +16,21 @@ public class Lop {
     private String maLop;
     private String tenLop;
     private String nganh;
-    private String khoa;
     private String coVan;
-    private List dssvLop;
+    private List<SinhVien> dssvLop;
 
     public Lop() {
         this.maLop = "";
         this.tenLop = "";
         this.nganh = "";
-        this.khoa = "";
         this.coVan = "";
         this.dssvLop = new ArrayList<>();
     }
     
-    public Lop(String maLop, String tenLop, String nganh, String khoa, String coVan, List dssvLop) {
+    public Lop(String maLop, String tenLop, String nganh, String khoa, String coVan, List<SinhVien> dssvLop) {
         this.maLop = maLop;
         this.tenLop = tenLop;
         this.nganh = nganh;
-        this.khoa = khoa;
         this.coVan = coVan;
         this.dssvLop = dssvLop;
     }
@@ -70,19 +67,11 @@ public class Lop {
         this.nganh = nganh;
     }
 
-    public String getKhoa() {
-        return khoa;
-    }
-
-    public void setKhoa(String khoa) {
-        this.khoa = khoa;
-    }
-
-    public List getDssvLop() {
+    public List<SinhVien> getDssvLop() {
         return dssvLop;
     }
 
-    public void setDssvLop(List dssvLop) {
+    public void setDssvLop(List<SinhVien> dssvLop) {
         this.dssvLop = dssvLop;
     }
     

@@ -11,22 +11,16 @@ package Model;
 public class DangKy {
     
     private String maSV;
-    private String maMH;
-    private int nhom;
-    private float diem;
+    private int maLTC;
     
     public DangKy() {
         this.maSV = "";
-        this.maMH = "";
-        this.nhom = 0;
-        this.diem = 0.0f;
+        this.maLTC = 0;
     }
 
-    public DangKy(String maSV, String maMH, int nhom, float diem) {
+    public DangKy(String maSV, int maLTC) {
         this.maSV = maSV;
-        this.maMH = maMH;
-        this.nhom = nhom;
-        this.diem = diem;
+        this.maLTC = maLTC;
     }
 
     public String getMaSV() {
@@ -37,30 +31,11 @@ public class DangKy {
         this.maSV = maSV;
     }
 
-    public String getMaMH() {
-        return maMH;
+    public int getMaLTC() {
+        return maLTC;
     }
 
-    public void setMaMH(String maMH) {
-        this.maMH = maMH;
+    public void setMaLTC(int maLTC) {
+        this.maLTC = maLTC;
     }
-
-    public int getNhom() {
-        return nhom;
-    }
-
-    public void setNhom(int nhom) {
-        this.nhom = nhom;
-    }
-
-    public float getDiem() {
-        return diem;
-    }
-
-    public void setDiem(float diem) {
-        this.diem = diem;
-    }
-    
-    
-    
 }

@@ -21,7 +21,6 @@ public class SinhVien {
     private String email;
     private String sdt;
     private String maLop;
-    private String nganh;
     private int namNhapHoc;
     private String trangThai;
     
@@ -35,12 +34,11 @@ public class SinhVien {
         this.email = "";
         this.sdt = "";
         this.maLop = "";
-        this.nganh = "";
         this.namNhapHoc = 0;
         this.trangThai = "";
     }
 
-    public SinhVien(String maSV, String hoSV, String tenlotSV, String tenSV, String phai, Date ngaySinh, String email, String sdt, String maLop, String nganh, int namNhapHoc, String trangThai) {
+    public SinhVien(String maSV, String hoSV, String tenlotSV, String tenSV, String phai, Date ngaySinh, String email, String sdt, String maLop, int namNhapHoc, String trangThai) {
         this.maSV = maSV;
         this.hoSV = hoSV;
         this.tenlotSV = tenlotSV;
@@ -50,7 +48,6 @@ public class SinhVien {
         this.email = email;
         this.sdt = sdt;
         this.maLop = maLop;
-        this.nganh = nganh;
         this.namNhapHoc = namNhapHoc;
         this.trangThai = trangThai;
     }
@@ -125,14 +122,6 @@ public class SinhVien {
 
     public void setMaLop(String maLop) {
         this.maLop = maLop;
-    }
-
-    public String getNganh() {
-        return nganh;
-    }
-
-    public void setNganh(String nganh) {
-        this.nganh = nganh;
     }
 
     public int getNamNhapHoc() {

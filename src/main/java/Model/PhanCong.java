@@ -11,19 +11,16 @@ package Model;
 public class PhanCong {
     
     private String maGV;
-    private String maMH;
-    private int khoaHT;
+    private int maLTC;
     
     public PhanCong() {
         this.maGV = "";
-        this.maMH = "";
-        this.khoaHT = 0;
+        this.maLTC = 0;
     }
 
-    public PhanCong(String maGV, String maMH, int khoaHT) {
+    public PhanCong(String maGV, int maLTC) {
         this.maGV = maGV;
-        this.maMH = maMH;
-        this.khoaHT = khoaHT;
+        this.maLTC = maLTC;
     }
 
     public String getMaGV() {
@@ -34,20 +31,12 @@ public class PhanCong {
         this.maGV = maGV;
     }
 
-    public String getMaMH() {
-        return maMH;
+    public int getMaLTC() {
+        return maLTC;
     }
 
-    public void setMaMH(String maMH) {
-        this.maMH = maMH;
-    }
-
-    public int getKhoaHT() {
-        return khoaHT;
-    }
-
-    public void setKhoaHT(int khoaHT) {
-        this.khoaHT = khoaHT;
+    public void setMaLTC(int maLTC) {
+        this.maLTC = maLTC;
     }
     
     

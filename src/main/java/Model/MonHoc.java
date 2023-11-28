@@ -15,6 +15,7 @@ public class MonHoc {
     private int stcth;
     private int stclt;
     private String phanLoai;
+    private String khoa;
     
     public MonHoc() {
         maMH = "";
@@ -22,14 +23,24 @@ public class MonHoc {
         stcth = 0;
         stclt = 0;
         phanLoai = "";
+        khoa = "";
     }
     
-    public MonHoc(String maMH, String tenMH, int stclt, int stcth, String phanLoai) {
+    public MonHoc(String maMH, String tenMH, int stclt, int stcth, String phanLoai, String khoa) {
         this.maMH = maMH;
         this.tenMH = tenMH;
         this.stclt = stclt;
         this.stcth = stcth;
         this.phanLoai = phanLoai;
+        this.khoa = khoa;
+    }
+
+    public String getKhoa() {
+        return khoa;
+    }
+
+    public void setKhoa(String khoa) {
+        this.khoa = khoa;
     }
 
     public String getMaMH() {

@@ -4,6 +4,9 @@
  */
 package Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Minh Thu
@@ -12,32 +15,32 @@ public class LopTinChi {
     
     private int maLopTC;
     private String maMH;
-    private String nienKhoa;
-    private int hocKy;
+    private int maHK;
     private int nhom;
     private int svMin;
     private int svMax;
     private boolean huyLop;
+    private List<DangKy> dssvdk;
     
     public LopTinChi() {
         this.maLopTC = 0;
         this.maMH = "";
-        this.nienKhoa = "";
-        this.hocKy = 0;
+        this.maHK = 0;
         this.nhom = 0;
         this.svMin = -1;
         this.svMax = -1;
+        this.dssvdk = new ArrayList<>();
         this.huyLop = false;
     }
 
-    public LopTinChi(int maLopTC, String maMH, String nienKhoa, int hocKy, int nhom, int svMin, int svMax, boolean huyLop) {
+    public LopTinChi(int maLopTC, String maMH, int maHK, int nhom, int svMin, int svMax, List<DangKy> dssvdk, boolean huyLop) {
         this.maLopTC = maLopTC;
         this.maMH = maMH;
-        this.nienKhoa = nienKhoa;
-        this.hocKy = hocKy;
+        this.maHK = maHK;
         this.nhom = nhom;
         this.svMin = svMin;
         this.svMax = svMax;
+        this.dssvdk = dssvdk;
         this.huyLop = huyLop;
     }
 
@@ -55,22 +58,6 @@ public class LopTinChi {
 
     public void setMaMH(String maMH) {
         this.maMH = maMH;
-    }
-
-    public String getNienKhoa() {
-        return nienKhoa;
-    }
-
-    public void setNienKhoa(String nienKhoa) {
-        this.nienKhoa = nienKhoa;
-    }
-
-    public int getHocKy() {
-        return hocKy;
-    }
-
-    public void setHocKy(int hocKy) {
-        this.hocKy = hocKy;
     }
 
     public int getNhom() {
@@ -103,6 +90,22 @@ public class LopTinChi {
 
     public void setHuyLop(boolean huyLop) {
         this.huyLop = huyLop;
+    }
+
+    public int getMaHK() {
+        return maHK;
+    }
+
+    public void setMaHK(int maHK) {
+        this.maHK = maHK;
+    }
+
+    public List<DangKy> getDssvdk() {
+        return dssvdk;
+    }
+
+    public void setDssvdk(List<DangKy> dssvdk) {
+        this.dssvdk = dssvdk;
     }
     
     

@@ -2,9 +2,9 @@ package View;
 
 import javax.swing.ButtonGroup;
 
-public class ChuongTrinhDaoTao extends javax.swing.JFrame {
+public class HomePage extends javax.swing.JFrame {
 
-    public ChuongTrinhDaoTao() {
+    public HomePage() {
         initComponents();
     }
 
