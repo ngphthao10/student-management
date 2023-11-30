@@ -29,6 +29,7 @@ public class HomePage extends javax.swing.JFrame {
         lbMaMH2 = new javax.swing.JLabel();
         cmbNganh = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
+<<<<<<< HEAD
         lbMaMH = new javax.swing.JLabel();
         tfmaMH = new javax.swing.JTextField();
         lbTenMH = new javax.swing.JLabel();
@@ -45,6 +46,14 @@ public class HomePage extends javax.swing.JFrame {
         btSua = new javax.swing.JButton();
         btXoa = new javax.swing.JButton();
         btNhapMoi = new javax.swing.JButton();
+=======
+        jLabel3 = new javax.swing.JLabel();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mnItemTaiKhoan = new javax.swing.JMenuItem();
+        mnItemDoiMK = new javax.swing.JMenuItem();
+        mnItemDangXuat = new javax.swing.JMenuItem();
+>>>>>>> ae262a5 (sua gi do ke i)
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,7 +128,11 @@ public class HomePage extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel2.setPreferredSize(new java.awt.Dimension(1069, 700));
 
+<<<<<<< HEAD
         jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-find-32.png")); // NOI18N
+=======
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1530, -1));
+>>>>>>> ae262a5 (sua gi do ke i)
 
         cmbKhoa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cmbKhoa.setForeground(new java.awt.Color(0, 0, 0));
@@ -231,6 +244,7 @@ public class HomePage extends javax.swing.JFrame {
 
         tfmaMH1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+<<<<<<< HEAD
         lbstclt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbstclt.setText("STCLT");
 
@@ -372,6 +386,37 @@ public class HomePage extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+=======
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\6_innovation01 (2).jpg")); // NOI18N
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel3.add(jLabel3);
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 1220, 710));
+
+        jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-menu-16.png")); // NOI18N
+        jMenu1.setText("Menu");
+
+        mnItemTaiKhoan.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\Downloads\\16x16-free-application-icons\\16x16-free-application-icons\\png\\16x16\\User group.png")); // NOI18N
+        mnItemTaiKhoan.setText("Thông tin tài khoản");
+        jMenu1.add(mnItemTaiKhoan);
+
+        mnItemDoiMK.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\Downloads\\16x16-free-application-icons\\16x16-free-application-icons\\png\\16x16\\Key.png")); // NOI18N
+        mnItemDoiMK.setText("Đổi mật khẩu");
+        mnItemDoiMK.setToolTipText("");
+        jMenu1.add(mnItemDoiMK);
+
+        mnItemDangXuat.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\Downloads\\16x16-free-application-icons\\16x16-free-application-icons\\png\\16x16\\Exit.png")); // NOI18N
+        mnItemDangXuat.setText("Đăng xuất");
+        jMenu1.add(mnItemDangXuat);
+
+        jMenuBar2.add(jMenu1);
+
+        setJMenuBar(jMenuBar2);
+>>>>>>> ae262a5 (sua gi do ke i)
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -411,6 +456,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+<<<<<<< HEAD
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -428,5 +474,16 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JTextField tfmaMH1;
     private javax.swing.JTextField tfmaMH2;
     private javax.swing.JTextField tfmaMH3;
+=======
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JMenuItem mnItemDangXuat;
+    private javax.swing.JMenuItem mnItemDoiMK;
+    private javax.swing.JMenuItem mnItemTaiKhoan;
+>>>>>>> ae262a5 (sua gi do ke i)
     // End of variables declaration//GEN-END:variables
 }
