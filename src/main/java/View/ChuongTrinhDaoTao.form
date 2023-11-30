@@ -312,6 +312,9 @@
                     <MatteColorBorder/>
                   </Border>
                 </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new java.awt.Font(&quot;Segoe UI&quot;, 0, 24)" type="code"/>
+                </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
@@ -363,9 +366,6 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbMonHocMouseClicked"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -421,7 +421,6 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-<<<<<<< HEAD
                           <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
@@ -472,51 +471,8 @@
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="tfmaMH3" min="-2" pref="141" max="-2" attributes="0"/>
                       </Group>
-=======
-                          <Component id="lbstclt1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="tfStclt" min="-2" pref="141" max="-2" attributes="0"/>
-                          <EmptySpace pref="60" max="32767" attributes="0"/>
-                          <Component id="lbstcth" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="tfStcth" min="-2" pref="141" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="lbMaMH" min="-2" pref="127" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="tfMaMH" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lbPhanLoai" min="-2" pref="107" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                          <Component id="cbCoSo" min="-2" pref="87" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="cbChuyenNganh" min="-2" pref="159" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="lbTenMH" min="-2" pref="127" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="tfTenMH" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lbKhoa" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                          <Component id="tfKhoa" max="32767" attributes="0"/>
-                      </Group>
->>>>>>> ae262a5 (sua gi do ke i)
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btThem" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btXoa" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btSua" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btNhapMoi" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -526,47 +482,34 @@
                   <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbMaMH" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfMaMH" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfmaMH" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbTenMH" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfTenMH" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfmaMH1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tfStclt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbstclt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfmaMH2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbstcth" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfStcth" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbstclt1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfmaMH3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbPhanLoai" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbCoSo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbChuyenNganh" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-<<<<<<< HEAD
                   <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-=======
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbKhoa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfKhoa" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
->>>>>>> ae262a5 (sua gi do ke i)
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btThem" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btSua" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btXoa" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btNhapMoi" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-<<<<<<< HEAD
                   <EmptySpace pref="308" max="32767" attributes="0"/>
-=======
-                  <EmptySpace pref="209" max="32767" attributes="0"/>
->>>>>>> ae262a5 (sua gi do ke i)
               </Group>
           </Group>
         </DimensionLayout>
@@ -580,7 +523,7 @@
             <Property name="text" type="java.lang.String" value="M&#xe3; m&#xf4;n h&#x1ecd;c"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfMaMH">
+        <Component class="javax.swing.JTextField" name="tfmaMH">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
@@ -595,29 +538,29 @@
             <Property name="text" type="java.lang.String" value="T&#xea;n m&#xf4;n h&#x1ecd;c"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfKhoa">
+        <Component class="javax.swing.JTextField" name="tfmaMH1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbKhoa">
+        <Component class="javax.swing.JLabel" name="lbstclt">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Khoa"/>
+            <Property name="text" type="java.lang.String" value="STCLT"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfStclt">
+        <Component class="javax.swing.JTextField" name="tfmaMH2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfStcth">
+        <Component class="javax.swing.JTextField" name="tfmaMH3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
@@ -717,21 +660,6 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="NH&#x1eac;P M&#x1eda;I"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lbstclt1">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="STCLT"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="tfTenMH">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
-            </Property>
           </Properties>
         </Component>
       </SubComponents>
