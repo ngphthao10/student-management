@@ -322,47 +322,6 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-<<<<<<< HEAD
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(lbMaMH, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfmaMH))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(lbTenMH, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfmaMH1))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbPhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(31, 31, 31)
-                                        .addComponent(btThem)))
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(37, 37, 37)
-                                        .addComponent(cbCoSo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cbChuyenNganh, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btXoa)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btSua)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btNhapMoi)
-                                        .addGap(0, 0, Short.MAX_VALUE))))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(19, Short.MAX_VALUE)
-                        .addComponent(lbstclt)
-                        .addGap(26, 26, 26)
-                        .addComponent(tfmaMH2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(lbstcth)
-                        .addGap(32, 32, 32)
-                        .addComponent(tfmaMH3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-=======
                         .addComponent(lbstclt1)
                         .addGap(18, 18, 18)
                         .addComponent(tfStclt, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -388,7 +347,6 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
                         .addComponent(lbKhoa)
                         .addGap(84, 84, 84)
                         .addComponent(tfKhoa)))
->>>>>>> ae262a5 (sua gi do ke i)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -423,25 +381,17 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
                     .addComponent(lbPhanLoai)
                     .addComponent(cbCoSo)
                     .addComponent(cbChuyenNganh))
-<<<<<<< HEAD
-                .addGap(63, 63, 63)
-=======
                 .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbKhoa)
                     .addComponent(tfKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
->>>>>>> ae262a5 (sua gi do ke i)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btThem)
                     .addComponent(btSua)
                     .addComponent(btXoa)
                     .addComponent(btNhapMoi))
-<<<<<<< HEAD
-                .addContainerGap(308, Short.MAX_VALUE))
-=======
                 .addContainerGap(209, Short.MAX_VALUE))
->>>>>>> ae262a5 (sua gi do ke i)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -469,15 +419,11 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-<<<<<<< HEAD
-    private void cmbKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKhoaActionPerformed
-=======
     private void tbMonHocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMonHocMouseClicked
         this.showDetail();
     }//GEN-LAST:event_tbMonHocMouseClicked
 
     private void cmbNganhActionPerformed(java.awt.event.ActionEvent evt) {                                         
->>>>>>> ae262a5 (sua gi do ke i)
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbKhoaActionPerformed
 
@@ -518,11 +464,8 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-<<<<<<< HEAD
-=======
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbKhoa;
->>>>>>> ae262a5 (sua gi do ke i)
     private javax.swing.JLabel lbMaMH;
     private javax.swing.JLabel lbMaMH1;
     private javax.swing.JLabel lbMaMH2;
