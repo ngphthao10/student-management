@@ -26,6 +26,8 @@ public class DataConnection {
 
             connection = DriverManager.getConnection(connectURL, sqlUser, sqlPassword);
             statement = connection.createStatement();
+            
+//            System.out.printf("Success");
 //            Statement stmt = conn.createStatement();
 //            String sql = "select * from MONHOC";
 //
