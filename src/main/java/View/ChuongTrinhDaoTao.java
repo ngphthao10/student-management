@@ -7,6 +7,7 @@ import java.awt.event.ItemEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ChuongTrinhDaoTao extends javax.swing.JFrame {
@@ -24,6 +25,7 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
     
     private void showData() throws ClassNotFoundException {
         LoadDatabase.filterAndDisplayTableMonHoc(cbbKhoa, cbbNganh);
+        myTable.setRowCount(0);
         int dem = 0;
         for (MonHoc mh : Controller.controller.arrayListMonHoc) {
             dem++;
@@ -36,11 +38,12 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         cbbKhoa = new javax.swing.JComboBox<>();
@@ -73,12 +76,6 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(209, 232, 195));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-user-64.png"))); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-cat-64.png"))); // NOI18N
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Student Management");
@@ -95,18 +92,26 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("XX - Ten người dùng");
 
+        jButton1.setBackground(new java.awt.Color(209, 232, 195));
+        jButton1.setBorder(null);
+
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(42, 42, 42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,27 +123,26 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel6))
+                            .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1))))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
+            .addComponent(jSeparator1)
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel2.setPreferredSize(new java.awt.Dimension(1069, 700));
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-find-32.png"))); // NOI18N
 
         cbbKhoa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cbbKhoa.setForeground(new java.awt.Color(0, 0, 0));
@@ -268,21 +272,41 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
         btThem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btThem.setForeground(new java.awt.Color(255, 255, 255));
         btThem.setText("THÊM");
+        btThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThemActionPerformed(evt);
+            }
+        });
 
         btSua.setBackground(new java.awt.Color(76, 124, 97));
         btSua.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btSua.setForeground(new java.awt.Color(255, 255, 255));
         btSua.setText("SỬA");
+        btSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSuaActionPerformed(evt);
+            }
+        });
 
         btXoa.setBackground(new java.awt.Color(76, 124, 97));
         btXoa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btXoa.setForeground(new java.awt.Color(255, 255, 255));
         btXoa.setText("XÓA");
+        btXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXoaActionPerformed(evt);
+            }
+        });
 
         btNhapMoi.setBackground(new java.awt.Color(76, 124, 97));
         btNhapMoi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btNhapMoi.setForeground(new java.awt.Color(255, 255, 255));
         btNhapMoi.setText("NHẬP MỚI");
+        btNhapMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNhapMoiActionPerformed(evt);
+            }
+        });
 
         lbTenMH1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbTenMH1.setText("Khoa");
@@ -446,6 +470,134 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btTimKiemActionPerformed
 
+    private void btNhapMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNhapMoiActionPerformed
+        if (evt.getSource() == btNhapMoi) {
+            tfMaMH.setText("");
+            tfTenMH.setText("");
+            tfStclt.setText("");
+            tfStcth.setText("");
+            cbbPhanLoai.setSelectedItem("Cơ sở");
+            tfKhoa.setText("");
+        }
+    }//GEN-LAST:event_btNhapMoiActionPerformed
+
+    private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
+        if (tfMaMH.getText().equals("") || tfTenMH.getText().equals("") || tfStclt.getText().equals("") || tfStcth.getText().equals("") || tfKhoa.getText().equals("") || cbbPhanLoai.getSelectedItem().equals(null)) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin môn học!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int row = tbMonHoc.getSelectedRow();
+            String pLoai = (String) cbbPhanLoai.getSelectedItem();
+            MonHoc mh = new MonHoc(tfMaMH.getText(), tfTenMH.getText(), Integer.parseInt(tfStclt.getText()), Integer.parseInt(tfStcth.getText()), pLoai, tfKhoa.getText());
+
+            for (MonHoc mhoc : Controller.controller.arrayListMonHoc) {
+                if (mhoc.getMaMH().equals(tfMaMH.getText())) {
+                    JOptionPane.showMessageDialog(null, "Môn học đã tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+//                for (TaiKhoan tkk : Controller.controller.arrayListTaiKhoan) {
+//                    if (txtMaNV.getText().equals(tkk.getMaNV())) {
+//                        baoloi.setText("Tên đăng nhập đã tồn tại!");
+//                        return;
+//                    }
+//                }
+            try {
+                Controller.InsertData.insertMonHoc(mh);
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ChuongTrinhDaoTao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            tbMonHoc.getSelectionModel().setSelectionInterval(tbMonHoc.getRowCount() - 1, tbMonHoc.getRowCount() - 1);
+        }
+        tfMaMH.setText("");
+        tfTenMH.setText("");
+        tfStclt.setText("");
+        tfStcth.setText("");
+        cbbPhanLoai.setSelectedItem("Cơ sở");
+        tfKhoa.setText("");
+        try {
+            showData();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ChuongTrinhDaoTao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btThemActionPerformed
+
+    private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
+        if (tbMonHoc.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn môn học!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Xác nhận xóa môn học?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+
+            if (confirmed == JOptionPane.YES_OPTION) {
+                System.out.println(tbMonHoc.getValueAt(tbMonHoc.getSelectedRow(), 1));
+                try {
+                    Controller.DeleteData.deleteMonHoc((String) tbMonHoc.getValueAt(tbMonHoc.getSelectedRow(), 1));
+//                Controller.DeleteData.deleteTaiKhoan((String) tbMonHoc.getValueAt(tbMonHoc.getSelectedRow(), 1));
+
+                    showData();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ChuongTrinhDaoTao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        }
+        tfMaMH.setText("");
+        tfTenMH.setText("");
+        tfStclt.setText("");
+        tfStcth.setText("");
+        cbbPhanLoai.setSelectedItem("Cơ sở");
+        tfKhoa.setText("");
+
+        try {
+            showData();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ChuongTrinhDaoTao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btXoaActionPerformed
+
+    private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
+        if (tfMaMH.getText().equals("") || tfTenMH.getText().equals("") || tfStclt.getText().equals("") || tfStcth.getText().equals("") || tfKhoa.getText().equals("") || cbbPhanLoai.getSelectedItem().equals(null)) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin môn học!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int row = tbMonHoc.getSelectedRow();
+            String pLoai = (String) cbbPhanLoai.getSelectedItem();
+            MonHoc mhoc = new MonHoc(tfMaMH.getText(), tfTenMH.getText(), Integer.parseInt(tfStclt.getText()), Integer.parseInt(tfStcth.getText()), pLoai, tfKhoa.getText());
+
+            for (MonHoc mh : Controller.controller.arrayListMonHoc) {
+                if (mh.getTenMH().equals(tfTenMH.getText())) {
+                    JOptionPane.showMessageDialog(null, "Tên môn học đã tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+            try {
+                Controller.UpdateData.updateMonHoc(mhoc);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ChuongTrinhDaoTao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            tbMonHoc.getSelectionModel().setSelectionInterval(row, row);
+
+//                for (TaiKhoan tkk : Controller.controller.arrayListTaiKhoan) {
+//                    if (txtMaNV.getText().equals(tkk.getMaNV())) {
+//                        baoloi.setText("Tên đăng nhập đã tồn tại!");
+//                        return;
+//                    }
+//                }
+        }
+        tfMaMH.setText("");
+        tfTenMH.setText("");
+        tfStclt.setText("");
+        tfStcth.setText("");
+        cbbPhanLoai.setSelectedItem("Cơ sở");
+        tfKhoa.setText("");
+        try {
+            showData();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ChuongTrinhDaoTao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btSuaActionPerformed
+
 
     public static void main(String args[]) {
 
@@ -467,9 +619,9 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbKhoa;
     private javax.swing.JComboBox<String> cbbNganh;
     private javax.swing.JComboBox<String> cbbPhanLoai;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -479,6 +631,7 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbMaMH;
     private javax.swing.JLabel lbMaMH1;
     private javax.swing.JLabel lbMaMH2;
