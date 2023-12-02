@@ -1,13 +1,54 @@
 package View;
 
-import javax.swing.ButtonGroup;
+import Controller.LoadDatabase;
+import static Controller.controller.arrayListKhoa;
+import static Controller.controller.arrayListNganh;
+import Model.Khoa;
+import Model.MonHoc;
+import Model.Nganh;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class DanhSachKhoaNganh extends javax.swing.JFrame {
-
+    private DefaultTableModel khoaTable, nganhTable;
     public DanhSachKhoaNganh() {
         initComponents();
+        khoaTable = (DefaultTableModel) tbKhoa.getModel();
+        nganhTable = (DefaultTableModel) tbNganh.getModel();
+        khoaTable.setRowCount(0);
+        nganhTable.setRowCount(0);
+        LoadDatabase loadData = new LoadDatabase();
+        loadData.fillComboBox(cbbKhoa, "tenKhoa", "KHOA");
+        showDataKhoa();
     }
 
+    public void showDataKhoa(){
+        khoaTable.setRowCount(0);
+        LoadDatabase.loadTableKhoa();
+        int dem = 0;
+        for (Khoa khoa : Controller.controller.arrayListKhoa) {
+            dem++;
+            khoaTable.addRow(new Object[]{dem, khoa.getMaKhoa(), khoa.getTenKhoa(), khoa.getSdt(), khoa.getTrgKhoa(), khoa.getNgayNhanChuc()});
+        }
+    }
+    
+    
+    public void showDataNganh() throws ClassNotFoundException{
+        nganhTable.setRowCount(0);
+        LoadDatabase.filterAndDisplayTableNganh(cbbKhoa);
+        int dem = 0;
+        for (Nganh nganh : Controller.controller.arrayListNganh) {
+            dem++;
+            nganhTable.addRow(new Object[]{dem, nganh.getMaNganh(), nganh.getTenNganh(), nganh.getKhoa()});
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -46,7 +87,7 @@ public class DanhSachKhoaNganh extends javax.swing.JFrame {
         btXoaNganh = new javax.swing.JButton();
         btNhapMoiNganh = new javax.swing.JButton();
         lbMaMH1 = new javax.swing.JLabel();
-        cmbKhoa = new javax.swing.JComboBox<>();
+        cbbKhoa = new javax.swing.JComboBox<>();
         btTimKiem = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -126,27 +167,30 @@ public class DanhSachKhoaNganh extends javax.swing.JFrame {
         panelKhoa.setPreferredSize(new java.awt.Dimension(1069, 700));
 
         tbKhoa.setBorder(new javax.swing.border.MatteBorder(null));
-        tbKhoa.setFont(new java.awt.Font("Segoe UI", 0, 24));
         tbKhoa.setForeground(new java.awt.Color(0, 0, 0));
         tbKhoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã khoa", "Tên khoa", "SĐT", "Ngày nhận chức"
+                "STT", "Mã khoa", "Tên khoa", "SĐT", "Trưởng khoa", "Ngày nhận chức"
             }
         ));
+        tbKhoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbKhoaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbKhoa);
         if (tbKhoa.getColumnModel().getColumnCount() > 0) {
-            tbKhoa.getColumnModel().getColumn(0).setPreferredWidth(70);
-            tbKhoa.getColumnModel().getColumn(1).setPreferredWidth(200);
-            tbKhoa.getColumnModel().getColumn(2).setPreferredWidth(250);
-            tbKhoa.getColumnModel().getColumn(2).setHeaderValue("Tên khoa");
-            tbKhoa.getColumnModel().getColumn(3).setHeaderValue("SĐT");
-            tbKhoa.getColumnModel().getColumn(4).setHeaderValue("Ngày nhận chức");
+            tbKhoa.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tbKhoa.getColumnModel().getColumn(1).setPreferredWidth(70);
+            tbKhoa.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tbKhoa.getColumnModel().getColumn(3).setPreferredWidth(70);
+            tbKhoa.getColumnModel().getColumn(4).setPreferredWidth(100);
         }
 
         lbMaMH3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -178,21 +222,41 @@ public class DanhSachKhoaNganh extends javax.swing.JFrame {
         btThemKhoa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btThemKhoa.setForeground(new java.awt.Color(255, 255, 255));
         btThemKhoa.setText("THÊM");
+        btThemKhoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThemKhoaActionPerformed(evt);
+            }
+        });
 
         btXoaKhoa.setBackground(new java.awt.Color(76, 124, 97));
         btXoaKhoa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btXoaKhoa.setForeground(new java.awt.Color(255, 255, 255));
         btXoaKhoa.setText("XÓA");
+        btXoaKhoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXoaKhoaActionPerformed(evt);
+            }
+        });
 
         btSuaKhoa.setBackground(new java.awt.Color(76, 124, 97));
         btSuaKhoa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btSuaKhoa.setForeground(new java.awt.Color(255, 255, 255));
         btSuaKhoa.setText("SỬA");
+        btSuaKhoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSuaKhoaActionPerformed(evt);
+            }
+        });
 
         btNhapMoiKhoa.setBackground(new java.awt.Color(76, 124, 97));
         btNhapMoiKhoa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btNhapMoiKhoa.setForeground(new java.awt.Color(255, 255, 255));
         btNhapMoiKhoa.setText("NHẬP MỚI");
+        btNhapMoiKhoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNhapMoiKhoaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelKhoaLayout = new javax.swing.GroupLayout(panelKhoa);
         panelKhoa.setLayout(panelKhoaLayout);
@@ -258,14 +322,14 @@ public class DanhSachKhoaNganh extends javax.swing.JFrame {
                     .addComponent(tfSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbstclt1)
                     .addComponent(tfNgayNhanChuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(panelKhoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btThemKhoa)
                     .addComponent(btSuaKhoa)
                     .addComponent(btNhapMoiKhoa)
                     .addComponent(btXoaKhoa))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -285,32 +349,51 @@ public class DanhSachKhoaNganh extends javax.swing.JFrame {
         btThemNganh.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btThemNganh.setForeground(new java.awt.Color(255, 255, 255));
         btThemNganh.setText("THÊM");
+        btThemNganh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThemNganhActionPerformed(evt);
+            }
+        });
 
         btSuaNganh.setBackground(new java.awt.Color(76, 124, 97));
         btSuaNganh.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btSuaNganh.setForeground(new java.awt.Color(255, 255, 255));
         btSuaNganh.setText("SỬA");
+        btSuaNganh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSuaNganhActionPerformed(evt);
+            }
+        });
 
         btXoaNganh.setBackground(new java.awt.Color(76, 124, 97));
         btXoaNganh.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btXoaNganh.setForeground(new java.awt.Color(255, 255, 255));
         btXoaNganh.setText("XÓA");
+        btXoaNganh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXoaNganhActionPerformed(evt);
+            }
+        });
 
         btNhapMoiNganh.setBackground(new java.awt.Color(76, 124, 97));
         btNhapMoiNganh.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btNhapMoiNganh.setForeground(new java.awt.Color(255, 255, 255));
         btNhapMoiNganh.setText("NHẬP MỚI");
+        btNhapMoiNganh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNhapMoiNganhActionPerformed(evt);
+            }
+        });
 
         lbMaMH1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbMaMH1.setText("Khoa");
 
-        cmbKhoa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cmbKhoa.setForeground(new java.awt.Color(0, 0, 0));
-        cmbKhoa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Công nghệ thông tin", "Công nghệ đa phương tiện", "An toàn thông tin", "Marketing", "Viễn thông" }));
-        cmbKhoa.setToolTipText("");
-        cmbKhoa.addActionListener(new java.awt.event.ActionListener() {
+        cbbKhoa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cbbKhoa.setForeground(new java.awt.Color(0, 0, 0));
+        cbbKhoa.setToolTipText("");
+        cbbKhoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbKhoaActionPerformed(evt);
+                cbbKhoaActionPerformed(evt);
             }
         });
 
@@ -318,28 +401,38 @@ public class DanhSachKhoaNganh extends javax.swing.JFrame {
         btTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btTimKiem.setForeground(new java.awt.Color(255, 255, 255));
         btTimKiem.setText("Tìm kiếm");
+        btTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTimKiemActionPerformed(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-find-32.png")); // NOI18N
 
         tbNganh.setBorder(new javax.swing.border.MatteBorder(null));
-        tbNganh.setFont(new java.awt.Font("Segoe UI", 0, 24));
         tbNganh.setForeground(new java.awt.Color(0, 0, 0));
         tbNganh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "STT", "Mã ngành", "Tên ngành"
+                "STT", "Mã ngành", "Tên ngành", "Mã khoa"
             }
         ));
+        tbNganh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbNganhMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbNganh);
         if (tbNganh.getColumnModel().getColumnCount() > 0) {
             tbNganh.getColumnModel().getColumn(0).setPreferredWidth(70);
-            tbNganh.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tbNganh.getColumnModel().getColumn(1).setPreferredWidth(100);
             tbNganh.getColumnModel().getColumn(2).setPreferredWidth(300);
+            tbNganh.getColumnModel().getColumn(3).setPreferredWidth(100);
         }
 
         javax.swing.GroupLayout panelNganhLayout = new javax.swing.GroupLayout(panelNganh);
@@ -363,7 +456,7 @@ public class DanhSachKhoaNganh extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelNganhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelNganhLayout.createSequentialGroup()
-                                .addComponent(cmbKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbbKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelNganhLayout.createSequentialGroup()
@@ -392,7 +485,7 @@ public class DanhSachKhoaNganh extends javax.swing.JFrame {
                     .addGroup(panelNganhLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(panelNganhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbKhoa)
+                            .addComponent(cbbKhoa)
                             .addComponent(lbMaMH1)
                             .addComponent(btTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(22, 22, 22))
@@ -438,17 +531,307 @@ public class DanhSachKhoaNganh extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKhoaActionPerformed
+    private void cbbKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbKhoaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbKhoaActionPerformed
+    }//GEN-LAST:event_cbbKhoaActionPerformed
+
+    private void tbKhoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKhoaMouseClicked
+        int index = tbKhoa.getSelectedRow();
+        Khoa khoa = arrayListKhoa.get(index);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String ngay = sdf.format(khoa.getNgayNhanChuc()); 
+        tfMaKhoa.setText(khoa.getMaKhoa());
+        tfTenKhoa.setText(khoa.getTenKhoa());
+        tfTrgKhoa.setText(khoa.getTrgKhoa());
+        tfSDT.setText(khoa.getSdt());
+        tfNgayNhanChuc.setText(ngay);
+    }//GEN-LAST:event_tbKhoaMouseClicked
+
+    private void btNhapMoiKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNhapMoiKhoaActionPerformed
+        tfMaKhoa.setText("");
+        tfTenKhoa.setText("");
+        tfTrgKhoa.setText("");
+        tfSDT.setText("");
+        tfNgayNhanChuc.setText("");
+    }//GEN-LAST:event_btNhapMoiKhoaActionPerformed
+
+    private void btThemKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemKhoaActionPerformed
+        if (tfSDT.getText().length() != 10) {
+            JOptionPane.showMessageDialog(null, "Thông tin về số điện thoại không hợp lệ!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            for (int i = 0; i < tfSDT.getText().length(); i++) {
+                if (Character.isDigit(tfSDT.getText().charAt(i))) {
+                    continue;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Thông tin về số điện thoại không hợp lệ!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+            }
+        }
+        
+        if (tfMaKhoa.getText().equals("") || tfTenKhoa.getText().equals("") || tfSDT.getText().equals("") || tfNgayNhanChuc.getText().equals("")) {
+        JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin khoa!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            
+            try {
+                int row = tbKhoa.getSelectedRow();
+                String ngayNhanChuc = tfNgayNhanChuc.getText();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date nnc = sdf.parse(ngayNhanChuc);
+                Khoa khoa = new Khoa(tfMaKhoa.getText(), tfTenKhoa.getText(), tfSDT.getText(), tfTrgKhoa.getText(), nnc);
+
+                for (Khoa kh : Controller.controller.arrayListKhoa) {
+                    if (kh.getMaKhoa().equals(tfMaKhoa.getText())) {
+                        JOptionPane.showMessageDialog(null, "Khoa đã tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+    //                for (TaiKhoan tkk : Controller.controller.arrayListTaiKhoan) {
+    //                    if (txtMaNV.getText().equals(tkk.getMaNV())) {
+    //                        baoloi.setText("Tên đăng nhập đã tồn tại!");
+    //                        return;
+    //                    }
+    //                }
+                Controller.InsertData.insertKhoa(khoa);
+            } catch (ParseException | ClassNotFoundException ex) {
+                Logger.getLogger(DanhSachKhoaNganh.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            tbKhoa.getSelectionModel().setSelectionInterval(tbKhoa.getRowCount() - 1, tbKhoa.getRowCount() - 1);
+        }
+        tfMaKhoa.setText("");
+        tfTenKhoa.setText("");
+        tfTrgKhoa.setText("");
+        tfSDT.setText("");
+        tfNgayNhanChuc.setText("");
+        
+        Controller.controller.arrayListKhoa.clear();
+        showDataKhoa();
+    }//GEN-LAST:event_btThemKhoaActionPerformed
+
+    private void btXoaKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaKhoaActionPerformed
+       if (tbKhoa.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn môn học!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Xác nhận xóa khoa?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+
+            if (confirmed == JOptionPane.YES_OPTION) {
+                try {
+                    Controller.DeleteData.deleteKhoa((String) tbKhoa.getValueAt(tbKhoa.getSelectedRow(), 1));
+//                Controller.DeleteData.deleteTaiKhoan((String) tbMonHoc.getValueAt(tbMonHoc.getSelectedRow(), 1));
+                    Controller.controller.arrayListKhoa.clear();
+                    showDataKhoa();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ChuongTrinhDaoTao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        }
+        tfMaKhoa.setText("");
+        tfTenKhoa.setText("");
+        tfTrgKhoa.setText("");
+        tfSDT.setText("");
+        tfNgayNhanChuc.setText("");
+        Controller.controller.arrayListKhoa.clear();
+        showDataKhoa();
+    }//GEN-LAST:event_btXoaKhoaActionPerformed
+
+    private void btSuaKhoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaKhoaActionPerformed
+        if (tfSDT.getText().length() != 10) {
+            JOptionPane.showMessageDialog(null, "Thông tin về số điện thoại không hợp lệ!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            for (int i = 0; i < tfSDT.getText().length(); i++) {
+                if (Character.isDigit(tfSDT.getText().charAt(i))) {
+                    continue;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Thông tin về số điện thoại không hợp lệ!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+            }
+        }
+        
+        if (tfMaKhoa.getText().equals("") || tfTenKhoa.getText().equals("") || tfSDT.getText().equals("") || tfNgayNhanChuc.getText().equals("")) {
+        JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin khoa!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                int row = tbKhoa.getSelectedRow();
+                String ngayNhanChuc = tfNgayNhanChuc.getText();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date nnc = sdf.parse(ngayNhanChuc);
+                Khoa khoa = new Khoa(tfMaKhoa.getText(), tfTenKhoa.getText(), tfSDT.getText(), tfTrgKhoa.getText(), nnc);
+
+                for (Khoa kh : Controller.controller.arrayListKhoa) {
+                    if (kh.getTenKhoa().equals(tfTenKhoa.getText())) {
+                        JOptionPane.showMessageDialog(null, "Tên khoa đã tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+    //                for (TaiKhoan tkk : Controller.controller.arrayListTaiKhoan) {
+    //                    if (txtMaNV.getText().equals(tkk.getMaNV())) {
+    //                        baoloi.setText("Tên đăng nhập đã tồn tại!");
+    //                        return;
+    //                    }
+    //                }
+                Controller.UpdateData.updateKhoa(khoa);
+            } catch (ParseException | ClassNotFoundException ex) {
+                Logger.getLogger(DanhSachKhoaNganh.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            tbKhoa.getSelectionModel().setSelectionInterval(tbKhoa.getRowCount() - 1, tbKhoa.getRowCount() - 1);
+        }
+        tfMaKhoa.setText("");
+        tfTenKhoa.setText("");
+        tfTrgKhoa.setText("");
+        tfSDT.setText("");
+        tfNgayNhanChuc.setText("");
+        
+        Controller.controller.arrayListKhoa.clear();
+        showDataKhoa();
+    }//GEN-LAST:event_btSuaKhoaActionPerformed
+
+    private void btTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimKiemActionPerformed
+        if(evt.getSource() == btTimKiem){
+            nganhTable.setRowCount(0);
+            try {
+                showDataNganh();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DanhSachKhoaNganh.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btTimKiemActionPerformed
+
+    private void btNhapMoiNganhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNhapMoiNganhActionPerformed
+        tfMaNganh.setText("");
+        tfTenNganh.setText("");
+    }//GEN-LAST:event_btNhapMoiNganhActionPerformed
+
+    private void tbNganhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNganhMouseClicked
+        int index = tbNganh.getSelectedRow();
+        Nganh nganh = arrayListNganh.get(index);
+        tfMaNganh.setText(nganh.getMaNganh());
+        tfTenNganh.setText(nganh.getTenNganh());
+    }//GEN-LAST:event_tbNganhMouseClicked
+
+    private void btThemNganhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemNganhActionPerformed
+        if (tfMaNganh.getText().equals("") || tfTenNganh.getText().equals("")) {
+        JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin ngành!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                int row = tbNganh.getSelectedRow();
+                String maKhoa = LoadDatabase.getMaKhoa(cbbKhoa.getSelectedItem().toString());
+                Nganh nganh = new Nganh(tfMaNganh.getText(), tfTenNganh.getText(), maKhoa);
+                for (Nganh ng : Controller.controller.arrayListNganh) {
+                    if (ng.getMaNganh().equalsIgnoreCase(nganh.getMaNganh())) {
+                        JOptionPane.showMessageDialog(null, "Ngành đã tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+    //                for (TaiKhoan tkk : Controller.controller.arrayListTaiKhoan) {
+    //                    if (txtMaNV.getText().equals(tkk.getMaNV())) {
+    //                        baoloi.setText("Tên đăng nhập đã tồn tại!");
+    //                        return;
+    //                    }
+    //                }
+                Controller.InsertData.insertNganh(nganh);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DanhSachKhoaNganh.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            tbNganh.getSelectionModel().setSelectionInterval(tbNganh.getRowCount() - 1, tbNganh.getRowCount() - 1);
+        }
+        tfMaNganh.setText("");
+        tfTenNganh.setText("");
+        try {
+            showDataNganh();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DanhSachKhoaNganh.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btThemNganhActionPerformed
+
+    private void btXoaNganhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaNganhActionPerformed
+        if (tbNganh.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn ngành cần xóa!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Xác nhận xóa ngành?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+
+            if (confirmed == JOptionPane.YES_OPTION) {
+                try {
+                    Controller.DeleteData.deleteNganh((String) tbNganh.getValueAt(tbNganh.getSelectedRow(), 1));
+                    showDataNganh();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ChuongTrinhDaoTao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        }
+        tfMaNganh.setText("");
+        tfTenNganh.setText("");
+        try {
+            showDataNganh();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DanhSachKhoaNganh.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btXoaNganhActionPerformed
+
+    private void btSuaNganhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaNganhActionPerformed
+        if (tfMaNganh.getText().equals("") || tfTenNganh.getText().equals("")) {
+        JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin ngành!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                int row = tbNganh.getSelectedRow();
+                String maKhoa = LoadDatabase.getMaKhoa(cbbKhoa.getSelectedItem().toString());
+                Nganh nganh = new Nganh(tfMaNganh.getText(), tfTenNganh.getText(), maKhoa);
+                // todo: tìm mã ngành cũ từ selected row
+                String maNganh = (String) tbNganh.getValueAt(tbNganh.getSelectedRow(), 1);
+//                System.out.println(maNganh);
+                for (Nganh ng : Controller.controller.arrayListNganh) {
+                    
+                    if (!ng.getMaNganh().equalsIgnoreCase(maNganh) && ng.getTenNganh().equalsIgnoreCase(nganh.getTenNganh())){
+                        JOptionPane.showMessageDialog(null, "Tên ngành đã tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    
+                    if (ng.getMaNganh().equalsIgnoreCase(maNganh)){
+                        JOptionPane.showMessageDialog(null, "Mã ngành đã tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+    //                for (TaiKhoan tkk : Controller.controller.arrayListTaiKhoan) {
+    //                    if (txtMaNV.getText().equals(tkk.getMaNV())) {
+    //                        baoloi.setText("Tên đăng nhập đã tồn tại!");
+    //                        return;
+    //                    }
+    //                }
+                Controller.UpdateData.updateNganh(nganh, maNganh);
+//                System.out.println(nganh.getMaNganh() + " "+ nganh.getTenNganh()+" "+nganh.getKhoa());
+                tbNganh.getSelectionModel().setSelectionInterval(row, row);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DanhSachKhoaNganh.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            }
+        }
+        tfMaNganh.setText("");
+        tfTenNganh.setText("");
+        try {
+            showDataNganh();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DanhSachKhoaNganh.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }//GEN-LAST:event_btSuaNganhActionPerformed
 
 
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DanhSachKhoaNganh ctdt = new DanhSachKhoaNganh();
-                ctdt.setVisible(true);
+                DanhSachKhoaNganh dskn = new DanhSachKhoaNganh();
+                dskn.setVisible(true);
+                dskn.setExtendedState(MAXIMIZED_BOTH);
             }
         });
     }
@@ -463,7 +846,7 @@ public class DanhSachKhoaNganh extends javax.swing.JFrame {
     private javax.swing.JButton btTimKiem;
     private javax.swing.JButton btXoaKhoa;
     private javax.swing.JButton btXoaNganh;
-    private javax.swing.JComboBox<String> cmbKhoa;
+    private javax.swing.JComboBox<String> cbbKhoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
