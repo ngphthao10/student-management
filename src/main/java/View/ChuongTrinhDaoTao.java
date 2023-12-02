@@ -93,6 +93,7 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
         jLabel6.setText("XX - Ten người dùng");
 
         jButton1.setBackground(new java.awt.Color(209, 232, 195));
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\src\\main\\java\\Image\\icons8-cat-64.png")); // NOI18N
         jButton1.setBorder(null);
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
@@ -457,11 +458,8 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
     }//GEN-LAST:event_tbMonHocMouseClicked
 
     private void btTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimKiemActionPerformed
-         
         if(evt.getSource() == btTimKiem){
-            System.out.println("Rows before clearing: " + myTable.getRowCount());
             myTable.setRowCount(0);
-            System.out.println("Rows after clearing: " + myTable.getRowCount());
             try {
                 showData();
             } catch (ClassNotFoundException ex) {
