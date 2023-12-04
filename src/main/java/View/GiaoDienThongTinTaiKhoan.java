@@ -238,7 +238,10 @@ public class GiaoDienThongTinTaiKhoan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOutActionPerformed
-        dispose();
+        HomePage home = new HomePage();
+        home.setLocationRelativeTo(null);
+        home.setVisible(true);
+        this.dispose();  
     }//GEN-LAST:event_btOutActionPerformed
 
     /**

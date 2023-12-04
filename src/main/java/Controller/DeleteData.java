@@ -44,4 +44,42 @@ public class DeleteData {
         JOptionPane.showMessageDialog(null, "Xóa môn học thất bại", "Thông báo", JOptionPane.ERROR_MESSAGE);
         return false;
     }
+    
+    public static boolean deleteKhoa(String MaKhoa) throws ClassNotFoundException {
+        String sqlCommand = "delete from khoa where MaKhoa=?";
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setString(1, MaKhoa);
+
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Xóa khoa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Xóa khoa thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    
+    public static boolean deleteNganh(String maNganh) throws ClassNotFoundException {
+        String sqlCommand = "delete from nganh where maNganh=?";
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setString(1, maNganh);
+
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Xóa ngành thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Xóa ngành thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
 }
