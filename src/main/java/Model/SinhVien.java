@@ -92,11 +92,11 @@ public class SinhVien {
         this.phai = phai;
     }
 
-    public Date getNamSinh() {
+    public Date getNgaySinh() {
         return ngaySinh;
     }
 
-    public void setNamSinh(Date ngaySinh) {
+    public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
 

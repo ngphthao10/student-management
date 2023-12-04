@@ -107,6 +107,4 @@ public class LopTinChi {
     public void setDssvdk(List<DangKy> dssvdk) {
         this.dssvdk = dssvdk;
     }
-    
-    
 }
