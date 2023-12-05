@@ -6,12 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public class LoadDatabase {
 //    public static void loadTableMonHoc(){
@@ -198,9 +194,47 @@ public class LoadDatabase {
 
         return maKhoa;
     }
+    
+    public static void loadTableGiangVien() {
+        ResultSet rs = DataConnection.retrieveData("select * from giangvien");
+        
+        try {
+            controller.arrayListGiangVien.clear();
+            while (rs.next()) {
+                String hanh = "";
+                if(rs.getString("hinhAnh") != null){
+                    hanh = rs.getString("hinhAnh").trim();
+                }
+                
+                GiangVien gv = new GiangVien(
+                    rs.getString("maGV").trim(),
+                    rs.getString("hoGV").trim(),
+                    rs.getString("tenLotGV").trim(),
+                    rs.getString("tenGV").trim(),
+                    rs.getString("phai").trim(),
+                    rs.getDate("ngaySinh"),
+                    rs.getString("maKhoa").trim(),
+                    rs.getDate("ngayBD"),
+                    rs.getDate("ngayKT"),
+                    rs.getString("trangThai").trim(),
+                    rs.getString("email").trim(),
+                    hanh
+                );
+                
+                controller.arrayListGiangVien.add(gv);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
 
     public LoadDatabase() {
 //        Controller.controller.arrayListNganh.removeAll(Controller.controller.arrayListNganh);
+//        loadTableGiangVien();
     }
+    
+    
 
 }
