@@ -23,6 +23,7 @@ public class GiangVien {
     private Date ngayKT;
     private String email;
     private String trangThai;
+    private String hinhAnh;
     
     public GiangVien() {
         this.maGV = "";
@@ -36,9 +37,11 @@ public class GiangVien {
         this.ngayKT = null;
         this.email = "";
         this.trangThai = "";
+        this.hinhAnh = "";
     }
 
-    public GiangVien(String maGV, String hoGV, String tenlotGV, String tenGV, String phai, Date ngaySinh, String khoa, Date ngayBD, Date ngayKT, String trangThai, String email) {
+    public GiangVien(String maGV, String hoGV, String tenlotGV, String tenGV, String phai, Date ngaySinh, 
+            String khoa, Date ngayBD, Date ngayKT, String trangThai, String email, String hinhAnh) {
         this.maGV = maGV;
         this.hoGV = hoGV;
         this.tenlotGV = tenlotGV;
@@ -50,8 +53,17 @@ public class GiangVien {
         this.ngayKT = ngayKT;
         this.email = email;
         this.trangThai = trangThai;
+        this.hinhAnh = hinhAnh;
+    }
+    
+    public String getHinhAnh() {
+        return hinhAnh;
     }
 
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
+    }
+    
     public String getMaGV() {
         return maGV;
     }

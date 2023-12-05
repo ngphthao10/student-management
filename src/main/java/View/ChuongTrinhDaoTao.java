@@ -562,15 +562,15 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
             int row = tbMonHoc.getSelectedRow();
             String pLoai = (String) cbbPhanLoai.getSelectedItem();
             MonHoc mhoc = new MonHoc(tfMaMH.getText(), tfTenMH.getText(), Integer.parseInt(tfStclt.getText()), Integer.parseInt(tfStcth.getText()), pLoai, tfKhoa.getText());
-
+            String maMonHoc = (String) tbMonHoc.getValueAt(tbMonHoc.getSelectedRow(), 1);
             for (MonHoc mh : Controller.controller.arrayListMonHoc) {
-                if (mh.getTenMH().equals(tfTenMH.getText())) {
-                    JOptionPane.showMessageDialog(null, "Tên môn học đã tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
-                    return;
+                if (mh.getMaMH().equalsIgnoreCase(maMonHoc) && mh.getTenMH().equalsIgnoreCase(mhoc.getTenMH())){
+                        JOptionPane.showMessageDialog(null, "Tên môn học đã tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                        return;
                 }
             }
             try {
-                Controller.UpdateData.updateMonHoc(mhoc);
+                Controller.UpdateData.updateMonHoc(mhoc, maMonHoc);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ChuongTrinhDaoTao.class.getName()).log(Level.SEVERE, null, ex);
             }
