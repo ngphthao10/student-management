@@ -82,4 +82,23 @@ public class DeleteData {
         JOptionPane.showMessageDialog(null, "Xóa ngành thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
+    
+    public static boolean deleteGiangVien(String maGV) throws ClassNotFoundException {
+        String sqlCommand = "delete from GIANGVIEN where maGV=?";
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setString(1, maGV);
+
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Xóa giảng viên thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Xóa giảng viên thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
 }

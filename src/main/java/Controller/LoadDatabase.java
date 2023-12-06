@@ -12,9 +12,6 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -325,24 +322,57 @@ public class LoadDatabase {
         try {
             createStatement();
             String sqlCommand = "SELECT * from NGANH WHERE maNganh IN (SELECT maNganh FROM LOP WHERE maLop = ?)";
-            
+
             try (PreparedStatement prepareStatement = DataConnection.connection.prepareStatement(sqlCommand)) {
                 prepareStatement.setString(1, maLop);
-                
+
                 try (ResultSet resultSet = prepareStatement.executeQuery()) {
                     while(resultSet.next()) {
                         Nganh nganh = new Nganh(
-                            resultSet.getString("maNganh"), resultSet.getString("tenNganh"), resultSet.getString("maKhoa")
+                                resultSet.getString("maNganh"), resultSet.getString("tenNganh"), resultSet.getString("maKhoa")
                         );
                         DataConnection.connection.close();
                         return nganh;
                     }
                 }
             }
+        }   catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Mã lớp không tồn tại", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+    public static void loadTableGiangVien() {
+        ResultSet rs = DataConnection.retrieveData("select * from giangvien");
+        
+        try {
+            controller.arrayListGiangVien.clear();
+            while (rs.next()) {
+                String hanh = "";
+                if(rs.getString("hinhAnh") != null){
+                    hanh = rs.getString("hinhAnh").trim();
+                }
+                
+                GiangVien gv = new GiangVien(
+                    rs.getString("maGV").trim(),
+                    rs.getString("hoGV").trim(),
+                    rs.getString("tenLotGV").trim(),
+                    rs.getString("tenGV").trim(),
+                    rs.getString("phai").trim(),
+                    rs.getDate("ngaySinh"),
+                    rs.getString("maKhoa").trim(),
+                    rs.getDate("ngayBD"),
+                    rs.getDate("ngayKT"),
+                    rs.getString("trangThai").trim(),
+                    rs.getString("email").trim(),
+                    hanh
+                );
+                
+                controller.arrayListGiangVien.add(gv);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
     }
     
     public static String getKhoafromMaNganh(String maNganh) {
@@ -387,11 +417,13 @@ public class LoadDatabase {
         }   catch (SQLException ex) {
             Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
+    }   
 
     public LoadDatabase() {
 //        Controller.controller.arrayListNganh.removeAll(Controller.controller.arrayListNganh);
+//        loadTableGiangVien();
     }
+    
+    
 
 }
