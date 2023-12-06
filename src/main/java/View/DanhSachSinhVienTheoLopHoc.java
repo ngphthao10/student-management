@@ -622,7 +622,7 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
             else {
                 sv.setHoSV(hoTen[0]);
                 sv.setTenSV(hoTen[hoTen.length - 1]);
-                hoTen = Arrays.copyOfRange(hoTen, 1, hoTen.length);
+                hoTen = Arrays.copyOfRange(hoTen, 1, hoTen.length - 1);
                 sv.setTenlotSV(String.join(" ", hoTen));
             }
             
@@ -702,7 +702,7 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
             else {
                 sv.setHoSV(hoTen[0]);
                 sv.setTenSV(hoTen[hoTen.length - 1]);
-                hoTen = Arrays.copyOfRange(hoTen, 1, hoTen.length);
+                hoTen = Arrays.copyOfRange(hoTen, 1, hoTen.length - 1);
                 sv.setTenlotSV(String.join(" ", hoTen));
             }
             

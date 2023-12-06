@@ -23,6 +23,7 @@ public class SinhVien {
     private String maLop;
     private int namNhapHoc;
     private String trangThai;
+    private String hinhAnh;
     
     public SinhVien() {
         this.maSV = "";
@@ -36,9 +37,10 @@ public class SinhVien {
         this.maLop = "";
         this.namNhapHoc = 0;
         this.trangThai = "";
+        this.hinhAnh = "";
     }
 
-    public SinhVien(String maSV, String hoSV, String tenlotSV, String tenSV, String phai, Date ngaySinh, String email, String sdt, String maLop, int namNhapHoc, String trangThai) {
+    public SinhVien(String maSV, String hoSV, String tenlotSV, String tenSV, String phai, Date ngaySinh, String email, String sdt, String maLop, int namNhapHoc, String trangThai, String hinhAnh) {
         this.maSV = maSV;
         this.hoSV = hoSV;
         this.tenlotSV = tenlotSV;
@@ -50,6 +52,7 @@ public class SinhVien {
         this.maLop = maLop;
         this.namNhapHoc = namNhapHoc;
         this.trangThai = trangThai;
+        this.hinhAnh = hinhAnh;
     }
 
     public String getMaSV() {
@@ -139,5 +142,14 @@ public class SinhVien {
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
+
+    public String getHinhAnh() {
+        return hinhAnh;
+    }
+
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
+    }
+    
     
 }
