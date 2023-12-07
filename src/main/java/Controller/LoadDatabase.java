@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.swing.JComboBox;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class LoadDatabase {
     public static void loadTableTaiKhoan(){
@@ -190,7 +191,7 @@ public class LoadDatabase {
                         String maLop = resultSet.getString("maLop").trim();
                         int namNhapHoc = Integer.parseInt(resultSet.getString("namNhapHoc"));
                         String trangThai = resultSet.getString("trangThai").trim();
-                        SinhVien sv = new SinhVien(maSV, hoSV, tenlotSV, tenSV, phai, ngaySinh, email, sdt, maLop, namNhapHoc, trangThai);
+                        SinhVien sv = new SinhVien(maSV, hoSV, tenlotSV, tenSV, phai, ngaySinh, email, sdt, maLop, namNhapHoc, trangThai, "");
                         controller.arrayListSinhVien.add(sv);
                     }
                 }
@@ -216,6 +217,7 @@ public class LoadDatabase {
                 try (ResultSet resultSet = prepareStatement.executeQuery()) {
                     while(resultSet.next()) {
                         String maLop = resultSet.getString("maLop");
+                        DataConnection.connection.close();
                         return maLop;
                     }
                 }
@@ -317,7 +319,66 @@ public class LoadDatabase {
         return maKhoa;
     }
     
-    //Hiển thị bảng giảng viên
+    public static SinhVien getThongTinSV(String maSV) throws ParseException {
+        SinhVien sv;
+        try {
+            createStatement();
+            String sqlCommand = "SELECT * FROM SINHVIEN WHERE maSV = ?";
+            
+            try (PreparedStatement prepareStatement = DataConnection.connection.prepareStatement(sqlCommand)) {
+                prepareStatement.setString(1, maSV);
+                controller.arrayListSinhVien.clear();
+                
+                try(ResultSet resultSet = prepareStatement.executeQuery()) {
+                    while(resultSet.next()) {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        Date ngaySinh = dateFormat.parse(resultSet.getString("ngaySinh"));
+                        int namNhapHoc = Integer.parseInt(resultSet.getString("namNhapHoc"));
+                        sv = new SinhVien(
+                                resultSet.getString("maSV"), resultSet.getString("hoSV"), resultSet.getString("tenlotSV"),
+                                resultSet.getString("tenSV"), resultSet.getString("phai"), ngaySinh,
+                                resultSet.getString("email"), resultSet.getString("sdt"), resultSet.getString("maLop"), 
+                                namNhapHoc, resultSet.getString("trangThai"), resultSet.getString("hinhAnh")
+                        );
+                        DataConnection.connection.close();
+                        return sv;
+                    }
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Mã sinh viên không tồn tại", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+    
+    public static Nganh getNganhfromMaLop(String maLop) throws ClassNotFoundException {
+        try {
+            createStatement();
+            String sqlCommand = "SELECT * from NGANH WHERE maNganh IN (SELECT maNganh FROM LOP WHERE maLop = ?)";
+
+            try (PreparedStatement prepareStatement = DataConnection.connection.prepareStatement(sqlCommand)) {
+                prepareStatement.setString(1, maLop);
+
+                try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                    while(resultSet.next()) {
+                        Nganh nganh = new Nganh(
+                                resultSet.getString("maNganh"), resultSet.getString("tenNganh"), resultSet.getString("maKhoa")
+                        );
+                        DataConnection.connection.close();
+                        return nganh;
+                    }
+                }
+            }
+        }   catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Mã lớp không tồn tại", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+
     public static void loadTableGiangVien() {
         ResultSet rs = DataConnection.retrieveData("select * from giangvien");
         
@@ -389,6 +450,50 @@ public class LoadDatabase {
             e.printStackTrace();
         }
     }
+    
+    public static String getKhoafromMaNganh(String maNganh) {
+        try {
+            createStatement();
+            String sqlCommand = "SELECT tenKhoa from KHOA WHERE maKhoa IN (SELECT maKhoa FROM NGANH WHERE maNganh = ?)";
+            
+            try (PreparedStatement prepareStatement = DataConnection.connection.prepareStatement(sqlCommand)) {
+                prepareStatement.setString(1, maNganh);
+                
+                try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                    while(resultSet.next()) {
+                        String tenKhoa = resultSet.getString("tenKhoa");
+                        DataConnection.connection.close();
+                        return tenKhoa;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static void fillSubComboBoxMaLop(JComboBox<String> subComboBox, String selectedValue) throws ClassNotFoundException {
+        try{
+            createStatement();
+            String query = "SELECT maLop FROM LOP WHERE maNganh IN (SELECT maNganh FROM NGANH WHERE tenNganh = ?)";
+            try(PreparedStatement prepareStatement = DataConnection.connection.prepareStatement(query)) {
+                prepareStatement.setString(1,selectedValue);
+                
+                try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                    while(resultSet.next()) {
+                        String maLop = resultSet.getString("maLop");
+                        subComboBox.addItem(maLop);
+                    }
+                }
+                DataConnection.connection.close();
+            }
+        }   catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }   
 
     //Hiển thị tên giảng viên vào comboBox
     public static void fillTenGiangVienComboBox(JComboBox<String> comboBox) {
