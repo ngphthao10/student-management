@@ -2,10 +2,8 @@ package Controller;
 
 
 import Model.*;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -134,6 +132,22 @@ public class UpdateData {
             Logger.getLogger(UpdateData.class.getName()).log(Level.SEVERE, null, ex);
         }
         JOptionPane.showMessageDialog(null, "Sửa giảng viên thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    
+    public static boolean updatePhanCong(PhanCong pc) throws ClassNotFoundException {
+        String sqlCommand = "update phancong set maGV=? where maLTC = ?";
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setString(1, pc.getMaGV());
+            ps.setInt(2, pc.getMaLTC());
+            return ps.executeUpdate() > 0;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Sửa phân công thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
 }

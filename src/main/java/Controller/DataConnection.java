@@ -13,10 +13,10 @@ public class DataConnection {
     public static void createStatement() throws ClassNotFoundException, SQLException{
         try{
             String hostname = "localhost";
-            String sqlInstanceName = "LAPTOP-CC48TIIO\\SQLEXPRESS";
-            String sqlDatabase = "quanlysinhvien";
+            String sqlInstanceName = "LAPTOP-SNRE2PET";
+            String sqlDatabase = "QLSV";
             String sqlUser = "sa";
-            String sqlPassword = "258937";
+            String sqlPassword = "28102003";
 
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 

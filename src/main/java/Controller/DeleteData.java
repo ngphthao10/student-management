@@ -101,4 +101,23 @@ public class DeleteData {
         JOptionPane.showMessageDialog(null, "Xóa giảng viên thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
+    
+    public static boolean deletePhanCong(int maLTC) throws ClassNotFoundException {
+        String sqlCommand = "delete from PHANCONG where maLTC=?";
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setInt(1, maLTC);
+
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Xóa phân công thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Xóa phân công thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
 }
