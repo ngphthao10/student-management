@@ -1,42 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Model;
 
-/**
- *
- * @author Minh Thu
- */
 public class NhomNguoiDangNhap {
     
-    private int maNDN;
-    private String chucVu;
+    private String maNhomNguoiDung;
+    private String tenNhomNguoiDung;
+
+    public NhomNguoiDangNhap(){
+        this.maNhomNguoiDung = "";
+        this.tenNhomNguoiDung = "";
+    }
     
-    public NhomNguoiDangNhap() {
-        this.maNDN = 0;
-        this.chucVu = "";
+    public NhomNguoiDangNhap(String maNhomNguoiDung, String tenNhomNguoiDung) {
+        this.maNhomNguoiDung = maNhomNguoiDung;
+        this.tenNhomNguoiDung = tenNhomNguoiDung;
     }
 
-    public NhomNguoiDangNhap(int maNDN, String chucVu) {
-        this.maNDN = maNDN;
-        this.chucVu = chucVu;
+    public String getMaNhomNguoiDung() {
+        return maNhomNguoiDung;
     }
 
-    public int getMaNDN() {
-        return maNDN;
+    public void setMaNhomNguoiDung(String maNhomNguoiDung) {
+        this.maNhomNguoiDung = maNhomNguoiDung;
     }
 
-    public void setMaNDN(int maNDN) {
-        this.maNDN = maNDN;
+    public String getTenNhomNguoiDung() {
+        return tenNhomNguoiDung;
     }
 
-    public String getChucVu() {
-        return chucVu;
-    }
-
-    public void setChucVu(String chucVu) {
-        this.chucVu = chucVu;
+    public void setTenNhomNguoiDung(String tenNhomNguoiDung) {
+        this.tenNhomNguoiDung = tenNhomNguoiDung;
     }
     
     

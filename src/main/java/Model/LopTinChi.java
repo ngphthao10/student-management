@@ -1,47 +1,75 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
+import Controller.LoadDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Minh Thu
- */
 public class LopTinChi {
     
     private int maLopTC;
     private String maMH;
-    private int maHK;
+    private String maHK;
+    private String maLop;
     private int nhom;
     private int svMin;
     private int svMax;
     private boolean huyLop;
     private List<DangKy> dssvdk;
     
+    MonHoc mh;
+    
     public LopTinChi() {
         this.maLopTC = 0;
         this.maMH = "";
-        this.maHK = 0;
+        this.maHK = "";
+        this.maLop = "";
         this.nhom = 0;
         this.svMin = -1;
         this.svMax = -1;
         this.dssvdk = new ArrayList<>();
         this.huyLop = false;
     }
-
-    public LopTinChi(int maLopTC, String maMH, int maHK, int nhom, int svMin, int svMax, List<DangKy> dssvdk, boolean huyLop) {
+    
+    public LopTinChi(int maLopTC, String maMH, String maHK, String maLop, int nhom, int svMin, int svMax, boolean huyLop) {
         this.maLopTC = maLopTC;
         this.maMH = maMH;
         this.maHK = maHK;
+        this.maLop = maLop;
         this.nhom = nhom;
         this.svMin = svMin;
         this.svMax = svMax;
-        this.dssvdk = dssvdk;
         this.huyLop = huyLop;
+    }
+    
+    public LopTinChi(int maLopTC, String maMH, String maHK, String maLop, int nhom, int svMin, int svMax, boolean huyLop, List<DangKy> dssvdk) {
+        this.maLopTC = maLopTC;
+        this.maMH = maMH;
+        this.maHK = maHK;
+        this.maLop = maLop;
+        this.nhom = nhom;
+        this.svMin = svMin;
+        this.svMax = svMax;
+        this.huyLop = huyLop;
+        this.dssvdk = dssvdk;
+    }
+    
+    public String getTenMH(){
+        LoadDatabase.loadTableMonHoc();
+        for (MonHoc mh : Controller.controller.arrayListMonHoc){
+            if (mh.getMaMH().equals(this.maMH)){
+                this.mh = mh;
+                break;
+            }
+        }
+        return mh.getTenMH();
+    }
+    
+    public String getMaLop() {
+        return maLop;
+    }
+
+    public void setMaLop(String maLop) {
+        this.maLop = maLop;
     }
 
     public int getMaLopTC() {
@@ -92,11 +120,11 @@ public class LopTinChi {
         this.huyLop = huyLop;
     }
 
-    public int getMaHK() {
+    public String getMaHK() {
         return maHK;
     }
 
-    public void setMaHK(int maHK) {
+    public void setMaHK(String maHK) {
         this.maHK = maHK;
     }
 
