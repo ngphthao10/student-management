@@ -16,4 +16,5 @@ public class controller {
     public static ArrayList<ChucNang> arrayListChucNang = new ArrayList<ChucNang>();  
     public static ArrayList<TaiKhoan> arrayListTaiKhoan = new ArrayList<TaiKhoan>();  
     public static ArrayList<PhanQuyen> arrayListPhanQuyen = new ArrayList<PhanQuyen>();  
+    public static TaiKhoan taiKhoan = new TaiKhoan();
 }

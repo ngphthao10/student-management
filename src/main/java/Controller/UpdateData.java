@@ -9,6 +9,21 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class UpdateData {
+    public static boolean changePassword(TaiKhoan tk, String pass) throws ClassNotFoundException{
+        String sqlCommand = "UPDATE TAIKHOAN SET matKhau = ? where maTK = ?";
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setString(1, pass);
+            ps.setString(2, tk.getMaTK());
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Sửa mật khẩu thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
     
     public static boolean updateMonHoc(MonHoc mh, String maMonHoc) throws ClassNotFoundException {
         String sqlCommand = "update MONHOC set maMH=?, tenMH=?, stclt=?, stcth=?, phanLoai=?, khoa=? WHERE maMH = ?";
