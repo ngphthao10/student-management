@@ -17,44 +17,62 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ThongTinGiangVien extends javax.swing.JFrame {
+
     private final DefaultTableModel gvienTable;
     private String selectedImageUrl;
+
     public ThongTinGiangVien() {
         initComponents();
+        lbSetName.setText(Controller.controller.taiKhoan.getMaTK() + " - " + Controller.controller.taiKhoan.getTenNguoiDung());
+        if (Controller.controller.taiKhoan.getMaNDN().equals("GV")) {
+            btThem.setEnabled(false);
+            btChinhSua.setEnabled(false);
+            btXoa.setEnabled(false);
+            btNhapMoi.setEnabled(false);
+        }
+        LoadDatabase.fillComboBox(cbbKhoa, "tenKhoa", "KHOA");
         gvienTable = (DefaultTableModel) tbGiangVien.getModel();
         gvienTable.setRowCount(0);
     }
-    
-    public void showDataTable(){
+
+    public void showDataTable() {
         LoadDatabase.loadTableGiangVien();
         gvienTable.setRowCount(0);
         int dem = 0;
         for (GiangVien gv : Controller.controller.arrayListGiangVien) {
             dem++;
-            gvienTable.addRow(new Object[]{dem, gv.getMaGV(), gv.getHoGV() + " " + gv.getTenlotGV() + " " + gv.getTenGV(), gv.getPhai(), 
+            gvienTable.addRow(new Object[]{dem, gv.getMaGV(), gv.getHoGV() + " " + gv.getTenlotGV() + " " + gv.getTenGV(), gv.getPhai(),
                 gv.getNgaySinh(), gv.getKhoa(), gv.getNgayBD(), gv.getNgayKT(), gv.getEmail(), gv.getTrangThai()});
         }
     }
-    public void showData(){
+
+    public void showData() {
         LoadDatabase.loadTableGiangVien();
+        boolean timGV = false;
         String maGiangVien = tfTimMaGV.getText();
         for (GiangVien gv : controller.arrayListGiangVien) {
-            if(gv.getMaGV().equalsIgnoreCase(maGiangVien)){
+
+            if (gv.getMaGV().equalsIgnoreCase(maGiangVien)) {
                 tfMaGV.setText(gv.getMaGV());
                 tfHoTen.setText(gv.getHoGV() + " " + gv.getTenlotGV() + " " + gv.getTenGV());
                 cbbPhai.setSelectedItem(gv.getPhai());
                 tfNgaySinh.setDate(gv.getNgaySinh());
-                tfKhoa.setText(gv.getKhoa());
+                cbbKhoa.setSelectedItem(gv.getKhoa());
                 tfNgayBD.setDate(gv.getNgayBD());
                 tfEmail.setText(gv.getEmail());
                 ccbTrangThai.setSelectedItem(gv.getTrangThai());
                 System.out.println(gv.getHinhAnh());
-                anhGV.setIcon(new javax.swing.ImageIcon(gv.getHinhAnh())); 
-                if (gv.getNgayKT()!=null) tfNgayKT.setDate(gv.getNgayKT());
-            }else{
-                JOptionPane.showMessageDialog(null, "Mã giảng viên không tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
-                return;
+                anhGV.setIcon(new javax.swing.ImageIcon(gv.getHinhAnh()));
+                if (gv.getNgayKT() != null) {
+                    tfNgayKT.setDate(gv.getNgayKT());
+                }
+                timGV = true;
+                break;
             }
+
+        }
+        if (!timGV) {
+            JOptionPane.showMessageDialog(null, "Mã giảng viên không tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -66,7 +84,7 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lbSetName = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
@@ -90,7 +108,6 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        tfKhoa = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -103,8 +120,10 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         tfNgaySinh = new com.toedter.calendar.JDateChooser();
         tfNgayBD = new com.toedter.calendar.JDateChooser();
         tfNgayKT = new com.toedter.calendar.JDateChooser();
+        cbbKhoa = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(209, 232, 195));
 
@@ -117,8 +136,9 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         jLabel5.setText("Thông tin giảng viên");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel6.setText("XX - Ten người dùng");
+        lbSetName.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbSetName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbSetName.setText("XX - Ten người dùng");
 
         jButton1.setBackground(new java.awt.Color(209, 232, 195));
         jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\src\\main\\java\\Image\\icons8-cat-64.png")); // NOI18N
@@ -149,8 +169,8 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 655, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 523, Short.MAX_VALUE)
+                .addComponent(lbSetName, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,7 +183,7 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6))
+                                .addComponent(lbSetName))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -358,8 +378,6 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel18.setText("Khoa");
 
-        tfKhoa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel13.setText("Ngày sinh");
 
@@ -400,6 +418,8 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         tfNgayKT.setDateFormatString("dd/MM/yyyy");
         tfNgayKT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        cbbKhoa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -435,13 +455,13 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
                                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(ccbTrangThai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(tfEmail)
-                                        .addComponent(tfKhoa)
                                         .addComponent(tfHoTen)
                                         .addComponent(tfMaGV)
                                         .addComponent(cbbPhai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(tfNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(36, 36, 36)
-                                    .addComponent(anhGV, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(anhGV, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbbKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(45, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -476,7 +496,7 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
                                         .addGap(27, 27, 27)
                                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel18)
-                                            .addComponent(tfKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(cbbKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addComponent(anhGV, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -501,7 +521,7 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
                     .addComponent(btXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btChinhSua, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btNhapMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -544,7 +564,7 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         tfHoTen.setText("");
         cbbPhai.setSelectedItem("Nam");
         tfNgaySinh.setDate(null);
-        tfKhoa.setText("");
+        cbbKhoa.setSelectedItem(null);
         tfNgayBD.setDate(null);
         tfEmail.setText("");
         ccbTrangThai.setSelectedItem("Đang công tác");
@@ -553,13 +573,13 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btNhapMoiActionPerformed
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
-        if (!tfNgayBD.getDate().after(tfNgaySinh.getDate())){
+        if (!tfNgayBD.getDate().after(tfNgaySinh.getDate())) {
             JOptionPane.showMessageDialog(null, "Ngày bắt đầu phải xảy ra sau ngày sinh!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
             tfNgayBD.setDate(null);
             tfNgaySinh.setDate(null);
             return;
         }
-        if (tfNgayKT.getDate() != null && !tfNgayKT.getDate().after(tfNgayKT.getDate())){
+        if (tfNgayKT.getDate() != null && !tfNgayKT.getDate().after(tfNgayKT.getDate())) {
             JOptionPane.showMessageDialog(null, "Ngày kết thúc phải xảy ra sau ngày bắt đầu!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
             tfNgayBD.setDate(null);
             tfNgayKT.setDate(null);
@@ -573,14 +593,15 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
             tfEmail.setText("");
             return;
         }
-        
-        if (tfMaGV.getText().equals("") || tfHoTen.getText().equals("") || cbbPhai.getSelectedItem().equals(null) || tfNgaySinh.getDate().equals(null) || tfKhoa.getText().equals("") ||
-                tfNgayBD.getDate().equals(null) || tfEmail.getText().equals("") || ccbTrangThai.getSelectedItem().equals(null)) {
+
+        if (tfMaGV.getText().equals("") || tfHoTen.getText().equals("") || cbbPhai.getSelectedItem().equals(null) || tfNgaySinh.getDate().equals(null) || cbbKhoa.getSelectedItem().equals(null)
+                || tfNgayBD.getDate().equals(null) || tfEmail.getText().equals("") || ccbTrangThai.getSelectedItem().equals(null)) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin giảng viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
             int row = tbGiangVien.getSelectedRow();
             String tt = (String) ccbTrangThai.getSelectedItem();
             String phai = (String) cbbPhai.getSelectedItem();
+            String khoa = (String) cbbKhoa.getSelectedItem();
             String HinhAnh = selectedImageUrl;
             String hoTen = tfHoTen.getText();
             String[] parts = hoTen.split(" ");
@@ -588,16 +609,18 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
             String tenLotGV = "";
             String tenGV = "";
 
-            if (parts.length >= 1) hoGV = parts[0];
+            if (parts.length >= 1) {
+                hoGV = parts[0];
+            }
             if (parts.length >= 2) {
                 tenLotGV = parts[1];
             }
             if (parts.length >= 3) {
                 tenGV = parts[2];
             }
-            GiangVien gv = new GiangVien(tfMaGV.getText(), hoGV, tenLotGV, tenGV, phai, tfNgaySinh.getDate(), 
-                    tfKhoa.getText(), tfNgayBD.getDate(), tfNgayKT.getDate(), tt, tfEmail.getText(), HinhAnh);
-        
+            GiangVien gv = new GiangVien(tfMaGV.getText(), hoGV, tenLotGV, tenGV, phai, tfNgaySinh.getDate(),
+                    khoa, tfNgayBD.getDate(), tfNgayKT.getDate(), tt, tfEmail.getText(), HinhAnh);
+
             if (tbGiangVien.getSelectedRow() == -1) {
                 for (GiangVien gvien : Controller.controller.arrayListGiangVien) {
                     if (gvien.getMaGV().equals(tfMaGV.getText())) {
@@ -619,17 +642,17 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
                 tbGiangVien.getSelectionModel().setSelectionInterval(row, row);
 
             }
-        tfMaGV.setText("");
-        tfHoTen.setText("");
-        cbbPhai.setSelectedItem(null);
-        tfNgaySinh.setDate(null);
-        tfKhoa.setText("");
-        tfNgayBD.setDate(null);
-        tfNgayKT.setDate(null);
-        tfEmail.setText("");
-        ccbTrangThai.setSelectedItem(null);
-        anhGV.setIcon(null);
-        showDataTable();
+            tfMaGV.setText("");
+            tfHoTen.setText("");
+            cbbPhai.setSelectedItem(null);
+            tfNgaySinh.setDate(null);
+            cbbKhoa.setSelectedItem(null);
+            tfNgayBD.setDate(null);
+            tfNgayKT.setDate(null);
+            tfEmail.setText("");
+            ccbTrangThai.setSelectedItem(null);
+            anhGV.setIcon(null);
+            showDataTable();
         }
     }//GEN-LAST:event_btThemActionPerformed
 
@@ -649,14 +672,13 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
     }//GEN-LAST:event_uploadActionPerformed
 
     private void tbGiangVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbGiangVienMouseClicked
- 
+
         int index = tbGiangVien.getSelectedRow();
         GiangVien gv = arrayListGiangVien.get(index);
-        
+
         if (gv.getNgayKT() != null) {
             tfNgayKT.setDate(gv.getNgayKT());
-        }
-        else{
+        } else {
             tfNgayKT.setDate(null);
         }
         tfMaGV.setText(gv.getMaGV());
@@ -665,10 +687,10 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         ccbTrangThai.setSelectedItem(gv.getTrangThai());
         tfNgaySinh.setDate(gv.getNgaySinh());
         tfNgayBD.setDate(gv.getNgayBD());
-        tfKhoa.setText(gv.getKhoa());
+        cbbKhoa.setSelectedItem(gv.getKhoa());
         tfEmail.setText(gv.getEmail());
         anhGV.setIcon(new javax.swing.ImageIcon(gv.getHinhAnh()));
-        
+
     }//GEN-LAST:event_tbGiangVienMouseClicked
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
@@ -686,30 +708,30 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(ChuongTrinhDaoTao.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
         }
         tfMaGV.setText("");
         tfHoTen.setText("");
         cbbPhai.setSelectedItem(null);
         tfNgaySinh.setDate(null);
-        tfKhoa.setText("");
+        cbbKhoa.setSelectedItem(null);
         tfNgayBD.setDate(null);
         tfNgayKT.setDate(null);
         tfEmail.setText("");
         ccbTrangThai.setSelectedItem(null);
         anhGV.setIcon(null);
-        showDataTable();   
+        showDataTable();
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void btChinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChinhSuaActionPerformed
-        if (!tfNgayBD.getDate().after(tfNgaySinh.getDate())){
+        if (!tfNgayBD.getDate().after(tfNgaySinh.getDate())) {
             JOptionPane.showMessageDialog(null, "Ngày bắt đầu phải xảy ra sau ngày sinh!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
             tfNgayBD.setDate(null);
             tfNgaySinh.setDate(null);
             return;
         }
-        if (tfNgayKT.getDate() != null && !tfNgayKT.getDate().after(tfNgayKT.getDate())){
+        if (tfNgayKT.getDate() != null && !tfNgayKT.getDate().after(tfNgayKT.getDate())) {
             JOptionPane.showMessageDialog(null, "Ngày kết thúc phải xảy ra sau ngày bắt đầu!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
             tfNgayBD.setDate(null);
             tfNgayKT.setDate(null);
@@ -723,14 +745,15 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
             tfEmail.setText("");
             return;
         }
-        
-        if (tfMaGV.getText().equals("") || tfHoTen.getText().equals("") || cbbPhai.getSelectedItem().equals(null) || tfNgaySinh.getDate().equals(null) || tfKhoa.getText().equals("") ||
-                tfNgayBD.getDate().equals(null) || tfEmail.getText().equals("") || ccbTrangThai.getSelectedItem().equals(null)) {
+
+        if (tfMaGV.getText().equals("") || tfHoTen.getText().equals("") || cbbPhai.getSelectedItem().equals(null) || tfNgaySinh.getDate().equals(null) || cbbKhoa.getSelectedItem().equals(null)
+                || tfNgayBD.getDate().equals(null) || tfEmail.getText().equals("") || ccbTrangThai.getSelectedItem().equals(null)) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin giảng viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
             int row = tbGiangVien.getSelectedRow();
             String tt = (String) ccbTrangThai.getSelectedItem();
             String phai = (String) cbbPhai.getSelectedItem();
+            String khoa = (String) cbbPhai.getSelectedItem();
             String HinhAnh = selectedImageUrl;
             String hoTen = tfHoTen.getText();
             String[] parts = hoTen.split(" ");
@@ -738,15 +761,21 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
             String tenLotGV = "";
             String tenGV = "";
 
-            if (parts.length >= 1) hoGV = parts[0];
-            if (parts.length >= 2) tenLotGV = parts[1];
-            if (parts.length >= 3) tenGV = parts[2];
-            
-            GiangVien gv = new GiangVien(tfMaGV.getText(), hoGV, tenLotGV, tenGV, phai, tfNgaySinh.getDate(), 
-                    tfKhoa.getText(), tfNgayBD.getDate(), tfNgayKT.getDate(), tt, tfEmail.getText(), HinhAnh);
+            if (parts.length >= 1) {
+                hoGV = parts[0];
+            }
+            if (parts.length >= 2) {
+                tenLotGV = parts[1];
+            }
+            if (parts.length >= 3) {
+                tenGV = parts[2];
+            }
+
+            GiangVien gv = new GiangVien(tfMaGV.getText(), hoGV, tenLotGV, tenGV, phai, tfNgaySinh.getDate(),
+                    khoa, tfNgayBD.getDate(), tfNgayKT.getDate(), tt, tfEmail.getText(), HinhAnh);
             String maGVien = (String) tbGiangVien.getValueAt(tbGiangVien.getSelectedRow(), 1);
             for (GiangVien gvien : Controller.controller.arrayListGiangVien) {
-                if (!gvien.getMaGV().equalsIgnoreCase(maGVien) && gvien.getEmail().equalsIgnoreCase(gv.getEmail())){
+                if (!gvien.getMaGV().equalsIgnoreCase(maGVien) && gvien.getEmail().equalsIgnoreCase(gv.getEmail())) {
                     JOptionPane.showMessageDialog(null, "Email không được trùng nhau!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -764,31 +793,29 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
             }
             tbGiangVien.getSelectionModel().setSelectionInterval(row, row);
 
-            
-        tfMaGV.setText("");
-        tfHoTen.setText("");
-        cbbPhai.setSelectedItem(null);
-        tfNgaySinh.setDate(null);
-        tfKhoa.setText("");
-        tfNgayBD.setDate(null);
-        tfNgayKT.setDate(null);
-        tfEmail.setText("");
-        ccbTrangThai.setSelectedItem(null);
-        anhGV.setIcon(null);
-        showDataTable();
+            tfMaGV.setText("");
+            tfHoTen.setText("");
+            cbbPhai.setSelectedItem(null);
+            tfNgaySinh.setDate(null);
+            cbbKhoa.setSelectedItem(null);
+            tfNgayBD.setDate(null);
+            tfNgayKT.setDate(null);
+            tfEmail.setText("");
+            ccbTrangThai.setSelectedItem(null);
+            anhGV.setIcon(null);
+            showDataTable();
         }
     }//GEN-LAST:event_btChinhSuaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        HomePage hp = new HomePage();
+        HomePage hp = new HomePage(Controller.controller.taiKhoan.getMaNDN());
         hp.setExtendedState(MAXIMIZED_BOTH);
         hp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-
     public static void main(String args[]) {
-         /* Set the Nimbus look and feel */
+        /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -829,6 +856,7 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
     private javax.swing.JButton btTimKiem;
     private javax.swing.JButton btXem;
     private javax.swing.JButton btXoa;
+    private javax.swing.JComboBox<String> cbbKhoa;
     private javax.swing.JComboBox<String> cbbPhai;
     private javax.swing.JComboBox<String> ccbTrangThai;
     private javax.swing.JButton jButton1;
@@ -844,7 +872,6 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -853,10 +880,10 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lb;
+    private javax.swing.JLabel lbSetName;
     private javax.swing.JTable tbGiangVien;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfHoTen;
-    private javax.swing.JTextField tfKhoa;
     private javax.swing.JTextField tfMaGV;
     private com.toedter.calendar.JDateChooser tfNgayBD;
     private com.toedter.calendar.JDateChooser tfNgayKT;

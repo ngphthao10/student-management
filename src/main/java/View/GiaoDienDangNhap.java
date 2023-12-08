@@ -6,20 +6,19 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class GiaoDienDangNhap extends javax.swing.JFrame {
-    
-    TaiKhoan taiKhoan = new TaiKhoan();
+
     public GiaoDienDangNhap() {
         initComponents();
     }
-    public void showHomeGUI(){
+
+    public void showHomeGUI() {
         String tenDN = tfTaiKhoan.getText();
         String pass = password.getText();
-        if(tenDN.equals("") || pass.equals("")){
+        if (tenDN.equals("") || pass.equals("")) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
         LoadDatabase.loadTableTaiKhoan();
-        LoadDatabase.loadTablePhanQuyen();
         int index = -1;
         for (TaiKhoan tk : Controller.controller.arrayListTaiKhoan) {
             if (tenDN.equals(tk.getTenDangNhap().trim())) {
@@ -31,11 +30,11 @@ public class GiaoDienDangNhap extends javax.swing.JFrame {
         } else {
             TaiKhoan tk = Controller.controller.arrayListTaiKhoan.get(index);
             if (tk.getMatKhau().equals(pass)) {
-                taiKhoan = tk;
+                Controller.controller.taiKhoan = tk;
 
-                if ((tk.getMaNDN().equals("SV")|| tk.getMaNDN().equals("GV") || tk.getMaNDN().equals("AD")) && tk.isTrangThaiXoa() == false) {
+                if ((tk.getMaNDN().equals("SV") || tk.getMaNDN().equals("GV") || tk.getMaNDN().equals("AD")) && tk.isTrangThaiXoa() == false) {
                     this.dispose();
-                    HomePage home = new HomePage();
+                    HomePage home = new HomePage(tk.getMaNDN());
                     home.setVisible(true);
                     home.setExtendedState(MAXIMIZED_BOTH);
 
@@ -47,6 +46,7 @@ public class GiaoDienDangNhap extends javax.swing.JFrame {
             }
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -160,7 +160,7 @@ public class GiaoDienDangNhap extends javax.swing.JFrame {
             password.setEchoChar((char) 0);
         } else {
             password.setEchoChar('*');
-        }  
+        }
     }//GEN-LAST:event_cbHienMKActionPerformed
 
     private void btDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDangNhapActionPerformed
