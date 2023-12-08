@@ -3,6 +3,7 @@ package Model;
 public class TaiKhoan {
     
     private String maNDN;
+    private String maTK;
     private String tenNguoiDung;
     private String tenDangNhap;
     private String matKhau;
@@ -10,18 +11,28 @@ public class TaiKhoan {
     
     public TaiKhoan() {
         this.maNDN = "";
+        this.maTK = "";
         this.tenNguoiDung = "";
         this.tenDangNhap = "";
         this.matKhau = "";
         this.trangThaiXoa = false;
     }
 
-    public TaiKhoan(String maNDN, String tenNguoiDung, String tenDangNhap, String matKhau, boolean trangThaiXoa) {
+    public TaiKhoan(String maNDN, String maTK, String tenNguoiDung, String tenDangNhap, String matKhau, boolean trangThaiXoa) {
         this.maNDN = maNDN;
+        this.maTK = maTK;
         this.tenNguoiDung = tenNguoiDung;
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
         this.trangThaiXoa = trangThaiXoa;
+    }
+
+    public String getMaTK() {
+        return maTK;
+    }
+
+    public void setMaTK(String maTK) {
+        this.maTK = maTK;
     }
 
     public String getMaNDN() {
