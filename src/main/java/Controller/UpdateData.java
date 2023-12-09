@@ -136,4 +136,29 @@ public class UpdateData {
         JOptionPane.showMessageDialog(null, "Sửa giảng viên thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
+    
+    public static boolean updateLopTinChi(LopTinChi ltc) throws ClassNotFoundException {
+        String sqlCommand = "UPDATE LOPTINCHI SET maMH = ?, maHK = ?, nhom = ?, svMin = ?, svMax = ?, huyLop = ?, maLop = ? WHERE maLopTC = ?";
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setString(1, ltc.getMaMH());
+            ps.setString(2, ltc.getMaHK());
+            ps.setInt(3, ltc.getNhom());
+            ps.setInt(4, ltc.getSvMin());
+            ps.setInt(5, ltc.getSvMax());
+            ps.setBoolean(6, ltc.isHuyLop());
+            ps.setString(7, ltc.getMaLop());
+            ps.setInt(8, ltc.getMaLopTC());
+            
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Sửa lớp tín chỉ thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Sửa lớp tín chỉ thất bại", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
 }

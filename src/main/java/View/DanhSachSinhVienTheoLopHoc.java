@@ -525,7 +525,17 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
     }//GEN-LAST:event_btSuaActionPerformed
 
     private void btNhapMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNhapMoiActionPerformed
-        // TODO add your handling code here:
+        if (evt.getSource() == btNhapMoi) {
+            tfMaSV.setText("");
+            tfHoTen.setText("");
+            cbNam.setSelected(false);
+            cbNu.setSelected(false);
+            tfNgaySinh.setText("");
+            tfEmail.setText("");
+            tfSDT.setText("");
+            tfNamNhapHoc.setText("");
+            cmbTrangThai.setSelectedItem("Đang học");
+        }
     }//GEN-LAST:event_btNhapMoiActionPerformed
 
     private void cmbKhoaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbKhoaItemStateChanged

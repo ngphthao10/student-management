@@ -4,7 +4,6 @@
  */
 package Model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,31 +14,34 @@ public class LopTinChi {
     
     private int maLopTC;
     private String maMH;
-    private int maHK;
+    private String maHK;
     private int nhom;
     private int svMin;
     private int svMax;
     private boolean huyLop;
+    private String maLop;
     private List<DangKy> dssvdk;
     
     public LopTinChi() {
         this.maLopTC = 0;
         this.maMH = "";
-        this.maHK = 0;
+        this.maHK = "";
         this.nhom = 0;
         this.svMin = -1;
         this.svMax = -1;
-        this.dssvdk = new ArrayList<>();
+        this.maLop = "";
+        this.dssvdk = null;
         this.huyLop = false;
     }
 
-    public LopTinChi(int maLopTC, String maMH, int maHK, int nhom, int svMin, int svMax, List<DangKy> dssvdk, boolean huyLop) {
+    public LopTinChi(int maLopTC, String maMH, String maHK, int nhom, int svMin, int svMax, boolean huyLop, String maLop, List<DangKy> dssvdk) {
         this.maLopTC = maLopTC;
         this.maMH = maMH;
         this.maHK = maHK;
         this.nhom = nhom;
         this.svMin = svMin;
         this.svMax = svMax;
+        this.maLop = maLop;
         this.dssvdk = dssvdk;
         this.huyLop = huyLop;
     }
@@ -92,12 +94,20 @@ public class LopTinChi {
         this.huyLop = huyLop;
     }
 
-    public int getMaHK() {
+    public String getMaHK() {
         return maHK;
     }
 
-    public void setMaHK(int maHK) {
+    public void setMaHK(String maHK) {
         this.maHK = maHK;
+    }
+
+    public String getMaLop() {
+        return maLop;
+    }
+
+    public void setMaLop(String maLop) {
+        this.maLop = maLop;
     }
 
     public List<DangKy> getDssvdk() {

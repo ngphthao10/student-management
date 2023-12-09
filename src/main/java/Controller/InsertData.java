@@ -146,5 +146,49 @@ public class InsertData {
         JOptionPane.showMessageDialog(null, "Thêm giảng viên thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
+     
+    public static boolean insertLopTinChi(LopTinChi ltc) throws ClassNotFoundException {
+        try {
+            String sqlCommand = "INSERT INTO LOPTINCHI VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setInt(1, ltc.getMaLopTC());
+            ps.setString(2, ltc.getMaMH());
+            ps.setString(3, ltc.getMaHK());
+            ps.setInt(4, ltc.getNhom());
+            ps.setInt(5, ltc.getSvMin());
+            ps.setInt(6, ltc.getSvMax());
+            ps.setBoolean(7, ltc.isHuyLop());
+            ps.setString(8, ltc.getMaLop());
+            
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Thêm lớp tín chỉ thành công!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Thêm lớp tín chỉ thất bại!!", "Thông báo",JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    
+    public static boolean insertDangKy(DangKy dk) throws ClassNotFoundException {
+        try {
+            String sqlCommand = "INSERT INTO DANGKY VALUES (?, ?)";
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setString(1, dk.getMaSV());
+            ps.setInt(2, dk.getMaLTC());
+            
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Đăng ký thành công!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Đăng ký thất bại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
    
 }

@@ -101,4 +101,44 @@ public class DeleteData {
         JOptionPane.showMessageDialog(null, "Xóa giảng viên thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
+    
+    public static boolean deleteLopTinChi(int maLTC) throws ClassNotFoundException {
+        try {
+//            System.out.println(maLTC);
+            String sqlCommand = "DELETE FROM LOPTINCHI WHERE maLopTC = ?";
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setInt(1, maLTC);
+            
+            // chèn thêm điều kiện ko đc xóa ltc khi có dssvdk của ltc != null
+            
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Xóa lớp tín chỉ thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Xóa lớp tín chỉ thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    
+    public static boolean deleteDangKy(int maLTC, String maSV) throws ClassNotFoundException {
+        try {
+            String sqlCommand = "DELETE FROM DANGKY WHERE maLTC = ? AND maSV = ?";
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setInt(1, maLTC);
+            ps.setString(2, maSV);
+            
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Huỷ đăng ký thành công!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Hủy đăng ký thất bại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
 }

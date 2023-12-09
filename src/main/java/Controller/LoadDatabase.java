@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -417,8 +419,225 @@ public class LoadDatabase {
         }   catch (SQLException ex) {
             Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }   
-
+    }
+    
+    public static void fillSubComboMonHoc(JComboBox<String> subComboBox, String selectedValue) throws ClassNotFoundException {
+        try {
+            createStatement();
+            String query = "SELECT tenMH FROM MONHOC WHERE khoa IN (SELECT maKhoa FROM KHOA WHERE tenKhoa = ?)";
+            try(PreparedStatement prepareStatement = DataConnection.connection.prepareStatement(query)) {
+                prepareStatement.setString(1, selectedValue);
+                
+                try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                    while(resultSet.next()) {
+                        String tenMH = resultSet.getString("tenMH");
+                        subComboBox.addItem(tenMH);
+                    }
+                }
+                DataConnection.connection.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void loadTableLopTinChi(String selectedValue) throws ClassNotFoundException {
+        try {
+            createStatement();
+            String query = "SELECT * FROM LOPTINCHI WHERE maMH IN (SELECT maMH FROM MONHOC JOIN KHOA ON khoa = maKhoa WHERE tenKhoa = ?)";
+            try (PreparedStatement prepareStatement = DataConnection.connection.prepareStatement(query)) {
+                prepareStatement.setString(1, selectedValue);
+                try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                    controller.arrayListLopTinChi.clear();
+                    while(resultSet.next()) {
+                        LopTinChi ltc = new LopTinChi(
+                                resultSet.getInt("maLopTC"), resultSet.getString("maMH"), resultSet.getString("maHK"),
+                                resultSet.getInt("nhom"), resultSet.getInt("svMin"), resultSet.getInt("svMax"), 
+                                resultSet.getBoolean("huyLop"), resultSet.getString("maLop"), null
+                        );
+                        controller.arrayListLopTinChi.add(ltc);
+                    }
+                }
+                DataConnection.connection.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public static String getTenMH(String maMH) throws ClassNotFoundException {
+        try {
+            createStatement();
+            String sqlCommand = "SELECT tenMH FROM MONHOC WHERE maMH = ?";
+            try (PreparedStatement prepareStatement = DataConnection.connection.prepareStatement(sqlCommand)) {
+                prepareStatement.setString(1, maMH);
+                
+                try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                    while(resultSet.next()) {
+                        String tenMH = resultSet.getString("tenMH");
+                        DataConnection.connection.close();
+                        return tenMH;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Không tìm thấy mã môn học!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+    
+    public static void fillSubComboLopFromKhoa(JComboBox<String> subComboBox, String selectedValue) throws ClassNotFoundException {
+        try {
+            createStatement();
+            String query = "SELECT maLop FROM LOP WHERE maNganh IN (SELECT maNganh FROM NGANH JOIN KHOA ON KHOA.maKhoa = NGANH.maKhoa WHERE tenKhoa = ?)";
+            try(PreparedStatement prepareStatement = DataConnection.connection.prepareStatement(query)) {
+                prepareStatement.setString(1, selectedValue);
+                
+                try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                    while(resultSet.next()) {
+                        String maLop = resultSet.getString("maLop");
+                        subComboBox.addItem(maLop);
+                    }
+                }
+                DataConnection.connection.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void fillDistinctComboBox(JComboBox<String> comboBox, String column, String tableName) {
+        try {
+            ResultSet rs = DataConnection.retrieveData("select DISTINCT " + column + " from " + tableName);
+            // Chèn dữ liệu từ kết quả truy vấn vào JComboBox
+            while (rs.next()) {
+                String columnName = rs.getString(column);
+                comboBox.addItem(columnName);
+            }
+            // Đóng tài nguyên
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static int getMaLTC() throws ClassNotFoundException {
+        ResultSet rs = DataConnection.retrieveData("SELECT MAX(maLopTC) FROM LOPTINCHI");
+        int maLopTC = 0;
+        
+        try {
+            while(rs.next()) {
+                maLopTC = rs.getInt(1);
+                ++maLopTC;
+            }
+            rs.close();
+            return maLopTC;
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Đã có lỗi xảy ra!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return -1;
+    }
+    
+    public static String getColumnFromMonHoc(String value, String selectColumn, String column) throws ClassNotFoundException {
+        try {
+            createStatement();
+            String sqlCommand = "SELECT " + selectColumn + " FROM MONHOC WHERE " + column + " = ?";
+            try (PreparedStatement prepareStatement = DataConnection.connection.prepareStatement(sqlCommand)) {
+                prepareStatement.setString(1, value);
+                
+                try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                    while(resultSet.next()) {
+                        String result = resultSet.getString(1);
+                        DataConnection.connection.close();
+                        return result;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Tên môn học không tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+    
+    public static String getTenGiangVienFromLTC(int maLTC) throws ClassNotFoundException {
+        try {
+            createStatement();
+            String query = "select CONCAT(hoGV, ' ', tenlotGV, ' ', tenGV) from giangvien where maGV = (select maGV from phancong where maLTC = ?)";
+            try (PreparedStatement ps = DataConnection.connection.prepareCall(query)) {
+                ps.setInt(1, maLTC);
+                try (ResultSet rs = ps.executeQuery()) {
+                    while(rs.next()) {
+                        String hotenGV = rs.getString(1);
+                        DataConnection.connection.close();
+                        return hotenGV;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Không tồn tại mã lóp tín chỉ trên!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+    
+    public static void loadTableDSSVDK(int maLTC) throws ClassNotFoundException {
+        try {
+            createStatement();
+            String query = "SELECT * FROM DANGKY WHERE maLTC = ?";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)) {
+                ps.setInt(1, maLTC);
+                try (ResultSet rs = ps.executeQuery()) {
+                    controller.arrayListDangKy.clear();
+                    while(rs.next()) {
+                        DangKy dk = new DangKy(
+                            rs.getString("maSV"), rs.getInt("maLTC")
+                        );
+                        controller.arrayListDangKy.add(dk);
+                    }
+                }
+                DataConnection.connection.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+    
+    public static void fillSubComboBoxMaLTC(JComboBox<String> comboBox, String tenKhoa) throws ClassNotFoundException {
+        try {
+            String query = "SELECT maLopTC FROM LOPTINCHI WHERE maMH IN (SELECT maMH FROM MONHOC JOIN KHOA ON khoa = maKhoa WHERE tenKhoa = ?)";
+            createStatement();
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)) {
+                ps.setString(1, tenKhoa);
+                try (ResultSet rs = ps.executeQuery()) {
+                    while(rs.next()) {
+                        String maLTC = String.valueOf(rs.getInt("maLopTC"));
+                        comboBox.addItem(maLTC);
+                    }
+                }
+                DataConnection.connection.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void loadTableDangKy() {
+        try {
+            ResultSet rs = DataConnection.retrieveData("SELECT * FROM DANGKY");
+            controller.arrayListDangKy.clear();
+            while(rs.next()) {
+                DangKy dk = new DangKy(rs.getString("maSV"), rs.getInt("maLTC"));
+                controller.arrayListDangKy.add(dk);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public LoadDatabase() {
 //        Controller.controller.arrayListNganh.removeAll(Controller.controller.arrayListNganh);
 //        loadTableGiangVien();
