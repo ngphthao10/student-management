@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
+import javax.swing.JComboBox;
 
 public class InsertData {
     public static boolean insertMonHoc(MonHoc mh) throws ClassNotFoundException {
@@ -188,6 +189,25 @@ public class InsertData {
             Logger.getLogger(InsertData.class.getName()).log(Level.SEVERE, null, ex);
         }
         JOptionPane.showMessageDialog(null, "Đăng ký thất bại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+     
+    public static boolean insertPhanCong(PhanCong pc) throws ClassNotFoundException {
+        String sqlCommand = "INSERT INTO PHANCONG (maLTC, maGV) VALUES(?, ?)"; 
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setInt(1, pc.getMaLTC());
+            ps.setString(2, pc.getMaGV());
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Thêm phân công thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Thêm phân công thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
    

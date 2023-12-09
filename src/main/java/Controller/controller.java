@@ -11,4 +11,11 @@ public class controller {
     public static ArrayList<GiangVien> arrayListGiangVien = new ArrayList<GiangVien>();
     public static ArrayList<LopTinChi> arrayListLopTinChi = new ArrayList<LopTinChi>();
     public static ArrayList<DangKy> arrayListDangKy = new ArrayList<DangKy>();
+    public static ArrayList<PhanCong> arrayListPhanCong = new ArrayList<PhanCong>();
+
+    public static ArrayList<NhomNguoiDangNhap> arrayListNNDN = new ArrayList<NhomNguoiDangNhap>();
+    public static ArrayList<ChucNang> arrayListChucNang = new ArrayList<ChucNang>();  
+    public static ArrayList<TaiKhoan> arrayListTaiKhoan = new ArrayList<TaiKhoan>();  
+    public static ArrayList<PhanQuyen> arrayListPhanQuyen = new ArrayList<PhanQuyen>();  
+    public static TaiKhoan taiKhoan = new TaiKhoan();
 }

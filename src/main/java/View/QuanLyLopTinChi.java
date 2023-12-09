@@ -514,8 +514,12 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
         if (evt.getSource() == btXoa) {
             try {
                 int index = tbLopTinChi.getSelectedRow();
-                int maLopTC = controller.arrayListLopTinChi.get(index).getMaLopTC();
-                Controller.DeleteData.deleteLopTinChi(maLopTC);
+                LopTinChi ltc = controller.arrayListLopTinChi.get(index);
+                if (ltc.getDssvdk() != null) {
+                    JOptionPane.showMessageDialog(null, "Lớp tín chỉ có sinh viên đăng ký, không thể xóa!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                Controller.DeleteData.deleteLopTinChi(ltc.getMaLopTC());
                 showData();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(QuanLyLopTinChi.class.getName()).log(Level.SEVERE, null, ex);

@@ -1,32 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
-/**
- *
- * @author Minh Thu
- */
 public class TaiKhoan {
     
+    private String maNDN;
     private String maTK;
+    private String tenNguoiDung;
+    private String tenDangNhap;
     private String matKhau;
     private boolean trangThaiXoa;
-    private int maNDN;
     
     public TaiKhoan() {
+        this.maNDN = "";
         this.maTK = "";
+        this.tenNguoiDung = "";
+        this.tenDangNhap = "";
         this.matKhau = "";
         this.trangThaiXoa = false;
-        this.maNDN = 0;
     }
 
-    public TaiKhoan(String maTK, String matKhau, boolean trangThaiXoa, int maNDN) {
+    public TaiKhoan(String maNDN, String maTK, String tenNguoiDung, String tenDangNhap, String matKhau, boolean trangThaiXoa) {
+        this.maNDN = maNDN;
         this.maTK = maTK;
+        this.tenNguoiDung = tenNguoiDung;
+        this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
         this.trangThaiXoa = trangThaiXoa;
-        this.maNDN = maNDN;
     }
 
     public String getMaTK() {
@@ -35,6 +33,30 @@ public class TaiKhoan {
 
     public void setMaTK(String maTK) {
         this.maTK = maTK;
+    }
+
+    public String getMaNDN() {
+        return maNDN;
+    }
+
+    public void setMaNDN(String maNDN) {
+        this.maNDN = maNDN;
+    }
+
+    public String getTenNguoiDung() {
+        return tenNguoiDung;
+    }
+
+    public void setTenNguoiDung(String tenNguoiDung) {
+        this.tenNguoiDung = tenNguoiDung;
+    }
+
+    public String getTenDangNhap() {
+        return tenDangNhap;
+    }
+
+    public void setTenDangNhap(String tenDangNhap) {
+        this.tenDangNhap = tenDangNhap;
     }
 
     public String getMatKhau() {
@@ -52,15 +74,5 @@ public class TaiKhoan {
     public void setTrangThaiXoa(boolean trangThaiXoa) {
         this.trangThaiXoa = trangThaiXoa;
     }
-
-    public int getMaNDN() {
-        return maNDN;
-    }
-
-    public void setMaNDN(int maNDN) {
-        this.maNDN = maNDN;
-    }
-    
-    
     
 }
