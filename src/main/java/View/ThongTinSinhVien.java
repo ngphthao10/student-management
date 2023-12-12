@@ -558,7 +558,8 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
 
     private void btSetImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSetImageActionPerformed
         try {
-            JFileChooser fptr = new JFileChooser("D:\\Java\\student-management\\student-management\\AnhTheSinhVien");
+            JFileChooser fptr = new JFileChooser("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement");
+
             fptr.setDialogTitle("Mở file");
             fptr.showOpenDialog(null);
             File fTenAnh = fptr.getSelectedFile();
