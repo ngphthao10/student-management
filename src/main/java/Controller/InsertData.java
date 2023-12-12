@@ -160,8 +160,7 @@ public class InsertData {
             ps.setInt(5, ltc.getNhom());
             ps.setInt(6, ltc.getSvMin());
             ps.setInt(7, ltc.getSvMax());
-            ps.setBoolean(8, ltc.isHuyLop());
-            
+            ps.setBoolean(8, ltc.isHuyLop()); 
             
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Thêm lớp tín chỉ thành công!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);

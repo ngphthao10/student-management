@@ -1,6 +1,7 @@
 package Controller;
 
 
+import static Controller.DataConnection.createStatement;
 import Model.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -72,6 +73,26 @@ public class UpdateData {
             Logger.getLogger(UpdateData.class.getName()).log(Level.SEVERE, null, ex);
         }
         JOptionPane.showMessageDialog(null, "Sửa môn học thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    
+    public static boolean updateAnh(String hinhAnh, String maSV) throws ClassNotFoundException {
+        try {
+            createStatement();
+            String sqlCommand = "UPDATE SINHVIEN SET hinhAnh = ? WHERE maSV = ?";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand)) {
+                ps.setString(1, hinhAnh);
+                ps.setString(2, maSV);
+                
+                if (ps.executeUpdate() > 0) {
+                    JOptionPane.showMessageDialog(null, "Cập nhật hình ảnh thành công!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Cập nhật hình ảnh thất bại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
     

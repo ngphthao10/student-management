@@ -453,7 +453,7 @@
                                   <Component id="tfNamNhapHoc" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="lbPhanLoai" min="-2" pref="107" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -474,7 +474,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="lbTenMH1" min="-2" pref="127" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="tfNgaySinh" min="-2" pref="344" max="-2" attributes="0"/>
+                                          <Component id="datechNgaySinh" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
@@ -501,7 +501,7 @@
                           <Component id="btNhapMoi" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="247" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -531,12 +531,12 @@
                           <Component id="cbNu" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tfNgaySinh" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbTenMH1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="lbTenMH1" min="-2" max="-2" attributes="0"/>
+                      <Component id="datechNgaySinh" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbTenMH3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -706,13 +706,6 @@
             <Property name="text" type="java.lang.String" value="Ng&#xe0;y sinh"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfNgaySinh">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="lbTenMH2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -750,9 +743,6 @@
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfSDTActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbTrangThai">
           <Properties>
@@ -783,6 +773,14 @@
         <Component class="javax.swing.JTextField" name="tfNamNhapHoc">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="datechNgaySinh">
+          <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>

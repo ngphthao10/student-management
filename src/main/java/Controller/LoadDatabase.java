@@ -507,7 +507,7 @@ public class LoadDatabase {
                         ltc = new LopTinChi(
                                 resultSet.getInt("maLopTC"), resultSet.getString("maMH"), resultSet.getString("maHK"),
                                 resultSet.getString("maLop"), resultSet.getInt("nhom"), resultSet.getInt("svMin"),
-                                resultSet.getInt("svMax"), resultSet.getBoolean("huyLop"), null
+                                resultSet.getInt("svMax"), resultSet.getBoolean("huyLop")
                         );
                         controller.arrayListLopTinChi.add(ltc);
                     }
@@ -828,7 +828,7 @@ public class LoadDatabase {
                         rs.getInt("nhom"),
                         rs.getInt("svMin"),
                         rs.getInt("svMax"),
-                        rs.getBoolean("huyLop"), null);
+                        rs.getBoolean("huyLop"));
                 controller.arrayListLopTinChi.add(ltc);
             }
         } catch (SQLException e) {
@@ -850,6 +850,29 @@ public class LoadDatabase {
             e.printStackTrace();
         }
     }
+    
+//    public static void getPhanCong(int maLTC) throws ClassNotFoundException {
+//        try {
+//            createStatement();
+//            String query = "SELECT * FROM PHANCONG WHERE maLTC = ?";
+//            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)) {
+//                ps.setInt(1, maLTC);
+//                controller.
+//                try (ResultSet rs = ps.executeQuery()) {
+//                    while(rs.next()) {
+//                        PhanCong pc = new PhanCong();
+//                        pc.setMaLTC(rs.getInt("maLTC"));
+//                        pc.setMaGV(rs.getString("maGV"));
+//                        controller.arrayListPhanCong.add(pc);
+//                        DataConnection.connection.close();
+//                    }
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//    }
 
     //Lấy mã ltc khi biết 3 thuộc tính maHK, tenMH, maLop
     public static int getMaLTC(String maHK, String tenMH, String maLop, int nhom) throws ClassNotFoundException {
@@ -949,6 +972,8 @@ public class LoadDatabase {
         }
         return quyen;
     }
+    
+    
 
     public LoadDatabase() {
 //        Controller.controller.arrayListNganh.removeAll(Controller.controller.arrayListNganh);

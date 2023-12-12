@@ -14,7 +14,6 @@ public class LopTinChi {
     private int svMin;
     private int svMax;
     private boolean huyLop;
-    private List<DangKy> dssvdk;
 
     public int getMaLopTC() {
         return maLopTC;
@@ -29,11 +28,10 @@ public class LopTinChi {
         this.svMin = -1;
         this.svMax = -1;
         this.maLop = "";
-        this.dssvdk = null;
         this.huyLop = false;
     }
     
-    public LopTinChi(int maLopTC, String maMH, String maHK, String maLop, int nhom, int svMin, int svMax, boolean huyLop, List<DangKy> dssvdk) {
+    public LopTinChi(int maLopTC, String maMH, String maHK, String maLop, int nhom, int svMin, int svMax, boolean huyLop) {
         this.maLopTC = maLopTC;
         this.maMH = maMH;
         this.maHK = maHK;
@@ -42,7 +40,6 @@ public class LopTinChi {
         this.svMin = svMin;
         this.svMax = svMax;
         this.huyLop = huyLop;
-        this.dssvdk = dssvdk;
     }
 
     public void setMaLopTC(int maLopTC) {
@@ -103,13 +100,5 @@ public class LopTinChi {
 
     public void setMaLop(String maLop) {
         this.maLop = maLop;
-    }
-
-    public List<DangKy> getDssvdk() {
-        return dssvdk;
-    }
-
-    public void setDssvdk(List<DangKy> dssvdk) {
-        this.dssvdk = dssvdk;
     }
 }

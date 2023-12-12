@@ -6,10 +6,15 @@ import Model.Nganh;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import static java.time.temporal.TemporalQueries.localDate;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -505,7 +510,6 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
                     cbNam.setSelected(true);
                 }
                 else cbNu.setSelected(true);
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 datechNgaySinh.setDate(sv.getNgaySinh());
                 tfEmail.setText(sv.getEmail());
                 tfSDT.setText(sv.getSdt());
@@ -553,12 +557,26 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btChinhSuaActionPerformed
 
     private void btSetImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSetImageActionPerformed
-        JFileChooser fptr = new JFileChooser("D:\\Java\\student-management\\student-management\\AnhTheSinhVien");
-        fptr.setDialogTitle("Mở file");
-        fptr.showOpenDialog(null);
-        File fTenAnh = fptr.getSelectedFile();
-        String duongDanAnh = fTenAnh.getAbsolutePath();
-        lbHinhAnh.setIcon(new ImageIcon(duongDanAnh));
+        try {
+            JFileChooser fptr = new JFileChooser("D:\\Java\\student-management\\student-management\\AnhTheSinhVien");
+            fptr.setDialogTitle("Mở file");
+            fptr.showOpenDialog(null);
+            File fTenAnh = fptr.getSelectedFile();
+            String duongDanAnh = fTenAnh.getAbsolutePath();
+            SinhVien sv = LoadDatabase.getThongTinSV(tfMaSV.getText());
+            if (duongDanAnh.contains("anhnam") && sv.getPhai().equalsIgnoreCase("Nam")) {
+                lbHinhAnh.setIcon(new ImageIcon(duongDanAnh));
+            }
+            else if (duongDanAnh.contains("anhnu") && sv.getPhai().equalsIgnoreCase("Nữ")) {
+                lbHinhAnh.setIcon(new ImageIcon(duongDanAnh));
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Phải set ảnh phù hợp với giới tính!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(ThongTinSinhVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btSetImageActionPerformed
 
     private void cmbNganhItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNganhItemStateChanged
@@ -617,7 +635,7 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
             String[] hoTen = tfHoTen.getText().split(" ");
             System.out.println(hoTen);
             if (hoTen.length <= 1) {
-                JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập họ tên có 2 chữ trở lên!!");
+                JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập họ tên có 2 chữ trở lên!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
                 return null;
             }
             else if (hoTen.length == 2) {
@@ -638,17 +656,30 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
                 sv.setPhai(cbNu.getText());
             }
             else {
-                JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn phái!!");
+                JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn phái!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
                 return null;
             }
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            LocalDate localDate = LocalDate.now();
+            Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            if (date.compareTo(datechNgaySinh.getDate()) < 0) {
+                JOptionPane.showMessageDialog(rootPane, "Ngày sinh không hợp lệ!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
             sv.setNgaySinh(datechNgaySinh.getDate());
+            String regex = "^[a-zA-Z0-9_]+@gmail\\.com$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(tfEmail.getText());
+            if (!matcher.matches()) {
+                JOptionPane.showMessageDialog(null, "Địa chỉ email không hợp lệ", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                tfEmail.setText("");
+                return null;
+            }
             sv.setEmail(tfEmail.getText());
             if (tfSDT.getText().equals("") == true) {
                 sv.setSdt(tfSDT.getText());
             }
             else if (tfSDT.getText().charAt(0) != '0' || tfSDT.getText().matches("\\d{10,11}") == false) {
-                JOptionPane.showMessageDialog(rootPane, "Số điện thoại không hợp lệ!!");
+                JOptionPane.showMessageDialog(rootPane, "Số điện thoại không hợp lệ!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
                 return null;
             } 
             else {

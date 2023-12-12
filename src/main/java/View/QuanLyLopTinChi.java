@@ -3,6 +3,8 @@ package View;
 import Controller.LoadDatabase;
 import Controller.controller;
 import Model.LopTinChi;
+import Model.PhanCong;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -35,6 +37,7 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
         cmbNienKhoa.removeAllItems();
         loadDatabase.fillDistinctComboBox(cmbNienKhoa, "nienKhoa", "HOCKY");
         btXemDSSVDK.setEnabled(false);
+        
     }
 
     /**
@@ -87,7 +90,6 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
         btXemDSSVDK = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -313,7 +315,6 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
         lbSetName.setText("XX1 - Ten người dùng");
 
         jButton1.setBackground(new java.awt.Color(209, 232, 195));
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\src\\main\\java\\Image\\icons8-cat-64.png")); // NOI18N
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
         jButton1.setFocusPainted(false);
@@ -542,12 +543,25 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
             try {
                 int index = tbLopTinChi.getSelectedRow();
                 LopTinChi ltc = controller.arrayListLopTinChi.get(index);
-                if (ltc.getDssvdk() != null) {
+                LoadDatabase.loadTableDSSVDK(ltc.getMaLopTC());
+                LoadDatabase.loadTablePhanCong();
+ 
+                for (PhanCong pc: Controller.controller.arrayListPhanCong){
+                    if(pc.getMaLTC() == ltc.getMaLopTC()){
+                        JOptionPane.showMessageDialog(null, "Lớp tín chỉ đã phân công!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }                    
+                }
+                if (!controller.arrayListDangKy.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Lớp tín chỉ có sinh viên đăng ký, không thể xóa!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                Controller.DeleteData.deleteLopTinChi(ltc.getMaLopTC());
-                showData();
+                
+                int confirm = JOptionPane.showConfirmDialog(rootPane, "Xác nhận xóa lớp tín chỉ?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    Controller.DeleteData.deleteLopTinChi(ltc.getMaLopTC());
+                    showData();
+                }               
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(QuanLyLopTinChi.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -570,7 +584,6 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(QuanLyLopTinChi.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         }
     }//GEN-LAST:event_btSuaActionPerformed
 
@@ -660,10 +673,15 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
         LopTinChi ltc = new LopTinChi();
         
         try {
+            int year = LocalDate.now().getYear();
             // check điều kiện nhập vào
             ltc.setMaLopTC(LoadDatabase.getMaLTC());
             tfMaLTC.setText(String.valueOf(ltc.getMaLopTC()));
             ltc.setMaMH(LoadDatabase.getColumnFromMonHoc(cmbMonHoc.getSelectedItem().toString() ,"maMH", "tenMH"));
+            if (cmbNienKhoa.getSelectedItem().toString().substring(3, 7).compareTo(String.valueOf(year)) < 0) {
+                JOptionPane.showMessageDialog(rootPane, "Không thêm LTC trong quá khứ", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
             ltc.setMaHK("0".concat(cmbHocKy.getSelectedItem().toString() + "_" + cmbNienKhoa.getSelectedItem().toString()));
             ltc.setNhom(Integer.parseInt(tfNhom.getText()));
             ltc.setMaLop((String) cmbLop.getSelectedItem());
@@ -682,8 +700,6 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
                 return null;
             }
             ltc.setHuyLop(cbHuyLop.isSelected()); 
-//            ltc.setDssvdk(dssvdk);
-            // thiếu dssvdk
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuanLyLopTinChi.class.getName()).log(Level.SEVERE, null, ex);
@@ -698,6 +714,11 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
         try {
             // check điều kiện nhập vào
             ltc.setMaMH(LoadDatabase.getColumnFromMonHoc(cmbMonHoc.getSelectedItem().toString() ,"maMH", "tenMH"));
+            int year = LocalDate.now().getYear();
+            if (cmbNienKhoa.getSelectedItem().toString().substring(3, 7).compareTo(String.valueOf(year)) < 0) {
+                JOptionPane.showMessageDialog(rootPane, "Không sửa LTC trong quá khứ", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
             ltc.setMaHK("0".concat(cmbHocKy.getSelectedItem().toString() + "_" + cmbNienKhoa.getSelectedItem().toString()));
             ltc.setNhom(Integer.parseInt(tfNhom.getText()));
             ltc.setMaLop((String) cmbLop.getSelectedItem());
@@ -754,9 +775,12 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new QuanLyLopTinChi().setVisible(true);
+                QuanLyLopTinChi qlltc = new QuanLyLopTinChi();
+                qlltc.setVisible(true);
+                qlltc.setExtendedState(MAXIMIZED_BOTH);
             }
         });
     }

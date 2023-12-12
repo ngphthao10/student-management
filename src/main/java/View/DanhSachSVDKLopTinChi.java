@@ -54,14 +54,7 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DanhSachSVDKLopTinChi.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-//        initComponents();
-//        setLocationRelativeTo(null);
-//        cbHuyLop.setEnabled(false);
-//        model = (DefaultTableModel) tbDSSVDK.getModel();
-//        model.setRowCount(0);
-//        tbDSSVDK.setRowHeight(20);
-        
+
     }
 
     /**
@@ -105,7 +98,6 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
         tbDSSVDK = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 0));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -290,7 +282,6 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jButton1.setBackground(new java.awt.Color(209, 232, 195));
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\src\\main\\java\\Image\\icons8-cat-64.png")); // NOI18N
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
         jButton1.setFocusPainted(false);
