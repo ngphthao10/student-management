@@ -39,6 +39,10 @@ public class PhanCong {
             }
         }
     }
+
+    public int getNhomLtc(){
+        return ltc.getNhom();
+    }
     
     public Boolean isHuyLopLtc(){
         return ltc.isHuyLop();

@@ -542,6 +542,27 @@ public class LoadDatabase {
         return null;
     }
     
+    public static String getTenKhoaFromMaKhoa(String maKhoa) throws ClassNotFoundException {
+        try {
+            createStatement();
+            String sqlCommand = "SELECT tenKhoa FROM KHOA WHERE maKhoa = ?";
+            try (PreparedStatement prepareStatement = DataConnection.connection.prepareStatement(sqlCommand)) {
+                prepareStatement.setString(1, maKhoa);
+                
+                try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                    while(resultSet.next()) {
+                        String tenKhoa = resultSet.getString("tenKhoa");
+                        DataConnection.connection.close();
+                        return tenKhoa;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public static void fillSubComboLopFromKhoa(JComboBox<String> subComboBox, String selectedValue) throws ClassNotFoundException {
         try {
             createStatement();
@@ -651,7 +672,7 @@ public class LoadDatabase {
         } catch (SQLException ex) {
             Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Không tồn tại mã lóp tín chỉ trên!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Lớp tín chỉ hiện chưa được phân công!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return null;
     }
     
@@ -751,14 +772,14 @@ public class LoadDatabase {
 
             String query;
             if ("Tất cả".equals(selectedTrangThai)) {
-                query = "SELECT maLopTC, maHK, tenMH, LTC.maLop, PC.maGV, CONCAT(hoGV, ' ', tenLotGV, ' ', tenGV) AS hoTen, huyLop "
+                query = "SELECT maLopTC, maHK, tenMH, LTC.maLop, ltc.Nhom, PC.maGV, CONCAT(hoGV, ' ', tenLotGV, ' ', tenGV) AS hoTen, huyLop "
                         + "FROM LOPTINCHI LTC "
                         + "JOIN MONHOC MH ON MH.maMH = LTC.maMH "
                         + "JOIN PHANCONG PC ON PC.maLTC = LTC.maLopTC "
                         + "JOIN GIANGVIEN GV ON GV.maGV = PC.maGV "
                         + "WHERE MH.khoa IN (SELECT maKhoa from khoa where tenKhoa = ?)";
             } else {
-                query = "SELECT maLopTC, maHK, tenMH, LTC.maLop, PC.maGV, CONCAT(hoGV, ' ', tenLotGV, ' ', tenGV) AS hoTen, huyLop "
+                query = "SELECT maLopTC, maHK, tenMH, LTC.maLop, ltc.Nhom, PC.maGV, CONCAT(hoGV, ' ', tenLotGV, ' ', tenGV) AS hoTen, huyLop "
                         + "FROM LOPTINCHI LTC "
                         + "JOIN MONHOC MH ON MH.maMH = LTC.maMH "
                         + "JOIN PHANCONG PC ON PC.maLTC = LTC.maLopTC "
@@ -831,8 +852,8 @@ public class LoadDatabase {
     }
 
     //Lấy mã ltc khi biết 3 thuộc tính maHK, tenMH, maLop
-    public static int getMaLTC(String maHK, String tenMH, String maLop) throws ClassNotFoundException {
-        String sqlQuery = "SELECT maLopTC FROM LOPTINCHI WHERE maHK = ? AND maMH IN (SELECT maMH from MONHOC where tenMH = ?) AND maLop = ?";
+    public static int getMaLTC(String maHK, String tenMH, String maLop, int nhom) throws ClassNotFoundException {
+        String sqlQuery = "SELECT maLopTC FROM LOPTINCHI WHERE maHK = ? AND maMH IN (SELECT maMH from MONHOC where tenMH = ?) AND maLop = ? AND nhom=?";
 
         int maLTC = -1;
         try {
@@ -841,6 +862,7 @@ public class LoadDatabase {
             ps.setString(1, maHK);
             ps.setString(2, tenMH);
             ps.setString(3, maLop);
+            ps.setInt(4, nhom);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

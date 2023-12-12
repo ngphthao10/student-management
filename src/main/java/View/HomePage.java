@@ -65,7 +65,7 @@ public class HomePage extends javax.swing.JFrame {
         btTTLH = new javax.swing.JButton();
         btTTSV = new javax.swing.JButton();
         btTTGV = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
+        btThoat = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -177,6 +177,11 @@ public class HomePage extends javax.swing.JFrame {
         btDKLTC.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btDKLTC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btDKLTC.setPreferredSize(new java.awt.Dimension(70, 30));
+        btDKLTC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDKLTCActionPerformed(evt);
+            }
+        });
         jPanel2.add(btDKLTC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 290, 80));
 
         btTTLH.setBackground(new java.awt.Color(76, 124, 97));
@@ -225,20 +230,20 @@ public class HomePage extends javax.swing.JFrame {
         });
         jPanel2.add(btTTGV, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 290, 80));
 
-        jButton14.setBackground(new java.awt.Color(76, 124, 97));
-        jButton14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton14.setForeground(new java.awt.Color(255, 255, 255));
-        jButton14.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-exit-48 (1).png")); // NOI18N
-        jButton14.setText(" Thoát                             ");
-        jButton14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jButton14.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jButton14.setPreferredSize(new java.awt.Dimension(70, 30));
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        btThoat.setBackground(new java.awt.Color(76, 124, 97));
+        btThoat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btThoat.setForeground(new java.awt.Color(255, 255, 255));
+        btThoat.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-exit-48 (1).png")); // NOI18N
+        btThoat.setText(" Thoát                             ");
+        btThoat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btThoat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btThoat.setPreferredSize(new java.awt.Dimension(70, 30));
+        btThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                btThoatActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 640, 290, 80));
+        jPanel2.add(btThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 640, 290, 80));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 290, 730));
 
@@ -336,9 +341,9 @@ public class HomePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnIThongTinActionPerformed
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+    private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton14ActionPerformed
+    }//GEN-LAST:event_btThoatActionPerformed
 
     private void mnIDoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnIDoiMKActionPerformed
         GiaoDienDoiMatKhau dmk = new GiaoDienDoiMatKhau();
@@ -356,9 +361,16 @@ public class HomePage extends javax.swing.JFrame {
     private void btTTSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTTSVActionPerformed
         ThongTinSinhVien ttsv = new ThongTinSinhVien();
         ttsv.setExtendedState(MAXIMIZED_BOTH);
-        ttsv.setEnabled(true);
+        ttsv.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btTTSVActionPerformed
+
+    private void btDKLTCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDKLTCActionPerformed
+        QuanLyLopTinChi qlltc = new QuanLyLopTinChi();
+        qlltc.setExtendedState(MAXIMIZED_BOTH);
+        qlltc.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btDKLTCActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -387,6 +399,7 @@ public class HomePage extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 HomePage hp = new HomePage(Controller.controller.taiKhoan.getMaNDN());
                 hp.setVisible(true);
@@ -404,7 +417,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JButton btTTGV;
     private javax.swing.JButton btTTLH;
     private javax.swing.JButton btTTSV;
-    private javax.swing.JButton jButton14;
+    private javax.swing.JButton btThoat;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

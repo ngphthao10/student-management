@@ -156,11 +156,12 @@ public class InsertData {
             ps.setInt(1, ltc.getMaLopTC());
             ps.setString(2, ltc.getMaMH());
             ps.setString(3, ltc.getMaHK());
-            ps.setInt(4, ltc.getNhom());
-            ps.setInt(5, ltc.getSvMin());
-            ps.setInt(6, ltc.getSvMax());
-            ps.setBoolean(7, ltc.isHuyLop());
-            ps.setString(8, ltc.getMaLop());
+            ps.setString(4, ltc.getMaLop());
+            ps.setInt(5, ltc.getNhom());
+            ps.setInt(6, ltc.getSvMin());
+            ps.setInt(7, ltc.getSvMax());
+            ps.setBoolean(8, ltc.isHuyLop());
+            
             
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Thêm lớp tín chỉ thành công!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);

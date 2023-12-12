@@ -16,7 +16,7 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
     
     public ChuongTrinhDaoTao() {
         initComponents();
-        lbSetName.setText(Controller.controller.taiKhoan.getMaNDN() + " - " + Controller.controller.taiKhoan.getTenNguoiDung());
+        lbSetName.setText(Controller.controller.taiKhoan.getMaTK() + " - " + Controller.controller.taiKhoan.getTenNguoiDung());
         myTable = (DefaultTableModel) tbMonHoc.getModel();
         myTable.setRowCount(0);
         LoadDatabase.fillComboBox(cbbKhoa, "tenKhoa", "KHOA");
@@ -187,7 +187,15 @@ public class ChuongTrinhDaoTao extends javax.swing.JFrame {
             new String [] {
                 "STT", "Mã môn học", "Tên môn học", "STCLT", "STCTH", "Phân loại"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbMonHoc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbMonHocMouseClicked(evt);
