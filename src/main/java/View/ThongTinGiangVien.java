@@ -242,7 +242,15 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
             new String [] {
                 "STT", "Mã giảng viên", "Họ và tên", "Phái", "Ngày Sinh", "Khoa", "Ngày bắt đầu", "Ngày kết thúc", "Email", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbGiangVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbGiangVienMouseClicked(evt);
@@ -573,13 +581,14 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btNhapMoiActionPerformed
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
+
         if (!tfNgayBD.getDate().after(tfNgaySinh.getDate())) {
             JOptionPane.showMessageDialog(null, "Ngày bắt đầu phải xảy ra sau ngày sinh!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
             tfNgayBD.setDate(null);
             tfNgaySinh.setDate(null);
             return;
         }
-        if (tfNgayKT.getDate() != null && !tfNgayKT.getDate().after(tfNgayKT.getDate())) {
+        if (tfNgayKT.getDate() != null && !tfNgayKT.getDate().after(tfNgayBD.getDate())) {
             JOptionPane.showMessageDialog(null, "Ngày kết thúc phải xảy ra sau ngày bắt đầu!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
             tfNgayBD.setDate(null);
             tfNgayKT.setDate(null);
@@ -593,66 +602,64 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
             tfEmail.setText("");
             return;
         }
-
+        
         if (tfMaGV.getText().equals("") || tfHoTen.getText().equals("") || cbbPhai.getSelectedItem().equals(null) || tfNgaySinh.getDate().equals(null) || cbbKhoa.getSelectedItem().equals(null)
                 || tfNgayBD.getDate().equals(null) || tfEmail.getText().equals("") || ccbTrangThai.getSelectedItem().equals(null)) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin giảng viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
-            int row = tbGiangVien.getSelectedRow();
-            String tt = (String) ccbTrangThai.getSelectedItem();
-            String phai = (String) cbbPhai.getSelectedItem();
-            String khoa = (String) cbbKhoa.getSelectedItem();
-            String HinhAnh = selectedImageUrl;
-            String hoTen = tfHoTen.getText();
-            String[] parts = hoTen.split(" ");
-            String hoGV = "";
-            String tenLotGV = "";
-            String tenGV = "";
-
-            if (parts.length >= 1) {
-                hoGV = parts[0];
-            }
-            if (parts.length >= 2) {
-                tenLotGV = parts[1];
-            }
-            if (parts.length >= 3) {
-                tenGV = parts[2];
-            }
-            GiangVien gv = new GiangVien(tfMaGV.getText(), hoGV, tenLotGV, tenGV, phai, tfNgaySinh.getDate(),
-                    khoa, tfNgayBD.getDate(), tfNgayKT.getDate(), tt, tfEmail.getText(), HinhAnh);
-
-            if (tbGiangVien.getSelectedRow() == -1) {
-                for (GiangVien gvien : Controller.controller.arrayListGiangVien) {
-                    if (gvien.getMaGV().equals(tfMaGV.getText())) {
-                        JOptionPane.showMessageDialog(null, "Mã giảng viên đã tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-                }
-//                for (TaiKhoan tkk : Controller.controller.arrayListTaiKhoan) {
-//                    if (txtMaNV.getText().equals(tkk.getMaNV())) {
-//                        baoloi.setText("Tên đăng nhập đã tồn tại!");
-//                        return;
-//                    }
-//                }
                 try {
-                    Controller.InsertData.insertGiangVien(gv);
+                    int row = tbGiangVien.getSelectedRow();
+                    String tt = (String) ccbTrangThai.getSelectedItem();
+                    String phai = (String) cbbPhai.getSelectedItem();
+                    
+                    String khoa = LoadDatabase.getMaKhoa((String)cbbKhoa.getSelectedItem()) ;
+                    String HinhAnh = selectedImageUrl;
+                    String hoTen = tfHoTen.getText();
+                    String[] parts = hoTen.split(" ");
+                    String hoGV = "";
+                    String tenLotGV = "";
+                    String tenGV = "";
+                    
+                    if (parts.length >= 1) {
+                        hoGV = parts[0];
+                    }
+                    if (parts.length >= 2) {
+                        tenLotGV = parts[1];
+                    }
+                    if (parts.length >= 3) {
+                        tenGV = parts[2];
+                    }
+                    GiangVien gv = new GiangVien(tfMaGV.getText(), hoGV, tenLotGV, tenGV, phai, tfNgaySinh.getDate(),
+                            khoa, tfNgayBD.getDate(), tfNgayKT.getDate(), tt, tfEmail.getText(), HinhAnh);
+                    
+                    for (GiangVien gvien : Controller.controller.arrayListGiangVien) {
+                        if (gvien.getMaGV().equals(tfMaGV.getText())) {
+                            JOptionPane.showMessageDialog(null, "Mã giảng viên đã tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                    }
+                    try {
+                        Controller.InsertData.insertGiangVien(gv);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(ThongTinGiangVien.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    tbGiangVien.getSelectionModel().setSelectionInterval(row, row);
+                    
+                    
+                    tfMaGV.setText("");
+                    tfHoTen.setText("");
+                    cbbPhai.setSelectedItem(null);
+                    tfNgaySinh.setDate(null);
+                    cbbKhoa.setSelectedItem(null);
+                    tfNgayBD.setDate(null);
+                    tfNgayKT.setDate(null);
+                    tfEmail.setText("");
+                    ccbTrangThai.setSelectedItem(null);
+                    anhGV.setIcon(null);
+                    showDataTable();
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(ThongTinGiangVien.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                tbGiangVien.getSelectionModel().setSelectionInterval(row, row);
-
-            }
-            tfMaGV.setText("");
-            tfHoTen.setText("");
-            cbbPhai.setSelectedItem(null);
-            tfNgaySinh.setDate(null);
-            cbbKhoa.setSelectedItem(null);
-            tfNgayBD.setDate(null);
-            tfNgayKT.setDate(null);
-            tfEmail.setText("");
-            ccbTrangThai.setSelectedItem(null);
-            anhGV.setIcon(null);
-            showDataTable();
         }
     }//GEN-LAST:event_btThemActionPerformed
 
@@ -675,9 +682,10 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
 
         int index = tbGiangVien.getSelectedRow();
         GiangVien gv = arrayListGiangVien.get(index);
-
+        
         if (gv.getNgayKT() != null) {
             tfNgayKT.setDate(gv.getNgayKT());
+            ccbTrangThai.setSelectedItem("Đã nghỉ việc");
         } else {
             tfNgayKT.setDate(null);
         }
@@ -686,8 +694,13 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         cbbPhai.setSelectedItem(gv.getPhai());
         ccbTrangThai.setSelectedItem(gv.getTrangThai());
         tfNgaySinh.setDate(gv.getNgaySinh());
+        try {
+            String tenKhoa = LoadDatabase.getTenKhoaFromMaKhoa(gv.getKhoa());
+            cbbKhoa.setSelectedItem(tenKhoa);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ThongTinGiangVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
         tfNgayBD.setDate(gv.getNgayBD());
-        cbbKhoa.setSelectedItem(gv.getKhoa());
         tfEmail.setText(gv.getEmail());
         anhGV.setIcon(new javax.swing.ImageIcon(gv.getHinhAnh()));
 
@@ -731,7 +744,7 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
             tfNgaySinh.setDate(null);
             return;
         }
-        if (tfNgayKT.getDate() != null && !tfNgayKT.getDate().after(tfNgayKT.getDate())) {
+        if (tfNgayKT.getDate() != null && !tfNgayKT.getDate().after(tfNgayBD.getDate())) {
             JOptionPane.showMessageDialog(null, "Ngày kết thúc phải xảy ra sau ngày bắt đầu!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
             tfNgayBD.setDate(null);
             tfNgayKT.setDate(null);
@@ -745,65 +758,63 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
             tfEmail.setText("");
             return;
         }
-
         if (tfMaGV.getText().equals("") || tfHoTen.getText().equals("") || cbbPhai.getSelectedItem().equals(null) || tfNgaySinh.getDate().equals(null) || cbbKhoa.getSelectedItem().equals(null)
                 || tfNgayBD.getDate().equals(null) || tfEmail.getText().equals("") || ccbTrangThai.getSelectedItem().equals(null)) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin giảng viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
-            int row = tbGiangVien.getSelectedRow();
-            String tt = (String) ccbTrangThai.getSelectedItem();
-            String phai = (String) cbbPhai.getSelectedItem();
-            String khoa = (String) cbbPhai.getSelectedItem();
-            String HinhAnh = selectedImageUrl;
-            String hoTen = tfHoTen.getText();
-            String[] parts = hoTen.split(" ");
-            String hoGV = "";
-            String tenLotGV = "";
-            String tenGV = "";
-
-            if (parts.length >= 1) {
-                hoGV = parts[0];
-            }
-            if (parts.length >= 2) {
-                tenLotGV = parts[1];
-            }
-            if (parts.length >= 3) {
-                tenGV = parts[2];
-            }
-
-            GiangVien gv = new GiangVien(tfMaGV.getText(), hoGV, tenLotGV, tenGV, phai, tfNgaySinh.getDate(),
-                    khoa, tfNgayBD.getDate(), tfNgayKT.getDate(), tt, tfEmail.getText(), HinhAnh);
-            String maGVien = (String) tbGiangVien.getValueAt(tbGiangVien.getSelectedRow(), 1);
-            for (GiangVien gvien : Controller.controller.arrayListGiangVien) {
-                if (!gvien.getMaGV().equalsIgnoreCase(maGVien) && gvien.getEmail().equalsIgnoreCase(gv.getEmail())) {
-                    JOptionPane.showMessageDialog(null, "Email không được trùng nhau!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-            }
-//                for (TaiKhoan tkk : Controller.controller.arrayListTaiKhoan) {
-//                    if (txtMaNV.getText().equals(tkk.getMaNV())) {
-//                        baoloi.setText("Tên đăng nhập đã tồn tại!");
-//                        return;
-//                    }
-//                }
             try {
-                Controller.UpdateData.updateGiangVien(gv, maGVien);
+                int row = tbGiangVien.getSelectedRow();
+                String tt = (String) ccbTrangThai.getSelectedItem();                
+                String phai = (String) cbbPhai.getSelectedItem();
+                String maKhoa = LoadDatabase.getMaKhoa((String) cbbKhoa.getSelectedItem());
+                
+                String HinhAnh = selectedImageUrl;
+                String hoTen = tfHoTen.getText();
+                String[] parts = hoTen.split(" ");
+                String hoGV = "";
+                String tenLotGV = "";
+                String tenGV = "";
+                
+                if (parts.length >= 1) {
+                    hoGV = parts[0];
+                }
+                if (parts.length >= 2) {
+                    tenLotGV = parts[1];
+                }
+                if (parts.length >= 3) {
+                    tenGV = parts[2];
+                }
+                
+                GiangVien gv = new GiangVien(tfMaGV.getText(), hoGV, tenLotGV, tenGV, phai, tfNgaySinh.getDate(),
+                        maKhoa, tfNgayBD.getDate(), tfNgayKT.getDate(), tt, tfEmail.getText(), HinhAnh);
+                String maGVien = (String) tbGiangVien.getValueAt(tbGiangVien.getSelectedRow(), 1);
+                for (GiangVien gvien : Controller.controller.arrayListGiangVien) {
+                    if (!gvien.getMaGV().equalsIgnoreCase(maGVien) && gvien.getEmail().equalsIgnoreCase(gv.getEmail())) {
+                        JOptionPane.showMessageDialog(null, "Email không được trùng nhau!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+                try {
+                    Controller.UpdateData.updateGiangVien(gv, maGVien);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(ThongTinGiangVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                tbGiangVien.getSelectionModel().setSelectionInterval(row, row);
+                
+                tfMaGV.setText("");
+                tfHoTen.setText("");
+                cbbPhai.setSelectedItem(null);
+                tfNgaySinh.setDate(null);
+                cbbKhoa.setSelectedItem(null);
+                tfNgayBD.setDate(null);
+                tfNgayKT.setDate(null);
+                tfEmail.setText("");
+                ccbTrangThai.setSelectedItem(null);
+                anhGV.setIcon(null);
+                showDataTable();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ThongTinGiangVien.class.getName()).log(Level.SEVERE, null, ex);
             }
-            tbGiangVien.getSelectionModel().setSelectionInterval(row, row);
-
-            tfMaGV.setText("");
-            tfHoTen.setText("");
-            cbbPhai.setSelectedItem(null);
-            tfNgaySinh.setDate(null);
-            cbbKhoa.setSelectedItem(null);
-            tfNgayBD.setDate(null);
-            tfNgayKT.setDate(null);
-            tfEmail.setText("");
-            ccbTrangThai.setSelectedItem(null);
-            anhGV.setIcon(null);
-            showDataTable();
         }
     }//GEN-LAST:event_btChinhSuaActionPerformed
 

@@ -195,7 +195,15 @@ public class DanhSachKhoaNganh extends javax.swing.JFrame {
             new String [] {
                 "STT", "Mã khoa", "Tên khoa", "SĐT", "Trưởng khoa", "Ngày nhận chức"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbKhoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbKhoaMouseClicked(evt);
@@ -458,7 +466,15 @@ public class DanhSachKhoaNganh extends javax.swing.JFrame {
             new String [] {
                 "STT", "Mã ngành", "Tên ngành", "Mã khoa"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbNganh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbNganhMouseClicked(evt);

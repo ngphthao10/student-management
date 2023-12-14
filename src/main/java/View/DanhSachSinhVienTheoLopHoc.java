@@ -5,16 +5,20 @@ import Controller.LoadDatabase;
 import java.awt.event.ItemEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Model.Lop;
 import Model.SinhVien;
 import java.text.ParseException;
 import javax.swing.table.DefaultTableModel;
 import Controller.controller;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
@@ -64,7 +68,6 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
         btXoa = new javax.swing.JButton();
         btNhapMoi = new javax.swing.JButton();
         lbTenMH1 = new javax.swing.JLabel();
-        tfNgaySinh = new javax.swing.JTextField();
         lbTenMH2 = new javax.swing.JLabel();
         lbTenMH3 = new javax.swing.JLabel();
         lbTenMH4 = new javax.swing.JLabel();
@@ -73,6 +76,7 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
         cmbTrangThai = new javax.swing.JComboBox<>();
         lbTenMH5 = new javax.swing.JLabel();
         tfNamNhapHoc = new javax.swing.JTextField();
+        datechNgaySinh = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -332,8 +336,6 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
         lbTenMH1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbTenMH1.setText("Ngày sinh");
 
-        tfNgaySinh.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         lbTenMH2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbTenMH2.setText("SĐT");
 
@@ -346,11 +348,6 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
         tfEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         tfSDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tfSDT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfSDTActionPerformed(evt);
-            }
-        });
 
         cmbTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cmbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang học", "Đã tốt nghiệp", "Bảo lưu", "Đã thôi học" }));
@@ -360,6 +357,9 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
 
         tfNamNhapHoc.setEditable(false);
         tfNamNhapHoc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        datechNgaySinh.setDateFormatString("dd/MM/yyyy");
+        datechNgaySinh.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -379,7 +379,7 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tfNamNhapHoc))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(lbPhanLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(26, 26, 26)
@@ -397,7 +397,7 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(lbTenMH1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(datechNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addComponent(lbTenMH3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -415,7 +415,7 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
                         .addComponent(btSua)
                         .addGap(18, 18, 18)
                         .addComponent(btNhapMoi)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,11 +437,11 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(cbNu)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbTenMH1))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbTenMH1)
+                    .addComponent(datechNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbTenMH3))
@@ -503,9 +503,20 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
        if (evt.getSource() == btThem) {
-           addSinhVien();
-           Collections.sort(controller.arrayListSinhVien, Comparator.comparing(SinhVien:: getMaSV));
-           showData();
+           try {
+               if (tfMaSV.getText().equals("") || tfHoTen.getText().equals("") || (cbNam.isSelected() == false && cbNu.isSelected() == false) || datechNgaySinh.getDate() == null || tfEmail.getText().equals("")) {
+                   JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập đầy đủ!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                   return;
+               }
+               SinhVien sv = addSinhVien();
+               if (sv == null) {
+                   return;
+               }
+               Controller.InsertData.insertSinhVien(sv);
+               showData();
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(DanhSachSinhVienTheoLopHoc.class.getName()).log(Level.SEVERE, null, ex);
+           }
        }
     }//GEN-LAST:event_btThemActionPerformed
 
@@ -518,9 +529,22 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
 
     private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
         if (evt.getSource() == btSua) {
-            updateSinhVien();
-            Collections.sort(controller.arrayListSinhVien, Comparator.comparing(SinhVien:: getMaSV));
-            showData();
+            try {
+                if (tfMaSV.getText().equals("") || tfHoTen.getText().equals("") || (cbNam.isSelected() == false && cbNu.isSelected() == false) || datechNgaySinh.getDate() == null || tfEmail.getText().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập đầy đủ!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int index = tbSVTheoLop.getSelectedRow();
+                String maSVItem = controller.arrayListSinhVien.get(index).getMaSV();
+                SinhVien sv = updateSinhVien();
+                if (sv == null) {
+                    return;
+                }
+                Controller.UpdateData.updateSinhVien(maSVItem, sv);
+                showData();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DanhSachSinhVienTheoLopHoc.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btSuaActionPerformed
 
@@ -530,7 +554,7 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
             tfHoTen.setText("");
             cbNam.setSelected(false);
             cbNu.setSelected(false);
-            tfNgaySinh.setText("");
+            datechNgaySinh.setDate(null);
             tfEmail.setText("");
             tfSDT.setText("");
             tfNamNhapHoc.setText("");
@@ -581,17 +605,12 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
         else {
             cbNu.setSelected(true);
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        tfNgaySinh.setText(dateFormat.format(sv.getNgaySinh()));
+        datechNgaySinh.setDate(sv.getNgaySinh());
         tfEmail.setText(sv.getEmail());
         tfSDT.setText(sv.getSdt());
         tfNamNhapHoc.setText(String.valueOf(sv.getNamNhapHoc()));
         cmbTrangThai.setSelectedItem(sv.getTrangThai());
     }//GEN-LAST:event_tbSVTheoLopMouseClicked
-
-    private void tfSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSDTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfSDTActionPerformed
 
     public void showData() {
         try {
@@ -615,15 +634,21 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
         }
     }
     
-    public void addSinhVien() {
-//        if (tfMaSV.equals(""))
-        
+    public SinhVien addSinhVien() {
         try {
+            LoadDatabase.loadTableLop(cmbLop);
             SinhVien sv = new SinhVien();
             sv.setMaSV(tfMaSV.getText());
+            for (SinhVien svItem: controller.arrayListSinhVien) {
+                if (svItem.getMaSV().equalsIgnoreCase(sv.getMaSV())) {
+                    JOptionPane.showMessageDialog(rootPane, "Mã sinh viên đã tồn tại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    return null;
+                }
+            }
             String[] hoTen = tfHoTen.getText().split(" ");
             if (hoTen.length <= 1) {
-                JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập họ tên có 2 chữ trở lên!!");
+                JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập họ tên có 2 chữ trở lên!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                return null;
             }
             else if (hoTen.length == 2) {
                 sv.setHoSV(hoTen[0]);
@@ -644,12 +669,22 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
             }
             else {
                 JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn phái!!");
+                return null;
             }
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            sv.setNgaySinh(dateFormat.parse(tfNgaySinh.getText()));
+            LocalDate localDate = LocalDate.now();
+            Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            if (date.compareTo(datechNgaySinh.getDate()) < 0) {
+                JOptionPane.showMessageDialog(rootPane, "Ngày sinh không hợp lệ!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
+            sv.setNgaySinh(datechNgaySinh.getDate());
             sv.setEmail(tfEmail.getText());
-            if (tfSDT.getText().length() > 11 || tfSDT.getText().length() < 10 || tfSDT.getText().charAt(0) != '0') {
-                JOptionPane.showMessageDialog(rootPane, "Số điện thoại không hợp lệ!!");
+            if (tfSDT.getText().equals("") == true) {
+                sv.setSdt(tfSDT.getText());
+            }
+            else if (tfSDT.getText().charAt(0) != '0' || tfSDT.getText().matches("\\d{10,11}") == false) {
+                JOptionPane.showMessageDialog(rootPane, "Số điện thoại không hợp lệ!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                return null;
             } 
             else {
                 sv.setSdt(tfSDT.getText());
@@ -662,6 +697,7 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
                 }
                 else {
                     JOptionPane.showMessageDialog(rootPane, "Mã lớp không tồn tại!!");
+                    return null;
                 }
                 
             } catch (ClassNotFoundException ex) {
@@ -669,99 +705,123 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
             }
             sv.setNamNhapHoc(Integer.parseInt("20".concat(sv.getMaSV().substring(1, 3))));
             sv.setTrangThai(String.valueOf(cmbTrangThai.getSelectedItem()));
-            
-            controller.arrayListSinhVien.add(sv);
-            try {
-                Controller.InsertData.insertSinhVien(sv);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(DanhSachSinhVienTheoLopHoc.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+            return sv;
         } catch (ParseException ex) {
             Logger.getLogger(DanhSachSinhVienTheoLopHoc.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
     
     public void deleteSinhVien() {
         int index = tbSVTheoLop.getSelectedRow();
         String maSVItem = controller.arrayListSinhVien.get(index).getMaSV();
-        controller.arrayListSinhVien.remove(index);
-        
+        int confirm = JOptionPane.showConfirmDialog(null, "Xác nhận xóa sinh viên?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                Controller.DeleteData.deleteSinhVien(maSVItem);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DanhSachSinhVienTheoLopHoc.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public SinhVien updateSinhVien() {
+        int index = tbSVTheoLop.getSelectedRow();
+        SinhVien sv = controller.arrayListSinhVien.get(index);
+        sv.setMaSV(tfMaSV.getText());
+        String[] hoTen = tfHoTen.getText().split(" ");
+        if (hoTen.length <= 1) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập họ tên có 2 chữ trở lên!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        else if (hoTen.length == 2) {
+            sv.setHoSV(hoTen[0]);
+            sv.setTenSV(hoTen[1]);
+        }
+        else {
+            sv.setHoSV(hoTen[0]);
+            sv.setTenSV(hoTen[hoTen.length - 1]);
+            hoTen = Arrays.copyOfRange(hoTen, 1, hoTen.length - 1);
+            sv.setTenlotSV(String.join(" ", hoTen));
+        }
+        if (cbNam.isSelected()) {
+            sv.setPhai(cbNam.getText());
+        }
+        else if (cbNu.isSelected()) {
+            sv.setPhai(cbNu.getText());
+        }
+        else {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn phái!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        LocalDate localDate = LocalDate.now();
+        Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        if (date.compareTo(datechNgaySinh.getDate()) < 0) {
+            JOptionPane.showMessageDialog(rootPane, "Ngày sinh không hợp lệ!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        sv.setNgaySinh(datechNgaySinh.getDate());
+        String regex = "^[a-zA-Z0-9_]+@gmail\\.com$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(tfEmail.getText());
+        if (!matcher.matches()) {
+            JOptionPane.showMessageDialog(null, "Địa chỉ email không hợp lệ", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+        sv.setEmail(tfEmail.getText());
+        if (tfSDT.getText().equals("") == true) {
+            sv.setSdt(tfSDT.getText());
+        }
+        else if (tfSDT.getText().charAt(0) != '0' || tfSDT.getText().matches("\\d{10,11}") == false) {
+            JOptionPane.showMessageDialog(rootPane, "Số điện thoại không hợp lệ!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+            return null;
+        } 
+        else {
+            sv.setSdt(tfSDT.getText());
+        }
         try {
-            Controller.DeleteData.deleteSinhVien(maSVItem);
+            String maLopItem = LoadDatabase.selectMalop((String)cmbLop.getSelectedItem());
+            if (maLopItem != null) {
+                sv.setMaLop(maLopItem);
+            }
+            else {
+                JOptionPane.showMessageDialog(rootPane, "Mã lớp không tồn tại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DanhSachSinhVienTheoLopHoc.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }
-    
-    public void updateSinhVien() {
-        int index = tbSVTheoLop.getSelectedRow();
-        String maSVItem = controller.arrayListSinhVien.get(index).getMaSV();
-        try { 
-            SinhVien sv = controller.arrayListSinhVien.get(index);
-            sv.setMaSV(tfMaSV.getText());
-            String[] hoTen = tfHoTen.getText().split(" ");
-            if (hoTen.length <= 1) {
-                JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập họ tên có 2 chữ trở lên!!");
-            }
-            else if (hoTen.length == 2) {
-                sv.setHoSV(hoTen[0]);
-                sv.setTenSV(hoTen[1]);
-            }
-            else {
-                sv.setHoSV(hoTen[0]);
-                sv.setTenSV(hoTen[hoTen.length - 1]);
-                hoTen = Arrays.copyOfRange(hoTen, 1, hoTen.length - 1);
-                sv.setTenlotSV(String.join(" ", hoTen));
-            }
-            
-            if (cbNam.isSelected()) {
-                sv.setPhai(cbNam.getText());
-            }
-            else if (cbNu.isSelected()) {
-                sv.setPhai(cbNu.getText());
-            }
-            else {
-                JOptionPane.showMessageDialog(rootPane, "Bạn chưa chọn phái!!");
-            }
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            sv.setNgaySinh(dateFormat.parse(tfNgaySinh.getText()));
-            sv.setEmail(tfEmail.getText());
-            if (tfSDT.getText().length() > 11 || tfSDT.getText().length() < 10 || tfSDT.getText().charAt(0) != '0') {
-                JOptionPane.showMessageDialog(rootPane, "Số điện thoại không hợp lệ!!");
-            } 
-            else {
-                sv.setSdt(tfSDT.getText());
-            }
-            try {
-                String maLopItem = LoadDatabase.selectMalop((String)cmbLop.getSelectedItem());
-                if (maLopItem != null) {
-                    sv.setMaLop(maLopItem);
-                }
-                else {
-                    JOptionPane.showMessageDialog(rootPane, "Mã lớp không tồn tại!!");
-                }
-                
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(DanhSachSinhVienTheoLopHoc.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            sv.setNamNhapHoc(Integer.parseInt("20".concat(sv.getMaSV().substring(1, 3))));
-            sv.setTrangThai(String.valueOf(cmbTrangThai.getSelectedItem()));
-            
-            try {
-                Controller.UpdateData.updateSinhVien(maSVItem, sv);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(DanhSachSinhVienTheoLopHoc.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        } catch (ParseException ex) {
-            Logger.getLogger(DanhSachSinhVienTheoLopHoc.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        sv.setNamNhapHoc(Integer.parseInt("20".concat(sv.getMaSV().substring(1, 3))));
+        sv.setTrangThai(String.valueOf(cmbTrangThai.getSelectedItem()));
+        return sv;
     }
 
     public static void main(String args[]) {
-
+        
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ThongTinSinhVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ThongTinSinhVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ThongTinSinhVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ThongTinSinhVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 DanhSachSinhVienTheoLopHoc ctdt = new DanhSachSinhVienTheoLopHoc();
@@ -783,6 +843,7 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbLop;
     private javax.swing.JComboBox<String> cmbNganh;
     private javax.swing.JComboBox<String> cmbTrangThai;
+    private com.toedter.calendar.JDateChooser datechNgaySinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -809,7 +870,6 @@ public class DanhSachSinhVienTheoLopHoc extends javax.swing.JFrame {
     private javax.swing.JTextField tfHoTen;
     private javax.swing.JTextField tfMaSV;
     private javax.swing.JTextField tfNamNhapHoc;
-    private javax.swing.JTextField tfNgaySinh;
     private javax.swing.JTextField tfSDT;
     // End of variables declaration//GEN-END:variables
 }

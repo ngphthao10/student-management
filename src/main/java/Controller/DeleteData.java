@@ -142,12 +142,13 @@ public class DeleteData {
         return false;
     }
     
-    public static boolean deletePhanCong(int maLTC) throws ClassNotFoundException {
-        String sqlCommand = "delete from PHANCONG where maLTC=?";
+    public static boolean deletePhanCong(int maLTC, String maGV) throws ClassNotFoundException {
+        String sqlCommand = "delete from PHANCONG where maLTC=? AND maGV=?";
         try {
             DataConnection.createStatement();
             PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
             ps.setInt(1, maLTC);
+            ps.setString(2, maGV);
 
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Xóa phân công thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);

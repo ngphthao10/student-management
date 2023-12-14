@@ -1,9 +1,9 @@
 package View;
 
 import Controller.LoadDatabase;
-import static Controller.controller.arrayListPhanCong;
 import Model.LopTinChi;
 import Model.PhanCong;
+import java.time.Year;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -15,6 +15,8 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
 
     public PhanCongGiangDay() {
         initComponents();
+        tbPhanCong.setRowHeight(20);
+        tbLopTinChi.setRowHeight(20);
         lbSetName.setText(Controller.controller.taiKhoan.getMaTK() + " - " + Controller.controller.taiKhoan.getTenNguoiDung());
         myTable = (DefaultTableModel) tbPhanCong.getModel();
         myTable.setRowCount(0);
@@ -22,12 +24,11 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         ltcTable.setRowCount(0);
 
         this.PhanQuyen();
-
+        cbbGV.setSelectedItem(null);
         LoadDatabase.fillComboBox(cbbKhoa, "tenKhoa", "KHOA");
         LoadDatabase.fillComboBox(cbbHK, "maHK", "LOPTINCHI");
         LoadDatabase.fillTenMonHocComboBox(cbbMH);
         LoadDatabase.fillComboBox(cbbML, "maLop", "LOPTINCHI");
-        LoadDatabase.fillTenGiangVienComboBox(cbbGV);
         LoadDatabase.fillTrangThaiComboBox(cbbTrangThai);
         showDataTableLTC();
         tfMaHK.setEditable(false);
@@ -82,7 +83,7 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         int dem = 0;
         for (PhanCong pc : Controller.controller.arrayListPhanCong) {
             dem++;
-            myTable.addRow(new Object[]{dem, pc.getMaLTC(), pc.getMaHKLtc(), pc.getTenMH(), pc.getMaLopLtc(), pc.getMaGV(), pc.getHoTenGV(), pc.isHuyLopLtc()});
+            myTable.addRow(new Object[]{dem, pc.getMaLTC(), pc.getMaHKLtc(), pc.getTenMH(), pc.getMaLopLtc(), pc.getNhomLtc(), pc.getMaGV(), pc.getHoTenGV(), pc.isHuyLopLtc()});
         }
     }
 
@@ -92,7 +93,7 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         int dem = 0;
         for (PhanCong pc : Controller.controller.arrayListPhanCong) {
             dem++;
-            myTable.addRow(new Object[]{dem, pc.getMaLTC(), pc.getMaHKLtc(), pc.getTenMH(), pc.getMaLopLtc(), pc.getMaGV(), pc.getHoTenGV(), pc.isHuyLopLtc()});
+            myTable.addRow(new Object[]{dem, pc.getMaLTC(), pc.getMaHKLtc(), pc.getTenMH(), pc.getMaLopLtc(), pc.getNhomLtc(), pc.getMaGV(), pc.getHoTenGV(), pc.isHuyLopLtc()});
         }
     }
 
@@ -102,7 +103,7 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         int dem = 0;
         for (PhanCong pc : Controller.controller.arrayListPhanCong) {
             dem++;
-            myTable.addRow(new Object[]{dem, pc.getMaLTC(), pc.getMaHKLtc(), pc.getTenMH(), pc.getMaLopLtc(), pc.getMaGV(), pc.getHoTenGV(), pc.isHuyLopLtc()});
+            myTable.addRow(new Object[]{dem, pc.getMaLTC(), pc.getMaHKLtc(), pc.getTenMH(), pc.getMaLopLtc(), pc.getNhomLtc(), pc.getMaGV(), pc.getHoTenGV(), pc.isHuyLopLtc()});
         }
     }
 
@@ -112,7 +113,7 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         int dem = 0;
         for (PhanCong pc : Controller.controller.arrayListPhanCong) {
             dem++;
-            myTable.addRow(new Object[]{dem, pc.getMaLTC(), pc.getMaHKLtc(), pc.getTenMH(), pc.getMaLopLtc(), pc.getMaGV(), pc.getHoTenGV(), pc.isHuyLopLtc()});
+            myTable.addRow(new Object[]{dem, pc.getMaLTC(), pc.getMaHKLtc(), pc.getTenMH(), pc.getMaLopLtc(), pc.getNhomLtc(), pc.getMaGV(), pc.getHoTenGV(), pc.isHuyLopLtc()});
         }
     }
 
@@ -127,6 +128,7 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         lbSetName = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         btOut = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         cbbKhoa = new javax.swing.JComboBox<>();
         lbMaMH1 = new javax.swing.JLabel();
@@ -197,7 +199,6 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 6, 6, 64));
 
         btOut.setBackground(new java.awt.Color(209, 232, 195));
-        btOut.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\src\\main\\java\\Image\\icons8-cat-64.png")); // NOI18N
         btOut.setBorder(null);
         btOut.setBorderPainted(false);
         btOut.setFocusPainted(false);
@@ -207,6 +208,18 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 0, -1, 76));
+
+        jButton1.setBackground(new java.awt.Color(209, 232, 195));
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\src\\main\\java\\Image\\icons8-cat-64.png")); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -224,7 +237,6 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         btXem.setBackground(new java.awt.Color(76, 124, 97));
         btXem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btXem.setForeground(new java.awt.Color(255, 255, 255));
-        btXem.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-list-24.png")); // NOI18N
         btXem.setText("Xem danh sách");
         btXem.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         btXem.addActionListener(new java.awt.event.ActionListener() {
@@ -235,15 +247,23 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
 
         tbPhanCong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã lớp tín chỉ", "Mã học kỳ", "Tên môn học", "Mã lớp", "Mã giảng viên", "Tên giảng viên", "Hủy lớp"
+                "STT", "Mã LTC", "Mã học kỳ", "Tên môn học", "Mã lớp", "Nhóm", "Mã giảng viên", "Tên giảng viên", "Hủy lớp"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbPhanCong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbPhanCongMouseClicked(evt);
@@ -252,13 +272,14 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbPhanCong);
         if (tbPhanCong.getColumnModel().getColumnCount() > 0) {
             tbPhanCong.getColumnModel().getColumn(0).setPreferredWidth(10);
-            tbPhanCong.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tbPhanCong.getColumnModel().getColumn(1).setPreferredWidth(20);
             tbPhanCong.getColumnModel().getColumn(2).setPreferredWidth(70);
             tbPhanCong.getColumnModel().getColumn(3).setPreferredWidth(150);
             tbPhanCong.getColumnModel().getColumn(4).setPreferredWidth(50);
-            tbPhanCong.getColumnModel().getColumn(5).setPreferredWidth(40);
-            tbPhanCong.getColumnModel().getColumn(6).setPreferredWidth(100);
-            tbPhanCong.getColumnModel().getColumn(7).setPreferredWidth(30);
+            tbPhanCong.getColumnModel().getColumn(5).setPreferredWidth(15);
+            tbPhanCong.getColumnModel().getColumn(6).setPreferredWidth(40);
+            tbPhanCong.getColumnModel().getColumn(7).setPreferredWidth(100);
+            tbPhanCong.getColumnModel().getColumn(8).setPreferredWidth(30);
         }
 
         tbLopTinChi.setModel(new javax.swing.table.DefaultTableModel(
@@ -271,7 +292,15 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
             new String [] {
                 "STT", "Mã LTC", "Tên môn học", "Mã học kỳ", "Mã lớp", "nhóm", "SV Min", "SV Max"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbLopTinChi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbLopTinChiMouseClicked(evt);
@@ -339,8 +368,8 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbMaMH5)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         lbMaMH3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -440,8 +469,8 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfMaHK)
-                            .addComponent(tfMaLop)
-                            .addComponent(cbbGV, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cbbGV, 0, 347, Short.MAX_VALUE)
+                            .addComponent(tfMaLop))))
                 .addGap(76, 76, 76))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,7 +480,7 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(lbstcth10)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -499,7 +528,6 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         cbbML.setToolTipText("");
 
         btLocML.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btLocML.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-filter-30.png")); // NOI18N
         btLocML.setText("Lọc");
         btLocML.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -515,7 +543,6 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         cbbHK.setToolTipText("");
 
         btLocHK.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btLocHK.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-filter-30.png")); // NOI18N
         btLocHK.setText("Lọc");
         btLocHK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -527,7 +554,6 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         cbbMH.setToolTipText("");
 
         btLocMH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btLocMH.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-filter-30.png")); // NOI18N
         btLocMH.setText("Lọc");
         btLocMH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -673,31 +699,39 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         try {
-            int row = tbPhanCong.getSelectedRow();
-            if (cbbGV.getSelectedItem() == null) {
-                JOptionPane.showMessageDialog(null, "Vui lòng phân công giảng viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
-                return;
+            System.out.println(tbLopTinChi.getSelectedRow());
+            if (tbLopTinChi.getSelectedRow() == -1) {
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn LTC cần phân công!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+            } else {
+                String maHK = (String) tbLopTinChi.getValueAt(tbLopTinChi.getSelectedRow(), 3);
+                Year currentYear = Year.now();
+                String year = maHK.substring(3, 7);
+                if (Integer.parseInt(year) < currentYear.getValue()) {
+                    JOptionPane.showMessageDialog(null, "Không phân công cho lớp tín chỉ đã qua!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (cbbGV.getSelectedItem() == null) {
+                    JOptionPane.showMessageDialog(null, "Vui lòng phân công giảng viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int maLTC = LoadDatabase.getMaLTC(tfMaHK.getText(), tfMonHoc.getText(), tfMaLop.getText(),
+                        (Integer) tbLopTinChi.getValueAt(tbLopTinChi.getSelectedRow(), 5));
+                if (maLTC == -1) {
+                    JOptionPane.showMessageDialog(null, "Lớp tín chỉ không tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+                String maGV = LoadDatabase.getMaGV(cbbGV);
+                PhanCong pc = new PhanCong(maGV, maLTC);
+                Controller.InsertData.insertPhanCong(pc);
+
             }
-            int maLTC = LoadDatabase.getMaLTC(tfMaHK.getText(), tfMonHoc.getText(), tfMaLop.getText());
-            if (maLTC == -1) {
-                JOptionPane.showMessageDialog(null, "Lớp tín chỉ không tồn tại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-            String maGV = LoadDatabase.getMaGV(cbbGV);
-            PhanCong pc = new PhanCong(maGV, maLTC);
-            //                for (TaiKhoan tkk : Controller.controller.arrayListTaiKhoan) {
-            //                    if (txtMaNV.getText().equals(tkk.getMaNV())) {
-            //                        baoloi.setText("Tên đăng nhập đã tồn tại!");
-            //                        return;
-            //                    }
-            //                }
-            Controller.InsertData.insertPhanCong(pc);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DanhSachKhoaNganh.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         tbPhanCong.getSelectionModel().setSelectionInterval(tbPhanCong.getRowCount() - 1, tbPhanCong.getRowCount() - 1);
 
-        showDataTable();
+        this.showDataTable();
+        this.showDataTableLTC();
         this.PhanQuyen();
     }//GEN-LAST:event_btThemActionPerformed
 
@@ -705,18 +739,25 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         if (tbPhanCong.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn phân công!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
-            int confirmed = JOptionPane.showConfirmDialog(null,
-                    "Xác nhận xóa phân công?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            String maHK = (String) tbPhanCong.getValueAt(tbPhanCong.getSelectedRow(), 2);
+            Year currentYear = Year.now();
+            String year = maHK.substring(3, 7);
+            if (Integer.parseInt(year) < currentYear.getValue()) {
+                JOptionPane.showMessageDialog(null, "Không xóa phân công của lớp tín chỉ đã qua!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            } else {
+                int confirmed = JOptionPane.showConfirmDialog(null,
+                        "Xác nhận xóa phân công?", "Xác nhận", JOptionPane.YES_NO_OPTION);
 
-            if (confirmed == JOptionPane.YES_OPTION) {
-                try {
-                    Controller.DeleteData.deletePhanCong((Integer) tbPhanCong.getValueAt(tbPhanCong.getSelectedRow(), 1));
-//                Controller.DeleteData.deleteTaiKhoan((String) tbMonHoc.getValueAt(tbMonHoc.getSelectedRow(), 1));
+                if (confirmed == JOptionPane.YES_OPTION) {
+                    try {
+                        Controller.DeleteData.deletePhanCong((Integer) tbPhanCong.getValueAt(tbPhanCong.getSelectedRow(), 1),
+                                tbPhanCong.getValueAt(tbPhanCong.getSelectedRow(), 6).toString());
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(PhanCongGiangDay.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     showDataTable();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(ChuongTrinhDaoTao.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
         }
         tfMaHK.setText("");
@@ -730,12 +771,12 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void tbPhanCongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhanCongMouseClicked
+        LoadDatabase.fillTenGiangVienComboBox(cbbGV);
         int index = tbPhanCong.getSelectedRow();
-        PhanCong pc = arrayListPhanCong.get(index);
-        tfMaHK.setText(pc.getMaHKLtc());
-        tfMonHoc.setText(pc.getTenMH());
-        tfMaLop.setText(pc.getMaLopLtc());
-        cbbGV.setSelectedItem(pc.getMaGV() + "-" + pc.getHoTenGV());
+        tfMaHK.setText((String) tbPhanCong.getValueAt(index, 2));
+        tfMonHoc.setText((String) tbPhanCong.getValueAt(index, 3));
+        tfMaLop.setText((String) tbPhanCong.getValueAt(index, 4));
+        cbbGV.setSelectedItem((String) tbPhanCong.getValueAt(index, 6) + "-" + (String) tbPhanCong.getValueAt(index, 7));
         btXoa.setEnabled(true);
         btSua.setEnabled(true);
         this.PhanQuyen();
@@ -748,27 +789,33 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
 
     private void btLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLuuActionPerformed
         try {
-            int row = tbPhanCong.getSelectedRow();
-            if (cbbGV.getSelectedItem().equals(null)) {
-                JOptionPane.showMessageDialog(null, "Vui lòng phân công giảng viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+            if (tbPhanCong.getSelectedRow() == -1) {
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn LTC cần lưu!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
                 return;
+            } else {
+                String maHK = (String) tbPhanCong.getValueAt(tbPhanCong.getSelectedRow(), 2);
+                Year currentYear = Year.now();
+                String year = maHK.substring(3, 7);
+                if (Integer.parseInt(year) < currentYear.getValue()) {
+                    JOptionPane.showMessageDialog(null, "Không sửa phân công cho lớp tín chỉ đã qua!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (cbbGV.getSelectedItem().equals(null)) {
+                    JOptionPane.showMessageDialog(null, "Vui lòng phân công giảng viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int maLTC = (Integer) tbPhanCong.getValueAt(tbPhanCong.getSelectedRow(), 1);
+                String maGV = LoadDatabase.getMaGV(cbbGV);
+                PhanCong pc = new PhanCong(maGV, maLTC);
+                Controller.UpdateData.updatePhanCong(pc);
             }
-            int maLTC = LoadDatabase.getMaLTC(tfMaHK.getText(), tfMonHoc.getText(), tfMaLop.getText());
-            String maGV = LoadDatabase.getMaGV(cbbGV);
-            PhanCong pc = new PhanCong(maGV, maLTC);
-            //                for (TaiKhoan tkk : Controller.controller.arrayListTaiKhoan) {
-            //                    if (txtMaNV.getText().equals(tkk.getMaNV())) {
-            //                        baoloi.setText("Tên đăng nhập đã tồn tại!");
-            //                        return;
-            //                    }
-            //                }
-            Controller.UpdateData.updatePhanCong(pc);
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DanhSachKhoaNganh.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         tbPhanCong.getSelectionModel().setSelectionInterval(tbPhanCong.getRowCount() - 1, tbPhanCong.getRowCount() - 1);
-
+        this.showDataTableLTC();
         showDataTable();
         this.PhanQuyen();
     }//GEN-LAST:event_btLuuActionPerformed
@@ -806,6 +853,7 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
     }//GEN-LAST:event_btLocMHActionPerformed
 
     private void tbLopTinChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLopTinChiMouseClicked
+        LoadDatabase.fillTenGiangVienComboBox(cbbGV);
         btThem.setEnabled(true);
         int index = tbLopTinChi.getSelectedRow();
         tfMaHK.setText((String) tbLopTinChi.getValueAt(index, 3));
@@ -821,6 +869,13 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         hp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btOutActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        HomePage hp = new HomePage(Controller.controller.taiKhoan.getMaNDN());
+        hp.setExtendedState(MAXIMIZED_BOTH);
+        hp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -876,6 +931,7 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbMH;
     private javax.swing.JComboBox<String> cbbML;
     private javax.swing.JComboBox<String> cbbTrangThai;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
