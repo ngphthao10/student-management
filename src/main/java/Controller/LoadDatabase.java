@@ -933,4 +933,391 @@ public class LoadDatabase {
 //        loadTableGiangVien();
     }
 
+    //lấy maHK khi biết học kỳ và niên khóa
+    public static String getMaHK (JComboBox<String> ComboBox1, JComboBox<String> ComboBox2) throws ClassNotFoundException {
+        String hocKy = (String) ComboBox1.getSelectedItem();
+        String nienKhoa = (String) ComboBox2.getSelectedItem();
+        if (hocKy == null || nienKhoa == null) {
+            return null;
+        }
+        try {
+            createStatement();
+            String sqlQuery = "SELECT maHK FROM HOCKY WHERE hocKy = ? AND nienKhoa = ?";
+            String maHK = "000";
+
+            try(PreparedStatement ps = DataConnection.connection.prepareStatement(sqlQuery)){
+                ps.setString(1, hocKy);
+                ps.setString(2, nienKhoa);
+                try(ResultSet rs = ps.executeQuery()){
+                    while(rs.next()){
+                        maHK = rs.getString("maHK");
+                    }
+                }
+                DataConnection.connection.close();
+            }
+           return maHK;
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    
+    public static void loadTableChiTietBangDiemHocKy(String MaSV, String MaHK) throws ClassNotFoundException {
+        try {
+            createStatement();
+            String query = "SELECT * FROM CHITIETBANGDIEMHOCKY WHERE CHITIETBANGDIEMHOCKY.maBD = (SELECT BANGDIEMHOCKY.maBD FROM BANGDIEMHOCKY WHERE BANGDIEMHOCKY.maSV = ? AND BANGDIEMHOCKY.maHK = ?)";
+            try(PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
+                ps.setString(1, MaSV);
+                ps.setString(2, MaHK);
+                try(ResultSet rs = ps.executeQuery()) {
+                    controller.arrayListChiTietBangDiemHocKy.clear();
+                    while(rs.next()){
+                        ChiTietBangDiemHocKy ctbdhk;
+                        ctbdhk = new ChiTietBangDiemHocKy(
+                                rs.getString("maBD"), rs.getInt("maLTC"), rs.getFloat("diem"), rs.getString("ketQua")
+                        );
+                        controller.arrayListChiTietBangDiemHocKy.add(ctbdhk);
+                    }
+                }
+            DataConnection.connection.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static String getMaMHfromMaLTC(int maLTC) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT maMH FROM LOPTINCHI WHERE maLopTC = ?";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
+                ps.setInt(1, maLTC);
+                try (ResultSet rs = ps.executeQuery()){
+                    while(rs.next()){
+                        String maMH = rs.getString("maMH");
+                        DataConnection.connection.close();
+                        return maMH;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Không tìm thấy mã lớp tín chỉ!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+    
+    public static int getSTCLTfromMaMH(String maMH) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT STCLT FROM MONHOC WHERE maMH = ?";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)) {
+                ps.setString(1, maMH);
+                
+                try (ResultSet rs = ps.executeQuery()) {
+                    while(rs.next()) {
+                        int STCLT = rs.getInt("STCLT");
+                        DataConnection.connection.close();
+                        return STCLT;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return 0;
+    }
+    
+    public static int getSTCTHfromMaMH(String maMH) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT STCTH FROM MONHOC WHERE maMH = ?";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)) {
+                ps.setString(1, maMH);
+                
+                try (ResultSet rs = ps.executeQuery()) {
+                    while(rs.next()) {
+                        int STCTH = rs.getInt("STCTH");
+                        DataConnection.connection.close();
+                        return STCTH;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return 0;
+    }
+    
+    public static Float getDiemTB(String maSV, String maHK) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT diemTB FROM BANGDIEMHOCKY WHERE maSV = ? AND maHK = ? ";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)) {
+                ps.setString(1, maSV);
+                ps.setString(2, maHK);
+                
+                try (ResultSet rs = ps.executeQuery()) {
+                    while(rs.next()) {
+                        Float diemTB = rs.getFloat("diemTB");
+                        DataConnection.connection.close();
+                        return diemTB;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return 0.0f;
+    }
+    
+    public static String getXepLoai(String maSV, String maHK) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT xeploai FROM BANGDIEMHOCKY WHERE maSV = ? AND maHK = ? ";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)) {
+                ps.setString(1, maSV);
+                ps.setString(2, maHK);
+                
+                try (ResultSet rs = ps.executeQuery()) {
+                    while(rs.next()) {
+                        String xeploai = rs.getString("xeploai");
+                        DataConnection.connection.close();
+                        return xeploai;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+    
+    public static String getTenGVfromMaGV(String MaGV) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT CONCAT(hoGV, ' ', tenlotGV, ' ', tenGV) AS hoTenGV FROM GIANGVIEN WHERE maGV = ?";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
+                ps.setString(1, MaGV);
+                try (ResultSet rs = ps.executeQuery()){
+                    while(rs.next()){
+                        String hoTenGV = rs.getString("hoTenGV");
+                        DataConnection.connection.close();
+                        return hoTenGV;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Không tìm thấy giảng viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+    
+    public static String getTenKhoafromMaGV(String MaGV) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT tenKhoa FROM KHOA INNER JOIN GIANGVIEN ON KHOA.maKhoa = GIANGVIEN.maKhoa WHERE maGV = ?";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
+                ps.setString(1, MaGV);
+                try (ResultSet rs = ps.executeQuery()){
+                    while(rs.next()){
+                        String tenKhoa = rs.getString("tenKhoa");
+                        DataConnection.connection.close();
+                        return tenKhoa;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        JOptionPane.showMessageDialog(null, "Xin vui lòng kiểm tra lại mã giảng viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+    
+    public static void fillcbbTenMH(JComboBox<String> ComboBox, String MaGV, String MaHK) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT tenMH FROM MONHOC \n" +
+                    "INNER JOIN LOPTINCHI ON MONHOC.maMH = LOPTINCHI.maMH \n" +
+                    "INNER JOIN PHANCONG ON PHANCONG.maLTC = LOPTINCHI.maLopTC \n" +
+                    "WHERE PHANCONG.maGV = ? AND LOPTINCHI.maHK = ?";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
+                ps.setString(1, MaGV);
+                ps.setString(2, MaHK);
+                try (ResultSet rs = ps.executeQuery()){
+                    while(rs.next()){
+                        String tenMH = rs.getString("tenMH");
+                        ComboBox.addItem(tenMH);
+                    }
+                    DataConnection.connection.close();
+                }
+            }
+        }   catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static String getMaMHfromTenMH(String TenMH) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT maMH FROM MONHOC WHERE tenMH = ?";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
+                ps.setString(1,TenMH);
+                try (ResultSet rs = ps.executeQuery()){
+                    while(rs.next()){
+                        String maMH = rs.getString("maMH");
+                        DataConnection.connection.close();
+                        return maMH;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        JOptionPane.showMessageDialog(null, "Không tìm thấy tên môn học!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+    
+    public static void fillcbbNhom(JComboBox<String> ComboBox, String MaGV, String MaHK, String MaMH) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT nhom FROM LOPTINCHI INNER JOIN PHANCONG ON PHANCONG.maLTC = LOPTINCHI.maLopTC\n" +
+                            "WHERE PHANCONG.maGV = ? AND LOPTINCHI.maHK = ? AND LOPTINCHI.maMH = ?";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
+                ps.setString(1, MaGV);
+                ps.setString(2, MaHK);
+                ps.setString(3, MaMH);
+                try (ResultSet rs = ps.executeQuery()){
+                    while(rs.next()){
+                        int nhom = rs.getInt("nhom");
+                        ComboBox.addItem(String.valueOf(nhom));
+                    }
+                    DataConnection.connection.close();
+                }
+            }
+        }   catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static int getMaLTC(String MaMH, String maHK, int nhom) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT maLopTC FROM LOPTINCHI WHERE maMH = ? AND maHK = ? AND nhom = ?";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
+                ps.setString(1,MaMH);
+                ps.setString(2,maHK);
+                ps.setInt(3,nhom);
+                try (ResultSet rs = ps.executeQuery()){
+                    while(rs.next()){
+                        int MaLTC = rs.getInt("MaLopTC");
+                        DataConnection.connection.close();
+                        return MaLTC;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Không tìm thấy lớp tín chỉ!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return 0;
+    }
+    
+    public static void loadTableChiTietBangDiemHocKy(int MaLTC) throws ClassNotFoundException {
+        try {
+            createStatement();
+            String query = "SELECT * FROM CHITIETBANGDIEMHOCKY WHERE maLTC = ?";
+            try(PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
+                ps.setInt(1, MaLTC);
+                try(ResultSet rs = ps.executeQuery()) {
+                    controller.arrayListChiTietBangDiemHocKy.clear();
+                    while(rs.next()){
+                        ChiTietBangDiemHocKy ctbdhk;
+                        ctbdhk = new ChiTietBangDiemHocKy(
+                                rs.getString("maBD"), rs.getInt("maLTC"), rs.getFloat("diem"), rs.getString("ketQua")
+                        );
+                        controller.arrayListChiTietBangDiemHocKy.add(ctbdhk);
+                    }
+                }
+            DataConnection.connection.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static String getMaSVfromMaLTC(String MaLTC) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT maSV FROM BANGDIEMHOCKY WHERE maBD IN (SELECT maBD FROM CHITIETBANGDIEMHOCKY WHERE maLTC = ?)";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
+                ps.setString(1,MaLTC);
+                try (ResultSet rs = ps.executeQuery()){
+                    while(rs.next()){
+                        String maSV = rs.getString("maSV");
+                        DataConnection.connection.close();
+                        return maSV;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Không tìm thấy sinh viên nào!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+    
+    public static String getHotenSVfromMaSV(String MaSV) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT CONCAT(hoSV, ' ', tenlotSV, ' ', tenSV) AS hotenSV FROM SINHVIEN WHERE maSV = ?";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
+                ps.setString(1,MaSV);
+                try (ResultSet rs = ps.executeQuery()){
+                    while(rs.next()){
+                        String tenSV = rs.getString("hotenSV");
+                        DataConnection.connection.close();
+                        return tenSV;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Không tìm thấy sinh viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+    
+    public static int getSTCTL(String maSV) throws ClassNotFoundException{
+        try {
+            createStatement();
+            String query = "SELECT COALESCE(SUM(mh.stclt), 0) + COALESCE(SUM(mh.stcth), 0) AS stctl\n" +
+                            "FROM BANGDIEMHOCKY bdhk\n" +
+                            "LEFT JOIN CHITIETBANGDIEMHOCKY ctbd ON bdhk.maBD = ctbd.maBD\n" +
+                            "LEFT JOIN LOPTINCHI lt ON ctbd.maLTC = lt.maLopTC\n" +
+                            "LEFT JOIN MONHOC mh ON lt.maMH = mh.maMH\n" +
+                            "GROUP BY bdhk.maBD, bdhk.maSV, ctbd.ketQua\n" +
+                            "HAVING bdhk.maSV = ? AND ctbd.ketQua = N'Đạt'";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
+                ps.setString(1,maSV);
+                try (ResultSet rs = ps.executeQuery()){
+                    while(rs.next()){
+                        int STCTL = rs.getInt("stctl");
+                        DataConnection.connection.close();
+                        return STCTL;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return 0;
+    }
 }
