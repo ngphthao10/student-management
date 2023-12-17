@@ -18,4 +18,6 @@ public class controller {
     public static ArrayList<TaiKhoan> arrayListTaiKhoan = new ArrayList<TaiKhoan>();  
     public static ArrayList<PhanQuyen> arrayListPhanQuyen = new ArrayList<PhanQuyen>();  
     public static TaiKhoan taiKhoan = new TaiKhoan();
+    
+    public static ArrayList<ChiTietBangDiemHocKy> arrayListChiTietBangDiemHocKy = new ArrayList<ChiTietBangDiemHocKy>();
 }
