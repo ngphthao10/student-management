@@ -211,4 +211,23 @@ public class UpdateData {
         JOptionPane.showMessageDialog(null, "Sửa phân công thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
+    
+    public static boolean updateChiTietBangDiemHocKy(String maSV, int maLTC, float diem, String ketQua) throws ClassNotFoundException {
+        String query = "UPDATE CHITIETBANGDIEMHOCKY SET diem = ?, ketQua = ? WHERE maLTC = ? AND maBD = (SELECT maBD FROM BANGDIEMHOCKY WHERE maSV = ?)";
+        try {
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(query);
+            ps.setFloat(1, diem);
+            ps.setString(2, ketQua);
+            ps.setInt(3, maLTC);
+            ps.setString(4, maSV);
+            return ps.executeUpdate() > 0;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Sửa điểm thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    
 }

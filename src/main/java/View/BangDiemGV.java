@@ -14,9 +14,11 @@ import javax.swing.table.DefaultTableModel;
 public class BangDiemGV extends javax.swing.JFrame {
 
     private DefaultTableModel myTable;
+    public int maLTC;
     
     public BangDiemGV() {
         initComponents();
+        tbDiem.setRowHeight(20);
         myTable = (DefaultTableModel) tbDiem.getModel();
         myTable.setRowCount(0);
         cbbHocKy.removeAllItems();
@@ -25,34 +27,34 @@ public class BangDiemGV extends javax.swing.JFrame {
         LoadDatabase.fillDistinctComboBox(cbbNienKhoa, "NienKhoa", "HOCKY");
         tfTenGV.setEditable(false);
         tfKhoa.setEditable(false);
-        
     }
     
     private void showData() throws ClassNotFoundException {
-       tfTenGV.setText(LoadDatabase.getTenGVfromMaGV(tfMaGV.getText()));
-       tfKhoa.setText(LoadDatabase.getTenKhoafromMaGV(tfMaGV.getText()));
-       cbbTenMH.removeAllItems();
-       cbbNhom.removeAllItems();
-       LoadDatabase.fillcbbTenMH(cbbTenMH, tfMaGV.getText(), LoadDatabase.getMaHK(cbbHocKy, cbbNienKhoa));
-       LoadDatabase.fillcbbNhom(cbbNhom, tfMaGV.getText(), LoadDatabase.getMaHK(cbbHocKy, cbbNienKhoa), LoadDatabase.getMaMHfromTenMH((String)cbbTenMH.getSelectedItem()));
-  
-       String maGV = (String) tfMaGV.getText();
-       String maHK = LoadDatabase.getMaHK(cbbHocKy, cbbNienKhoa);
-       String maMH = LoadDatabase.getMaMHfromTenMH((String) cbbTenMH.getSelectedItem());
-       int nhom = Integer.parseInt((String)cbbNhom.getSelectedItem());
-       int maLTC = LoadDatabase.getMaLTC(maMH, maHK, nhom);
-       LoadDatabase.loadTableChiTietBangDiemHocKy(maLTC);
-//       myTable.setRowCount(0);
-       int dem = 0;
-       
-       for (ChiTietBangDiemHocKy ctbdhk: controller.arrayListChiTietBangDiemHocKy){
-           dem++;
-           Object[] row = new Object[]{
-               dem, LoadDatabase.getMaSVfromMaLTC(String.valueOf(ctbdhk.getMaLTC())), LoadDatabase.getHotenSVfromMaSV(LoadDatabase.getMaSVfromMaLTC(String.valueOf(ctbdhk.getMaLTC()))), ctbdhk.getDiem(), ctbdhk.getKetQua()
-           };
-           myTable.addRow(row);
-       }
+        myTable.setRowCount(0);
+        tfTenGV.setText(LoadDatabase.getTenGVfromMaGV(tfMaGV.getText()));
+        tfKhoa.setText(LoadDatabase.getTenKhoafromMaGV(tfMaGV.getText()));
+        cbbTenMH.removeAllItems();
+        cbbNhom.removeAllItems();
+        LoadDatabase.fillcbbTenMH(cbbTenMH, tfMaGV.getText(), LoadDatabase.getMaHK(cbbHocKy, cbbNienKhoa));
+        LoadDatabase.fillcbbNhom(cbbNhom, tfMaGV.getText(), LoadDatabase.getMaHK(cbbHocKy, cbbNienKhoa), LoadDatabase.getMaMHfromTenMH((String)cbbTenMH.getSelectedItem()));
+
+        String maGV = (String) tfMaGV.getText();
+        String maHK = LoadDatabase.getMaHK(cbbHocKy, cbbNienKhoa);
+        String maMH = LoadDatabase.getMaMHfromTenMH((String) cbbTenMH.getSelectedItem());
+        int nhom = Integer.parseInt((String)cbbNhom.getSelectedItem());
+        maLTC = LoadDatabase.getMaLTC(maMH, maHK, nhom);
+        LoadDatabase.loadTableChiTietBangDiemHocKy(maLTC);
+        myTable.setRowCount(0);
+        int dem = 0;
+        for (ChiTietBangDiemHocKy ctbd : Controller.controller.arrayListChiTietBangDiemHocKy) {
+            dem++;
+            Object[] row = new Object[]{
+                dem, ctbd.getMaSV(), ctbd.getHoTenSV(), ctbd.getDiem(), ctbd.getKetQua()
+            };
+        myTable.addRow(row);
+        }
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -73,10 +75,9 @@ public class BangDiemGV extends javax.swing.JFrame {
         lbstclt = new javax.swing.JLabel();
         tfTenGV = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        btTimKiem = new javax.swing.JButton();
+        btTaiLaiTrang = new javax.swing.JButton();
         cbbHocKy = new javax.swing.JComboBox<>();
         cbbTenMH = new javax.swing.JComboBox<>();
-        btSuaDiem = new javax.swing.JButton();
         lbTenMH4 = new javax.swing.JLabel();
         lbMaMH1 = new javax.swing.JLabel();
         cbbNienKhoa = new javax.swing.JComboBox<>();
@@ -85,7 +86,7 @@ public class BangDiemGV extends javax.swing.JFrame {
         lbnhom = new javax.swing.JLabel();
         cbbNhom = new javax.swing.JComboBox<>();
         tfKhoa = new javax.swing.JTextField();
-        tfTest = new javax.swing.JTextField();
+        btTimKiem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDiem = new javax.swing.JTable();
 
@@ -188,26 +189,24 @@ public class BangDiemGV extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel8.setText("Chi tiết thông tin");
 
-        btTimKiem.setBackground(new java.awt.Color(76, 124, 97));
-        btTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btTimKiem.setForeground(new java.awt.Color(255, 255, 255));
-        btTimKiem.setText("Tìm kiếm");
-        btTimKiem.addActionListener(new java.awt.event.ActionListener() {
+        btTaiLaiTrang.setBackground(new java.awt.Color(76, 124, 97));
+        btTaiLaiTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btTaiLaiTrang.setForeground(new java.awt.Color(255, 255, 255));
+        btTaiLaiTrang.setText("Tải lại trang");
+        btTaiLaiTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTimKiemActionPerformed(evt);
+                btTaiLaiTrangActionPerformed(evt);
             }
         });
 
+        cbbHocKy.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cbbHocKy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbHocKyActionPerformed(evt);
             }
         });
 
-        btSuaDiem.setBackground(new java.awt.Color(76, 124, 97));
-        btSuaDiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btSuaDiem.setForeground(new java.awt.Color(255, 255, 255));
-        btSuaDiem.setText("Sửa điểm");
+        cbbTenMH.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         lbTenMH4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbTenMH4.setText("Tên môn học");
@@ -215,6 +214,7 @@ public class BangDiemGV extends javax.swing.JFrame {
         lbMaMH1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbMaMH1.setText("Học kỳ");
 
+        cbbNienKhoa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cbbNienKhoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbNienKhoaActionPerformed(evt);
@@ -229,9 +229,19 @@ public class BangDiemGV extends javax.swing.JFrame {
         lbnhom.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbnhom.setText("Nhóm");
 
+        cbbNhom.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
         tfKhoa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        tfTest.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btTimKiem.setBackground(new java.awt.Color(76, 124, 97));
+        btTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btTimKiem.setForeground(new java.awt.Color(255, 255, 255));
+        btTimKiem.setText("Tìm kiếm");
+        btTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -272,25 +282,21 @@ public class BangDiemGV extends javax.swing.JFrame {
                                     .addComponent(cbbNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cbbTenMH, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(90, 90, 90)
-                                .addComponent(btTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(65, 65, 65)
-                                .addComponent(btSuaDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lbnhom, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addComponent(lbnhom, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(162, 162, 162)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(btTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addComponent(btTaiLaiTrang)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tfTest, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,16 +329,15 @@ public class BangDiemGV extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbnhom, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbNhom, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
+                .addGap(76, 76, 76)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btSuaDiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(63, 63, 63)
-                .addComponent(tfTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(446, 446, 446))
+                    .addComponent(btTaiLaiTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(525, 525, 525))
         );
 
         tbDiem.setBorder(new javax.swing.border.MatteBorder(null));
+        tbDiem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbDiem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -345,11 +350,16 @@ public class BangDiemGV extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbDiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbDiemMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbDiem);
@@ -400,10 +410,25 @@ public class BangDiemGV extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbbNienKhoaActionPerformed
 
+    private void tbDiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDiemMouseClicked
+//        try {
+            int index = tbDiem.getSelectedRow();
+            String maSV = (String) tbDiem.getValueAt(index, 1);
+            String hoTenSV = (String) tbDiem.getValueAt(index, 2);
+            float diem = (float) tbDiem.getValueAt(index, 3);
+            String ketQua = (String) tbDiem.getValueAt(index, 4);
+            new SuaDiem(maSV, hoTenSV, diem, ketQua, maLTC).setVisible(true);
+//            myTable.setRowCount(0);
+//            showData();
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(BangDiemGV.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }//GEN-LAST:event_tbDiemMouseClicked
+
     private void btTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimKiemActionPerformed
         if (evt.getSource() == btTimKiem){
             try {
-                if(tfMaGV.getText().equals("")){
+                if (tfMaGV.getText().equals("")){
                     JOptionPane.showMessageDialog(null, "Vui lòng nhập mã giảng viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -413,6 +438,17 @@ public class BangDiemGV extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btTimKiemActionPerformed
+
+    private void btTaiLaiTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaiLaiTrangActionPerformed
+        if (evt.getSource() == btTaiLaiTrang){
+            try {
+                myTable.setRowCount(0);
+                showData();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(BangDiemGV.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btTaiLaiTrangActionPerformed
 
 
     public static void main(String args[]) {
@@ -427,7 +463,7 @@ public class BangDiemGV extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btSuaDiem;
+    private javax.swing.JButton btTaiLaiTrang;
     private javax.swing.JButton btTimKiem;
     private javax.swing.JComboBox<String> cbbHocKy;
     private javax.swing.JComboBox<String> cbbNhom;
@@ -457,7 +493,6 @@ public class BangDiemGV extends javax.swing.JFrame {
     private javax.swing.JTextField tfKhoa;
     private javax.swing.JTextField tfMaGV;
     private javax.swing.JTextField tfTenGV;
-    private javax.swing.JTextField tfTest;
     // End of variables declaration//GEN-END:variables
 
     

@@ -538,7 +538,7 @@ public class LoadDatabase {
         } catch (SQLException ex) {
             Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Không tìm thấy mã môn học!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+//        JOptionPane.showMessageDialog(null, "Không tìm thấy mã môn học!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return null;
     }
     
@@ -1022,7 +1022,10 @@ public class LoadDatabase {
                     while(rs.next()){
                         ChiTietBangDiemHocKy ctbdhk;
                         ctbdhk = new ChiTietBangDiemHocKy(
-                                rs.getString("maBD"), rs.getInt("maLTC"), rs.getFloat("diem"), rs.getString("ketQua")
+                                rs.getString("maBD"), 
+                                rs.getInt("maLTC"), 
+                                rs.getFloat("diem"), 
+                                rs.getString("ketQua")
                         );
                         controller.arrayListChiTietBangDiemHocKy.add(ctbdhk);
                     }
@@ -1051,7 +1054,7 @@ public class LoadDatabase {
         } catch (SQLException ex) {
             Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Không tìm thấy mã lớp tín chỉ!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+//        JOptionPane.showMessageDialog(null, "Không tìm thấy mã lớp tín chỉ!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return null;
     }
     
@@ -1073,7 +1076,7 @@ public class LoadDatabase {
         } catch (SQLException ex) {
             Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+//        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return 0;
     }
     
@@ -1095,7 +1098,7 @@ public class LoadDatabase {
         } catch (SQLException ex) {
             Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+//        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return 0;
     }
     
@@ -1118,7 +1121,7 @@ public class LoadDatabase {
         } catch (SQLException ex) {
             Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+//        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return 0.0f;
     }
     
@@ -1141,7 +1144,7 @@ public class LoadDatabase {
         } catch (SQLException ex) {
             Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+//        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return null;
     }
     
@@ -1276,29 +1279,6 @@ public class LoadDatabase {
         return 0;
     }
     
-    public static void loadTableChiTietBangDiemHocKy(int MaLTC) throws ClassNotFoundException {
-        try {
-            createStatement();
-            String query = "SELECT * FROM CHITIETBANGDIEMHOCKY WHERE maLTC = ?";
-            try(PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
-                ps.setInt(1, MaLTC);
-                try(ResultSet rs = ps.executeQuery()) {
-                    controller.arrayListChiTietBangDiemHocKy.clear();
-                    while(rs.next()){
-                        ChiTietBangDiemHocKy ctbdhk;
-                        ctbdhk = new ChiTietBangDiemHocKy(
-                                rs.getString("maBD"), rs.getInt("maLTC"), rs.getFloat("diem"), rs.getString("ketQua")
-                        );
-                        controller.arrayListChiTietBangDiemHocKy.add(ctbdhk);
-                    }
-                }
-            DataConnection.connection.close();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
     public static String getMaSVfromMaLTC(String MaLTC) throws ClassNotFoundException{
         try {
             createStatement();
@@ -1337,7 +1317,7 @@ public class LoadDatabase {
         } catch (SQLException ex) {
             Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Không tìm thấy sinh viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+//        JOptionPane.showMessageDialog(null, "Không tìm thấy sinh viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return null;
     }
     
@@ -1364,7 +1344,93 @@ public class LoadDatabase {
         } catch (SQLException ex) {
             Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+//        JOptionPane.showMessageDialog(null, "Chưa có thông tin!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return 0;
     }
+    
+    public static void loadTableSinhVien() {
+        ResultSet rs = DataConnection.retrieveData("SELECT * FROM SINHVIEN");
+
+        try {
+            controller.arrayListSinhVien.clear();
+            while (rs.next()) {
+                String hanh = "";
+                if (rs.getString("hinhAnh") != null) {
+                    hanh = rs.getString("hinhAnh").trim();
+                }
+
+                SinhVien sv = new SinhVien(
+                        rs.getString("maSV").trim(),
+                        rs.getString("hoSV").trim(),
+                        rs.getString("tenLotSV").trim(),
+                        rs.getString("tenSV").trim(),
+                        rs.getString("phai").trim(),
+                        rs.getDate("ngaySinh"),
+                        rs.getString("email").trim(),
+                        rs.getString("sdt"),
+                        rs.getString("maLop").trim(),
+                        rs.getInt("namNhapHoc"),
+                        rs.getString("trangThai").trim(),
+                        hanh
+                );
+
+                controller.arrayListSinhVien.add(sv);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void loadTableBangDiemHocKy() {
+        ResultSet rs = DataConnection.retrieveData("SELECT * FROM BANGDIEMHOCKY");
+        try {
+            while (rs.next()) {
+                BangDiemHocKy bdhk = new BangDiemHocKy(
+                        rs.getString("maBD").trim(),
+                        rs.getString("maSV").trim(),
+                        rs.getString("maHK").trim(),
+                        rs.getFloat("diemTB"),
+                        rs.getString("xeploai").trim());
+                controller.arrayListBangDiemHocKy.add(bdhk);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void loadTableChiTietBangDiemHocKy(int MaLTC) throws ClassNotFoundException {
+        try {
+            createStatement();
+            if (MaLTC == 0) {
+                return;
+            }
+            String query = "SELECT ctbd.maBD, maLTC, bdhk.maSV, CONCAT(hoSV, ' ', tenlotSV, ' ', tenSV) AS hoTenSV, diem, ketQua FROM CHITIETBANGDIEMHOCKY ctbd " +
+                    "JOIN BANGDIEMHOCKY bdhk ON ctbd.maBD = bdhk.maBD " +
+                    "JOIN SINHVIEN sv ON bdhk.maSV = sv.maSV " +
+                    "WHERE maLTC = ?";
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)) {           
+                ps.setInt(1, MaLTC);
+                ResultSet rs = ps.executeQuery();
+                controller.arrayListChiTietBangDiemHocKy.clear();
+                while (rs.next()) {
+                    ChiTietBangDiemHocKy ctbd = new ChiTietBangDiemHocKy(
+                            rs.getString("maBD"),
+                            rs.getInt("maLTC"),
+                            rs.getFloat("diem"), 
+                            rs.getString("ketQua")
+                    );
+                    controller.arrayListChiTietBangDiemHocKy.add(ctbd);
+                }
+            }
+            DataConnection.connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+
+    
+    
+    
 }

@@ -4,16 +4,16 @@
  */
 package Model;
 
-/**
- *
- * @author Minh Thu
- */
+import Controller.LoadDatabase;
+
 public class ChiTietBangDiemHocKy {
     
     private String maBD;
     private int maLTC;
     private float diem;
     private String ketQua;
+    SinhVien sv;
+    BangDiemHocKy bdhk;
     
     public ChiTietBangDiemHocKy() {
         this.maBD = "";
@@ -27,6 +27,21 @@ public class ChiTietBangDiemHocKy {
         this.maLTC = maLTC;
         this.diem = diem;
         this.ketQua = ketQua;
+        LoadDatabase.loadTableBangDiemHocKy();
+        LoadDatabase.loadTableSinhVien();
+        
+        for (BangDiemHocKy bdhk : Controller.controller.arrayListBangDiemHocKy){
+            if(bdhk.getMaBD().equals(this.maBD)){
+                this.bdhk = bdhk;
+                break;
+            }
+        }
+        for (SinhVien svien : Controller.controller.arrayListSinhVien){
+            if (svien.getMaSV().equals(bdhk.getMaSV())){
+                this.sv = svien;
+                break;
+            }
+        }
     }
 
     public String getMaBD() {
@@ -61,6 +76,12 @@ public class ChiTietBangDiemHocKy {
         this.ketQua = ketQua;
     }
     
+    public String getMaSV(){
+        return sv.getMaSV();
+    }
     
+    public String getHoTenSV(){
+        return sv.getHoSV() + " " + sv.getTenlotSV() + " " + sv.getTenSV();
+    }
     
 }
