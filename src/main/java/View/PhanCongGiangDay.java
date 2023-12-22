@@ -39,7 +39,7 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
         btXoa.setEnabled(false);
         btThem.setEnabled(false);
     }
-
+    
     public void PhanQuyen() {
         if (Controller.controller.taiKhoan.getMaNDN().equals("GV")) {
             btThem.setEnabled(false);
@@ -771,7 +771,9 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void tbPhanCongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPhanCongMouseClicked
+        cbbGV.removeAllItems();
         LoadDatabase.fillTenGiangVienComboBox(cbbGV);
+        cbbGV.setEnabled(false);
         int index = tbPhanCong.getSelectedRow();
         tfMaHK.setText((String) tbPhanCong.getValueAt(index, 2));
         tfMonHoc.setText((String) tbPhanCong.getValueAt(index, 3));
@@ -853,6 +855,7 @@ public class PhanCongGiangDay extends javax.swing.JFrame {
     }//GEN-LAST:event_btLocMHActionPerformed
 
     private void tbLopTinChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLopTinChiMouseClicked
+        cbbGV.removeAllItems();
         LoadDatabase.fillTenGiangVienComboBox(cbbGV);
         btThem.setEnabled(true);
         int index = tbLopTinChi.getSelectedRow();
