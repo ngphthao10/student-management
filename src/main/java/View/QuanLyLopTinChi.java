@@ -570,6 +570,7 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
 
     private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
         if (evt.getSource() == btSua) {
+//            LoadDatabase.loadTablePhanCong();
             try {
                 if (cmbMonHoc.getSelectedItem().equals("") || cmbHocKy.getSelectedItem().equals("") || tfNhom.getText().equals("") || cmbNienKhoa.getSelectedItem().equals("") || cmbLop.getSelectedItem().equals("") || tfSVMIN.getText().equals("") || tfSVMAX.getText().equals("")) {
                     JOptionPane.showMessageDialog(rootPane, "Bạn phải điền đầu đủ thông tin!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
@@ -661,8 +662,12 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
             cmbMonHoc.removeAllItems();
             LoadDatabase.fillSubComboMonHoc(cmbMonHoc, selectedValue);
             cmbLop.removeAllItems();
-            LoadDatabase.fillSubComboLopFromKhoa(cmbLop, selectedValue);
-            
+            if (cmbKhoa.getSelectedItem().equals("Cơ bản 2")) {
+                LoadDatabase.fillSubComboBoxLopForCB2(cmbLop);
+            }
+            else {
+                LoadDatabase.fillSubComboLopFromKhoa(cmbLop, selectedValue);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuanLyLopTinChi.class.getName()).log(Level.SEVERE, null, ex);
         }

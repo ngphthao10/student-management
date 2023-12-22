@@ -71,7 +71,4 @@ public class BangDiemHocKy {
     public void setXepLoai(String xepLoai) {
         this.xepLoai = xepLoai;
     }
-    
-    
-    
 }

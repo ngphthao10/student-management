@@ -229,6 +229,11 @@ public class SuaDiem extends javax.swing.JFrame {
                 String ketQua = this.getKetQuafromDiem(diem);
                 if (Controller.UpdateData.updateChiTietBangDiemHocKy((String) tfMaSV.getText(), maLTC, diem, ketQua) == true){
                     JOptionPane.showMessageDialog(null, "Sửa điểm thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    // cập nhật điểm trung bình của sinh viên
+                    String maHK = LoadDatabase.getMaHKFROMmaLTC(maLTC);
+                    String maBD = LoadDatabase.getMaBD(maHK, tfMaSV.getText());
+                    Controller.UpdateData.updateDiemTB(maBD);
                     this.dispose();
                 }
             } catch (ClassNotFoundException ex) {

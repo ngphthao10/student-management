@@ -230,4 +230,42 @@ public class UpdateData {
         return false;
     }
     
+    
+    public static boolean updateDiemTB(String maBD) throws ClassNotFoundException {
+        try {
+            String query = "UPDATE BANGDIEMHOCKY SET diemTB = ?, xepLoai = ? WHERE maBD = ?";
+            createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(query);
+            float diemTB = LoadDatabase.getDiemTBHocKy(maBD);
+            ps.setFloat(1, diemTB);
+            String xepLoai = "";
+            
+            if (diemTB >= 8.0) {
+                xepLoai = "Giỏi";
+            }
+            else if (diemTB >= 6.5) {
+                xepLoai = "Khá";
+            }
+            else if (diemTB > 4.0) {
+                xepLoai = "Trung bình";
+            }
+            else if (diemTB >= 0.0) {
+                xepLoai = "Yếu";
+            }
+            else {
+                xepLoai = "Không xác định";
+            }
+            ps.setString(2, xepLoai);
+            ps.setString(3, maBD);
+            
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Cập nhật điểm thành công!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Cập nhật điểm thất bại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
 }

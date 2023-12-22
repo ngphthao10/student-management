@@ -411,18 +411,12 @@ public class BangDiemGV extends javax.swing.JFrame {
     }//GEN-LAST:event_cbbNienKhoaActionPerformed
 
     private void tbDiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDiemMouseClicked
-//        try {
-            int index = tbDiem.getSelectedRow();
-            String maSV = (String) tbDiem.getValueAt(index, 1);
-            String hoTenSV = (String) tbDiem.getValueAt(index, 2);
-            float diem = (float) tbDiem.getValueAt(index, 3);
-            String ketQua = (String) tbDiem.getValueAt(index, 4);
-            new SuaDiem(maSV, hoTenSV, diem, ketQua, maLTC).setVisible(true);
-//            myTable.setRowCount(0);
-//            showData();
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(BangDiemGV.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        int index = tbDiem.getSelectedRow();
+        String maSV = (String) tbDiem.getValueAt(index, 1);
+        String hoTenSV = (String) tbDiem.getValueAt(index, 2);
+        float diem = (float) tbDiem.getValueAt(index, 3);
+        String ketQua = (String) tbDiem.getValueAt(index, 4);
+        new SuaDiem(maSV, hoTenSV, diem, ketQua, maLTC).setVisible(true);
     }//GEN-LAST:event_tbDiemMouseClicked
 
     private void btTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimKiemActionPerformed

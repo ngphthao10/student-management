@@ -161,4 +161,22 @@ public class DeleteData {
         JOptionPane.showMessageDialog(null, "Xóa phân công thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
+    
+    public static boolean deleteChiTietBangDiemHocKy(String maBD) throws ClassNotFoundException {
+        try {
+            String sqlCommand = "DELETE FROM CHITIETBANGDIEMHOCKY WHERE maBD = ?";
+            DataConnection.createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setString(1, maBD);
+            
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Xóa chi tiết bảng điểm học kỳ thành công!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Xóa chi tiết bảng điểm thất bại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
 }

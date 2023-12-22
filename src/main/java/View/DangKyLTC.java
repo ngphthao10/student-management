@@ -2,7 +2,9 @@ package View;
 
 import Controller.LoadDatabase;
 import Controller.controller;
+import Model.ChiTietBangDiemHocKy;
 import Model.DangKy;
+import Model.PhanCong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -220,7 +222,7 @@ public class DangKyLTC extends javax.swing.JFrame {
             DangKy dk = new DangKy(
                 tfMaSV.getText(), Integer.parseInt(cmbMaLTC.getSelectedItem().toString())
             );
-            
+            // check năm học không được nhỏ hơn học kỳ - niên khóa hiện tại thì ko được đăng ký
             LoadDatabase.loadTableDangKy();
             for (DangKy dkItem: controller.arrayListDangKy) {
                 if (dkItem.getMaLTC() == dk.getMaLTC() && dkItem.getMaSV().equals(dk.getMaSV())) {
@@ -228,29 +230,74 @@ public class DangKyLTC extends javax.swing.JFrame {
                     return;
                 }
             }
-            Controller.InsertData.insertDangKy(dk);
+            for (PhanCong pc: Controller.controller.arrayListPhanCong){
+                if(pc.getMaLTC() == dk.getMaLTC()){
+                    Controller.InsertData.insertDangKy(dk);
+                    insertChiTietBangDiemHocKy(dk);
+                }                    
+            }
+            JOptionPane.showMessageDialog(rootPane, "Lớp tín chỉ chưa được phân công giảng dạy!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DangKyLTC.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public void deleteDangKy() {
-        DangKy dk = new DangKy(
-            tfMaSV.getText(), Integer.parseInt(cmbMaLTC.getSelectedItem().toString())
-        );
-        LoadDatabase.loadTableDangKy();
-        for (DangKy dkItem: controller.arrayListDangKy) {
-            if (dkItem.getMaLTC() == dk.getMaLTC() && dkItem.getMaSV().equals(dk.getMaSV())) {
-                try {
-                    Controller.DeleteData.deleteDangKy(dk.getMaLTC(), dk.getMaSV());
-                    LoadDatabase.loadTableDangKy();
-                    return;
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(DangKyLTC.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            DangKy dk = new DangKy(
+                    tfMaSV.getText(), Integer.parseInt(cmbMaLTC.getSelectedItem().toString())
+            );
+            LoadDatabase.loadTableDangKy();
+            String maBD = LoadDatabase.getMaBD(dk.getMaLTC(), dk.getMaSV());
+            // load table chitietbangdiemhocky vao array
+            LoadDatabase.loadTableChiTietBangDiemHocKy(maBD, dk.getMaLTC());
+            
+            // check điều kiện sinh viên đã có điểm ở ltc đó hoặc ltc đó đã qua thì sinh viên không được hủy đk lớp
+            for (DangKy dkItem: controller.arrayListDangKy) {
+                if (dkItem.getMaLTC() == dk.getMaLTC() && dkItem.getMaSV().equals(dk.getMaSV())) {
+                    try {
+                        for (ChiTietBangDiemHocKy ctbdhk: controller.arrayListChiTietBangDiemHocKy) {
+                            if (ctbdhk.getDiem() != 0) {
+                                JOptionPane.showMessageDialog(null, "Sinh viên đã có điểm, không thể hủy đăng ký!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                            if (LoadDatabase.getMaHK(ctbdhk.getMaBD()).substring(0, 7).compareTo("02_2023") < 0) {
+                                JOptionPane.showMessageDialog(null, "Lớp tín chỉ đã qua, không thể hủy đăng ký!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                        }
+                        Controller.DeleteData.deleteDangKy(dk.getMaLTC(), dk.getMaSV());
+                        LoadDatabase.loadTableDangKy();
+                        deleteChiTietBangDiemHocKy(dk);
+                        return;
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(DangKyLTC.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa đăng ký lớp tín chỉ này!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DangKyLTC.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(rootPane, "Bạn chưa đăng ký lớp tín chỉ này!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void insertChiTietBangDiemHocKy(DangKy dk) {
+        try {
+            String maBD = LoadDatabase.getMaBD(dk.getMaLTC(), dk.getMaSV());
+            ChiTietBangDiemHocKy ctbdhk = new ChiTietBangDiemHocKy(maBD, dk.getMaLTC(), 0, "Không đạt");
+            Controller.InsertData.insertChiTietBangDiemHocKy(ctbdhk);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DangKyLTC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteChiTietBangDiemHocKy (DangKy dk) {
+        try {
+            String maBD = LoadDatabase.getMaBD(dk.getMaLTC(), dk.getMaSV());
+            Controller.DeleteData.deleteChiTietBangDiemHocKy(maBD);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DangKyLTC.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**

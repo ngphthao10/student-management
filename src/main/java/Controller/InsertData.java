@@ -1,5 +1,6 @@
 package Controller;
 
+import static Controller.DataConnection.createStatement;
 import Model.*;
 import java.util.Date;
 import java.sql.PreparedStatement;
@@ -208,6 +209,27 @@ public class InsertData {
             Logger.getLogger(InsertData.class.getName()).log(Level.SEVERE, null, ex);
         }
         JOptionPane.showMessageDialog(null, "Thêm phân công thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    
+    public static boolean insertChiTietBangDiemHocKy(ChiTietBangDiemHocKy ctbdhk) throws ClassNotFoundException {
+        try {
+            String sqlCommand = "INSERT INTO CHITIETBANGDIEMHOCKY VALUES(?, ?, ?, ?)";
+            createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setString(1, ctbdhk.getMaBD());
+            ps.setInt(2, ctbdhk.getMaLTC());
+            ps.setFloat(3, ctbdhk.getDiem());
+            ps.setString(4, ctbdhk.getKetQua());
+            
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Thêm chi tiết bảng điểm học kỳ thành công!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Thêm chi tiết bảng điểm học kỳ thất bại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
    
