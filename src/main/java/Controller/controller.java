@@ -20,4 +20,5 @@ public class controller {
     public static TaiKhoan taiKhoan = new TaiKhoan();
     
     public static ArrayList<ChiTietBangDiemHocKy> arrayListChiTietBangDiemHocKy = new ArrayList<ChiTietBangDiemHocKy>();
+    public static ArrayList<BangDiemHocKy> arrayListBangDiemHocKy = new ArrayList<BangDiemHocKy>();
 }
