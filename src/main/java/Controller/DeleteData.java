@@ -15,14 +15,14 @@ public class DeleteData {
             ps.setString(1, MaMH);
 
             if (ps.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Xóa môn học thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Xóa sinh viên thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 return true;
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(DeleteData.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Xóa môn học thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Xóa sinh viên thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
         
@@ -35,13 +35,13 @@ public class DeleteData {
             ps.setString(1, maSV);
             
             if (ps.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Xóa môn học thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Xóa sinh viên thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 return true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(DeleteData.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Xóa môn học thất bại", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Xóa sinh viên thất bại", "Thông báo", JOptionPane.ERROR_MESSAGE);
         return false;
     }
     

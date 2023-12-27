@@ -55,7 +55,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         lbSetName = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel8 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btCTDT = new javax.swing.JButton();
         btDSKN = new javax.swing.JButton();
@@ -69,6 +69,7 @@ public class HomePage extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
         mnIThongTin = new javax.swing.JMenuItem();
@@ -85,15 +86,15 @@ public class HomePage extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Student Management");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 38, 131, 24));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 131, -1));
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 3, 18)); // NOI18N
         jLabel4.setText("MoliSM");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 6, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, 20));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         jLabel5.setText("Trang chủ");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 351, 49));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 351, -1));
 
         lbSetName.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbSetName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -102,11 +103,11 @@ public class HomePage extends javax.swing.JFrame {
 
         jSeparator1.setBackground(new java.awt.Color(153, 153, 255));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 10, 80));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 10, 80));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-cat-64.png")); // NOI18N
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 70));
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-cat-64.png")); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1530, 80));
 
@@ -116,7 +117,7 @@ public class HomePage extends javax.swing.JFrame {
         btCTDT.setBackground(new java.awt.Color(76, 124, 97));
         btCTDT.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btCTDT.setForeground(new java.awt.Color(255, 255, 255));
-        btCTDT.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-elective-48.png")); // NOI18N
+        btCTDT.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-elective-48.png")); // NOI18N
         btCTDT.setText(" Chương trình đào tạo  ");
         btCTDT.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btCTDT.setHideActionText(true);
@@ -132,7 +133,7 @@ public class HomePage extends javax.swing.JFrame {
         btDSKN.setBackground(new java.awt.Color(76, 124, 97));
         btDSKN.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btDSKN.setForeground(new java.awt.Color(255, 255, 255));
-        btDSKN.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-department-48.png")); // NOI18N
+        btDSKN.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-department-48.png")); // NOI18N
         btDSKN.setText(" Danh sách khoa, ngành");
         btDSKN.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btDSKN.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -147,17 +148,22 @@ public class HomePage extends javax.swing.JFrame {
         btCTBD.setBackground(new java.awt.Color(76, 124, 97));
         btCTBD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btCTBD.setForeground(new java.awt.Color(255, 255, 255));
-        btCTBD.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-report-card-48.png")); // NOI18N
+        btCTBD.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-report-card-48.png")); // NOI18N
         btCTBD.setText(" Chi tiết bảng điểm        ");
         btCTBD.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btCTBD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btCTBD.setPreferredSize(new java.awt.Dimension(70, 30));
+        btCTBD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCTBDActionPerformed(evt);
+            }
+        });
         jPanel2.add(btCTBD, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 290, 80));
 
         btPCGD.setBackground(new java.awt.Color(76, 124, 97));
         btPCGD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btPCGD.setForeground(new java.awt.Color(255, 255, 255));
-        btPCGD.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-assignment-48.png")); // NOI18N
+        btPCGD.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-register-48.png")); // NOI18N
         btPCGD.setText(" Phân công giảng dạy    ");
         btPCGD.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btPCGD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -172,7 +178,7 @@ public class HomePage extends javax.swing.JFrame {
         btDKLTC.setBackground(new java.awt.Color(76, 124, 97));
         btDKLTC.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btDKLTC.setForeground(new java.awt.Color(255, 255, 255));
-        btDKLTC.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-register-48.png")); // NOI18N
+        btDKLTC.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-assignment-48.png")); // NOI18N
         btDKLTC.setText(" Đăng ký lớp tín chỉ       ");
         btDKLTC.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btDKLTC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -187,7 +193,7 @@ public class HomePage extends javax.swing.JFrame {
         btTTLH.setBackground(new java.awt.Color(76, 124, 97));
         btTTLH.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btTTLH.setForeground(new java.awt.Color(255, 255, 255));
-        btTTLH.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-class-48.png")); // NOI18N
+        btTTLH.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-class-48.png")); // NOI18N
         btTTLH.setText(" Thông tin lớp học        ");
         btTTLH.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btTTLH.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -202,7 +208,7 @@ public class HomePage extends javax.swing.JFrame {
         btTTSV.setBackground(new java.awt.Color(76, 124, 97));
         btTTSV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btTTSV.setForeground(new java.awt.Color(255, 255, 255));
-        btTTSV.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-student-48.png")); // NOI18N
+        btTTSV.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-student-48.png")); // NOI18N
         btTTSV.setText(" Thông tin sinh viên     ");
         btTTSV.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btTTSV.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -217,7 +223,7 @@ public class HomePage extends javax.swing.JFrame {
         btTTGV.setBackground(new java.awt.Color(76, 124, 97));
         btTTGV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btTTGV.setForeground(new java.awt.Color(255, 255, 255));
-        btTTGV.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-teacher-48.png")); // NOI18N
+        btTTGV.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-teacher-48.png")); // NOI18N
         btTTGV.setText(" Thông tin giảng viên   ");
         btTTGV.setToolTipText("");
         btTTGV.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -233,7 +239,7 @@ public class HomePage extends javax.swing.JFrame {
         btThoat.setBackground(new java.awt.Color(76, 124, 97));
         btThoat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btThoat.setForeground(new java.awt.Color(255, 255, 255));
-        btThoat.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-exit-48 (1).png")); // NOI18N
+        btThoat.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-exit-48 (1).png")); // NOI18N
         btThoat.setText(" Thoát                             ");
         btThoat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btThoat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -245,24 +251,30 @@ public class HomePage extends javax.swing.JFrame {
         });
         jPanel2.add(btThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 640, 290, 80));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 290, 730));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 290, 750));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel3.add(jLabel3);
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 338, -1, -1));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 338, -1, -1));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\6_innovation01 (1).jpg")); // NOI18N
-        jPanel3.add(jLabel7);
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\6_innovation01 (1).jpg")); // NOI18N
+        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel6.setRequestFocusEnabled(false);
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 1230, 730));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 1230, 750));
 
-        jMenu.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-menu-16.png")); // NOI18N
+        jMenu.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-menu-16.png")); // NOI18N
         jMenu.setText("Menu");
+        jMenu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        mnIThongTin.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\User group.png")); // NOI18N
+        mnIThongTin.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\User group.png")); // NOI18N
         mnIThongTin.setText("Thông tin tài khoản");
         mnIThongTin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,7 +283,7 @@ public class HomePage extends javax.swing.JFrame {
         });
         jMenu.add(mnIThongTin);
 
-        mnIDoiMK.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\Key.png")); // NOI18N
+        mnIDoiMK.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\Key.png")); // NOI18N
         mnIDoiMK.setText("Đổi mật khẩu");
         mnIDoiMK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,7 +292,7 @@ public class HomePage extends javax.swing.JFrame {
         });
         jMenu.add(mnIDoiMK);
 
-        mnIDangXuat.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\Exit.png")); // NOI18N
+        mnIDangXuat.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\Exit.png")); // NOI18N
         mnIDangXuat.setText("Đăng xuất");
         mnIDangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -372,6 +384,20 @@ public class HomePage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btDKLTCActionPerformed
 
+    private void btCTBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCTBDActionPerformed
+        if (Controller.controller.taiKhoan.getMaNDN().equals("SV")) {
+            BangDiemSV bdsv = new BangDiemSV();
+            bdsv.setExtendedState(MAXIMIZED_BOTH);
+            bdsv.setVisible(true);
+            this.dispose();
+        } else {
+            BangDiemGV bdgv = new BangDiemGV();
+            bdgv.setExtendedState(MAXIMIZED_BOTH);
+            bdgv.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btCTBDActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -418,12 +444,13 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JButton btTTLH;
     private javax.swing.JButton btTTSV;
     private javax.swing.JButton btThoat;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;

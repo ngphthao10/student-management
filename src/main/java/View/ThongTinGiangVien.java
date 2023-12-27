@@ -23,6 +23,7 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
 
     public ThongTinGiangVien() {
         initComponents();
+        tbGiangVien.setRowHeight(20);
         lbSetName.setText(Controller.controller.taiKhoan.getMaTK() + " - " + Controller.controller.taiKhoan.getTenNguoiDung());
         if (Controller.controller.taiKhoan.getMaNDN().equals("GV")) {
             btThem.setEnabled(false);
@@ -85,7 +86,7 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lbSetName = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btOut = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -140,14 +141,14 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         lbSetName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbSetName.setText("XX - Ten người dùng");
 
-        jButton1.setBackground(new java.awt.Color(209, 232, 195));
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\src\\main\\java\\Image\\icons8-cat-64.png")); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setFocusPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btOut.setBackground(new java.awt.Color(209, 232, 195));
+        btOut.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-cat-64.png")); // NOI18N
+        btOut.setBorder(null);
+        btOut.setBorderPainted(false);
+        btOut.setFocusPainted(false);
+        btOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btOutActionPerformed(evt);
             }
         });
 
@@ -160,26 +161,28 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btOut, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 523, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 524, Short.MAX_VALUE)
                 .addComponent(lbSetName, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,12 +190,9 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(14, 14, 14))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                        .addContainerGap())))
-            .addComponent(jSeparator1)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
@@ -202,8 +202,6 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel3.setPreferredSize(new java.awt.Dimension(1069, 700));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-find-32.png")); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setText("Nhập mã giảng viên");
@@ -223,7 +221,6 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         btXem.setBackground(new java.awt.Color(76, 124, 97));
         btXem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btXem.setForeground(new java.awt.Color(255, 255, 255));
-        btXem.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-list-24.png")); // NOI18N
         btXem.setText("Xem danh sách");
         btXem.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         btXem.addActionListener(new java.awt.event.ActionListener() {
@@ -232,6 +229,7 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
             }
         });
 
+        tbGiangVien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbGiangVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
@@ -404,7 +402,6 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
 
         anhGV.setBackground(new java.awt.Color(255, 51, 51));
         anhGV.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        anhGV.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-user-64.png")); // NOI18N
         anhGV.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         upload.setText("Upload:");
@@ -537,13 +534,13 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 6, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -788,6 +785,11 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
                 GiangVien gv = new GiangVien(tfMaGV.getText(), hoGV, tenLotGV, tenGV, phai, tfNgaySinh.getDate(),
                         maKhoa, tfNgayBD.getDate(), tfNgayKT.getDate(), tt, tfEmail.getText(), HinhAnh);
                 String maGVien = (String) tbGiangVien.getValueAt(tbGiangVien.getSelectedRow(), 1);
+                if(!tfMaGV.getText().equals(maGVien)){
+                    JOptionPane.showMessageDialog(null, "Không được sửa mã giảng viên!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    tfMaGV.setText(maGVien);
+                    return;
+                }
                 for (GiangVien gvien : Controller.controller.arrayListGiangVien) {
                     if (!gvien.getMaGV().equalsIgnoreCase(maGVien) && gvien.getEmail().equalsIgnoreCase(gv.getEmail())) {
                         JOptionPane.showMessageDialog(null, "Email không được trùng nhau!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
@@ -818,12 +820,12 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btChinhSuaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOutActionPerformed
         HomePage hp = new HomePage(Controller.controller.taiKhoan.getMaNDN());
         hp.setExtendedState(MAXIMIZED_BOTH);
         hp.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btOutActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -863,6 +865,7 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
     private javax.swing.JLabel anhGV;
     private javax.swing.JButton btChinhSua;
     private javax.swing.JButton btNhapMoi;
+    private javax.swing.JButton btOut;
     private javax.swing.JButton btThem;
     private javax.swing.JButton btTimKiem;
     private javax.swing.JButton btXem;
@@ -870,7 +873,6 @@ public class ThongTinGiangVien extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbKhoa;
     private javax.swing.JComboBox<String> cbbPhai;
     private javax.swing.JComboBox<String> ccbTrangThai;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

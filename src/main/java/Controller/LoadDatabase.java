@@ -356,21 +356,23 @@ public class LoadDatabase {
         return null;
     }
 
-    public static Nganh getNganhfromMaLop(String maLop) throws ClassNotFoundException {
+    public static ArrayList<String> getNganh_KhoafromMaLop(String maLop) throws ClassNotFoundException {
         try {
             createStatement();
-            String sqlCommand = "SELECT * from NGANH WHERE maNganh IN (SELECT maNganh FROM LOP WHERE maLop = ?)";
-
+            String sqlCommand = "SELECT tenNganh, tenKhoa FROM NGANH\n" +
+                                "JOIN LOP ON NGANH.maNganh = LOP.maNganh\n" +
+                                "JOIN KHOA ON KHOA.maKhoa = NGANH.maKhoa\n" +
+                                "WHERE maLop = ?";
+            ArrayList<String> list = new ArrayList<String>();
             try (PreparedStatement prepareStatement = DataConnection.connection.prepareStatement(sqlCommand)) {
                 prepareStatement.setString(1, maLop);
 
                 try (ResultSet resultSet = prepareStatement.executeQuery()) {
                     while (resultSet.next()) {
-                        Nganh nganh = new Nganh(
-                                resultSet.getString("maNganh"), resultSet.getString("tenNganh"), resultSet.getString("maKhoa")
-                        );
+                        list.add(resultSet.getString("tenNganh"));
+                        list.add(resultSet.getString("tenKhoa"));
                         DataConnection.connection.close();
-                        return nganh;
+                        return list;
                     }
                 }
             }
@@ -1350,7 +1352,7 @@ public class LoadDatabase {
                             "LEFT JOIN CHITIETBANGDIEMHOCKY ctbd ON bdhk.maBD = ctbd.maBD\n" +
                             "LEFT JOIN LOPTINCHI lt ON ctbd.maLTC = lt.maLopTC\n" +
                             "LEFT JOIN MONHOC mh ON lt.maMH = mh.maMH\n" +
-                            "GROUP BY bdhk.maBD, bdhk.maSV, ctbd.ketQua\n" +
+                            "GROUP BY bdhk.maSV, ctbd.ketQua\n" +
                             "HAVING bdhk.maSV = ? AND ctbd.ketQua = N'Đạt'";
             try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)){
                 ps.setString(1,maSV);
@@ -1528,7 +1530,7 @@ public class LoadDatabase {
         try {
             String query = "SELECT DISTINCT maBD FROM BANGDIEMHOCKY JOIN DANGKY ON BANGDIEMHOCKY.maSV = DANGKY.maSV\n" +
                     "JOIN LOPTINCHI ON DANGKY.maLTC = LOPTINCHI.maLopTC\n" +
-                    "WHERE LOPTINCHI.maHK = ? AND BANGDIEMHOCKY.maSV = ?";
+                    "WHERE BANGDIEMHOCKY.maHK = ? AND BANGDIEMHOCKY.maSV = ?";
             createStatement();
             try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)) {
                 ps.setString(1, maHK);
@@ -1571,9 +1573,9 @@ public class LoadDatabase {
     
     public static String getMaBD(int maLTC, String maSV) throws ClassNotFoundException {
         try {
-            String query = "SELECT CHITIETBANGDIEMHOCKY.maBD FROM CHITIETBANGDIEMHOCKY\n" +
-                    "JOIN BANGDIEMHOCKY ON CHITIETBANGDIEMHOCKY.maBD = CHITIETBANGDIEMHOCKY.maBD\n" +
-                    "WHERE maSV = ? AND maLTC = ?";
+            String query = "SELECT maBD FROM BANGDIEMHOCKY\n" +
+                            "WHERE maSV = ?\n" +
+                            "AND maHK IN (SELECT maHK FROM LOPTINCHI WHERE maLopTC = ?)";
             createStatement();
             try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)) {
                 ps.setString(1, maSV);
@@ -1626,5 +1628,30 @@ public class LoadDatabase {
         } catch (SQLException ex) {
             Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public static LopTinChi getLopTinChi(int maLTC) throws ClassNotFoundException {
+        try {
+            String query = "SELECT * FROM LOPTINCHI WHERE maLopTC = ?";
+            createStatement();
+            try (PreparedStatement ps = DataConnection.connection.prepareStatement(query)) {
+                ps.setInt(1, maLTC);
+                
+                ResultSet resultSet = ps.executeQuery();
+                while(resultSet.next()) {
+                    LopTinChi ltc = new LopTinChi(
+                                resultSet.getInt("maLopTC"), resultSet.getString("maMH"), resultSet.getString("maHK"),
+                                resultSet.getString("maLop"), resultSet.getInt("nhom"), resultSet.getInt("svMin"),
+                                resultSet.getInt("svMax"), resultSet.getBoolean("huyLop")
+                        );
+                    DataConnection.connection.close();
+                    return ltc;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoadDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Lớp tín chỉ không tồn tại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return null;
     }
 }

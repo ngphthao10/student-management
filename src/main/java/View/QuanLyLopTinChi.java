@@ -79,7 +79,7 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lbSetName = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btOut = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         cmbKhoa = new javax.swing.JComboBox<>();
         btTimKiem = new javax.swing.JButton();
@@ -90,6 +90,7 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
         btXemDSSVDK = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -191,7 +192,7 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -238,7 +239,7 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
                         .addComponent(lbSetName1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(102, 102, 102))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btSua, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,13 +315,14 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
         lbSetName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbSetName.setText("XX1 - Ten người dùng");
 
-        jButton1.setBackground(new java.awt.Color(209, 232, 195));
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setFocusPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btOut.setBackground(new java.awt.Color(209, 232, 195));
+        btOut.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-cat-64.png")); // NOI18N
+        btOut.setBorder(null);
+        btOut.setBorderPainted(false);
+        btOut.setFocusPainted(false);
+        btOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btOutActionPerformed(evt);
             }
         });
 
@@ -329,41 +331,41 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addGap(8, 8, 8)
+                .addComponent(btOut, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbSetName, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addGap(27, 27, 27))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btOut, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbSetName)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSeparator1))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbSetName))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         cmbKhoa.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -453,7 +455,7 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1059, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -461,7 +463,7 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
                         .addComponent(cmbKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
                         .addComponent(btTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
                         .addComponent(btDKLTC, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -477,7 +479,7 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btTimKiem)
                     .addComponent(btDKLTC))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btXemDSSVDK)
@@ -543,11 +545,14 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
             try {
                 int index = tbLopTinChi.getSelectedRow();
                 LopTinChi ltc = controller.arrayListLopTinChi.get(index);
-                LoadDatabase.loadTableDSSVDK(ltc.getMaLopTC());
+                int maltc = (Integer) tbLopTinChi.getValueAt(index, 0);
+                            System.out.println(index);
+                            System.out.println(ltc.getMaLopTC());
+                LoadDatabase.loadTableDSSVDK(maltc);
                 LoadDatabase.loadTablePhanCong();
  
                 for (PhanCong pc: Controller.controller.arrayListPhanCong){
-                    if(pc.getMaLTC() == ltc.getMaLopTC()){
+                    if(pc.getMaLTC() == maltc){
                         JOptionPane.showMessageDialog(null, "Lớp tín chỉ đã phân công!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
                         return;
                     }                    
@@ -559,7 +564,7 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
                 
                 int confirm = JOptionPane.showConfirmDialog(rootPane, "Xác nhận xóa lớp tín chỉ?", "Xác nhận", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-                    Controller.DeleteData.deleteLopTinChi(ltc.getMaLopTC());
+                    Controller.DeleteData.deleteLopTinChi(maltc);
                     showData();
                 }               
             } catch (ClassNotFoundException ex) {
@@ -572,6 +577,10 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
         if (evt.getSource() == btSua) {
 //            LoadDatabase.loadTablePhanCong();
             try {
+                if (cmbNienKhoa.getSelectedItem().toString().compareTo("2023-2024") < 0) {
+                    JOptionPane.showMessageDialog(rootPane, "Không được sửa thông tin của lớp tín chỉ đã qua!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 if (cmbMonHoc.getSelectedItem().equals("") || cmbHocKy.getSelectedItem().equals("") || tfNhom.getText().equals("") || cmbNienKhoa.getSelectedItem().equals("") || cmbLop.getSelectedItem().equals("") || tfSVMIN.getText().equals("") || tfSVMAX.getText().equals("")) {
                     JOptionPane.showMessageDialog(rootPane, "Bạn phải điền đầu đủ thông tin!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -610,38 +619,38 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
     }//GEN-LAST:event_btDKLTCActionPerformed
 
     private void tbLopTinChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLopTinChiMouseClicked
-        try {
-            int index = tbLopTinChi.getSelectedRow();
-            LopTinChi ltc = controller.arrayListLopTinChi.get(index);
-            tfMaLTC.setText(String.valueOf(ltc.getMaLopTC()));
-            cmbMonHoc.setSelectedItem(LoadDatabase.getColumnFromMonHoc(ltc.getMaMH(), "tenMH", "maMH"));
-            cmbHocKy.setSelectedItem(ltc.getMaHK().substring(1, 2));
-            tfNhom.setText(String.valueOf(ltc.getNhom()));
-            cmbNienKhoa.setSelectedItem(ltc.getMaHK().substring(3));
-            cmbLop.setSelectedItem(ltc.getMaLop());
-            tfSVMIN.setText(String.valueOf(ltc.getSvMin()));
-            tfSVMAX.setText(String.valueOf(ltc.getSvMax()));
-            cbHuyLop.setSelected(ltc.isHuyLop());
-            btXemDSSVDK.setEnabled(true);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(QuanLyLopTinChi.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        int index = tbLopTinChi.getSelectedRow();
+        tfMaLTC.setText(tbLopTinChi.getValueAt(index, 0).toString());
+        cmbMonHoc.setSelectedItem(tbLopTinChi.getValueAt(index, 2));
+        cmbHocKy.setSelectedItem(tbLopTinChi.getValueAt(index, 3).toString().substring(1, 2));
+        tfNhom.setText(tbLopTinChi.getValueAt(index, 5).toString());
+        cmbNienKhoa.setSelectedItem(tbLopTinChi.getValueAt(index, 3).toString().substring(3));
+        cmbLop.setSelectedItem(tbLopTinChi.getValueAt(index, 4));
+        tfSVMIN.setText(tbLopTinChi.getValueAt(index, 6).toString());
+        tfSVMAX.setText(tbLopTinChi.getValueAt(index, 7).toString());
+        cbHuyLop.setSelected((Boolean) tbLopTinChi.getValueAt(index, 8));
+        btXemDSSVDK.setEnabled(true);
     }//GEN-LAST:event_tbLopTinChiMouseClicked
 
     private void btXemDSSVDKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXemDSSVDKActionPerformed
         if(evt.getSource() == btXemDSSVDK) {
-            int index = tbLopTinChi.getSelectedRow();
-            LopTinChi ltc = controller.arrayListLopTinChi.get(index);
-            new DanhSachSVDKLopTinChi(ltc).setVisible(true);
+            try {
+                int index = tbLopTinChi.getSelectedRow();
+                int maLTC = (Integer)tbLopTinChi.getValueAt(index, 0);
+                LopTinChi ltc = LoadDatabase.getLopTinChi(maLTC);
+                new DanhSachSVDKLopTinChi(ltc).setVisible(true);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(QuanLyLopTinChi.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btXemDSSVDKActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOutActionPerformed
         HomePage hp = new HomePage(Controller.controller.taiKhoan.getMaNDN());
         hp.setExtendedState(MAXIMIZED_BOTH);
         hp.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btOutActionPerformed
     
     public void showData() {
         try {
@@ -715,7 +724,6 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
     public LopTinChi updateLopTinChi() {
         int index = tbLopTinChi.getSelectedRow();
         LopTinChi ltc = controller.arrayListLopTinChi.get(index);
-        
         try {
             // check điều kiện nhập vào
             ltc.setMaMH(LoadDatabase.getColumnFromMonHoc(cmbMonHoc.getSelectedItem().toString() ,"maMH", "tenMH"));
@@ -727,10 +735,10 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
             ltc.setMaHK("0".concat(cmbHocKy.getSelectedItem().toString() + "_" + cmbNienKhoa.getSelectedItem().toString()));
             ltc.setNhom(Integer.parseInt(tfNhom.getText()));
             ltc.setMaLop((String) cmbLop.getSelectedItem());
-            
+            int maltc = (Integer) tbLopTinChi.getValueAt(index, 0);
             // check điều kiện maMH, maHK, nhom, maLop không được trùng nhau
             for (LopTinChi loptinchi: controller.arrayListLopTinChi) {
-                if (ltc.getMaLop().equals(loptinchi.getMaLop()) && ltc.getMaHK().equals(loptinchi.getMaHK()) && ltc.getMaMH().equals(loptinchi.getMaMH()) && ltc.getNhom() == loptinchi.getNhom() && ltc.getMaLopTC() != loptinchi.getMaLopTC()) {
+                if (ltc.getMaLop().equals(loptinchi.getMaLop()) && ltc.getMaHK().equals(loptinchi.getMaHK()) && ltc.getMaMH().equals(loptinchi.getMaMH()) && ltc.getNhom() == loptinchi.getNhom() && loptinchi.getMaLopTC() != maltc ) {
                     JOptionPane.showMessageDialog(rootPane, "Mã môn hoc, mã lớp, nhóm, mã học kỳ đã tồn tại.", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
                     return null;
                 }
@@ -793,6 +801,7 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDKLTC;
     private javax.swing.JButton btNhapMoi;
+    private javax.swing.JButton btOut;
     private javax.swing.JButton btSua;
     private javax.swing.JButton btThem;
     private javax.swing.JButton btTimKiem;
@@ -804,7 +813,6 @@ public class QuanLyLopTinChi extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbLop;
     private javax.swing.JComboBox<String> cmbMonHoc;
     private javax.swing.JComboBox<String> cmbNienKhoa;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

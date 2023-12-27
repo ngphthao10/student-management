@@ -17,9 +17,7 @@ public class GiaoDienDoiMatKhau extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         btOut = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -29,7 +27,6 @@ public class GiaoDienDoiMatKhau extends javax.swing.JFrame {
         oldPassword = new javax.swing.JPasswordField();
         newPassword = new javax.swing.JPasswordField();
         retypePassword = new javax.swing.JPasswordField();
-        btDangNhap = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -37,10 +34,8 @@ public class GiaoDienDoiMatKhau extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(209, 232, 195));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Student Management");
-
         btOut.setBackground(new java.awt.Color(209, 232, 195));
+        btOut.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-cat-64.png")); // NOI18N
         btOut.setBorder(null);
         btOut.setBorderPainted(false);
         btOut.setFocusPainted(false);
@@ -49,9 +44,6 @@ public class GiaoDienDoiMatKhau extends javax.swing.JFrame {
                 btOutActionPerformed(evt);
             }
         });
-
-        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 3, 18)); // NOI18N
-        jLabel4.setText("MoliSM");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(76, 124, 97));
@@ -89,35 +81,20 @@ public class GiaoDienDoiMatKhau extends javax.swing.JFrame {
 
         retypePassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        btDangNhap.setBackground(new java.awt.Color(76, 124, 97));
-        btDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btDangNhap.setForeground(new java.awt.Color(255, 255, 255));
-        btDangNhap.setText("Đăng nhập lại");
-        btDangNhap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDangNhapActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(252, 252, 252))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(btXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(btDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btOut)
-                        .addGap(60, 60, 60)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(45, 45, 45)
+                        .addComponent(btOut, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(176, 176, 176)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(114, 114, 114)
@@ -138,16 +115,10 @@ public class GiaoDienDoiMatKhau extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btOut)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
+                    .addComponent(btOut, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(oldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -161,11 +132,9 @@ public class GiaoDienDoiMatKhau extends javax.swing.JFrame {
                     .addComponent(retypePassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbHien)
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40))
+                .addGap(18, 18, 18)
+                .addComponent(btXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,7 +147,9 @@ public class GiaoDienDoiMatKhau extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -208,6 +179,10 @@ public class GiaoDienDoiMatKhau extends javax.swing.JFrame {
     private void btXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXacNhanActionPerformed
         String newPass = (String) newPassword.getText();
         String retypePass = (String) retypePassword.getText();
+        if (newPass.length() < 6) {
+            JOptionPane.showMessageDialog(null, "Mật khẩu phải dài hơn 5 ký tự!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if(arePasswordsMatching(newPass, retypePass)){
             //viet cau truy van updatePassword roi cho hien Joptionpan la doi mat khau thanh cong
             if(Controller.controller.taiKhoan.getMatKhau().equals(oldPassword.getText())){
@@ -224,14 +199,11 @@ public class GiaoDienDoiMatKhau extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(null, "Mật khẩu không trùng khớp! Vui lòng thử lại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btXacNhanActionPerformed
-
-    private void btDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDangNhapActionPerformed
         GiaoDienDangNhap dn = new GiaoDienDangNhap();
         dn.setVisible(true);
         dn.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_btDangNhapActionPerformed
+    }//GEN-LAST:event_btXacNhanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,14 +243,11 @@ public class GiaoDienDoiMatKhau extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btDangNhap;
     private javax.swing.JButton btOut;
     private javax.swing.JButton btXacNhan;
     private javax.swing.JCheckBox cbHien;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;

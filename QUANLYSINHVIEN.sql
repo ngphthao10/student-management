@@ -1,6 +1,6 @@
-﻿CREATE DATABASE QUANLYSINHVIEN
+﻿--CREATE DATABASE QUANLYSINHVIEN
 GO
-USE QUANLYSINHVIEN
+--USE QUANLYSINHVIEN
 
 --Nhóm người đăng nhập: maNDN(số nguyên tăng dần), tên nhóm người dùng (sinh viên, giảng viên, admin,...)	
 go
@@ -138,7 +138,8 @@ CREATE TABLE LOPTINCHI(
 
 go
 CREATE TABLE BANGDIEMHOCKY(
-	maBD varchar(15) PRIMARY KEY,
+	id int IDENTITY(1,1),
+	maBD AS CAST('BD' + right('00' + CAST(id as varchar(3)), 3) as char(5)) persisted primary key,
 	maSV varchar(15) FOREIGN KEY REFERENCES SINHVIEN(maSV) on delete cascade,
 	maHK varchar(20) FOREIGN KEY REFERENCES HOCKY(maHK) on delete cascade,
 	diemTB float,
@@ -148,7 +149,7 @@ CREATE TABLE BANGDIEMHOCKY(
 
 go
 CREATE TABLE CHITIETBANGDIEMHOCKY(
-	maBD varchar(15) FOREIGN KEY REFERENCES BANGDIEMHOCKY(maBD) on delete cascade,
+	maBD char(5) FOREIGN KEY REFERENCES BANGDIEMHOCKY(maBD) on delete cascade,
 	maLTC int FOREIGN KEY REFERENCES LOPTINCHI(maLopTC),
 	diem float,
 	ketQua nvarchar(20)
@@ -195,12 +196,15 @@ INSERT INTO CHUCNANG (tenChucNang, tenManHinh) VALUES
 
 -- TAI KHOAN
 go
+
 INSERT INTO TAIKHOAN (maNND, tenNguoiDung, tenDangNhap, matKhau, trangThaiXoa) VALUES
-('SV', N'Nguyễn Phương Thảo', 'ngphthao10', '123456', '0'),
-('SV', N'Nguyễn Thị Minh Thư', 'aklc', '123456', '0'),
-('SV', N'Đặng Ngọc Yến', 'ngocYen', '123456', '0'),
+('SV', N'Nguyễn Phương Thảo', 'phuongthao', '123456', '0'),
+('SV', N'Nguyễn Thị Minh Thư', 'minhthu', '123456', '0'),
+('SV', N'Đặng Ngọc Yến', 'ngocyen', '123456', '0'),
 ('GV', N'Nguyễn Trung Hiếu', 'trunghieu', '123456', '0'),
-('AD', N'ADMIN', 'admin', '123456', '0');
+('AD', N'Admin', 'admin', '123456', '0');
+
+TRUNCATE TABLE TAIKHOAN
 
 -- PHAN QUYEN
 go
@@ -392,17 +396,64 @@ UPDATE SINHVIEN SET hinhAnh = 'D:\Java\student-management\student-management\Anh
 
 --BANG DIEM HOC KY
 go
-INSERT INTO BANGDIEMHOCKY VALUES
-('BD01', 'N18DCCN025', '01_2019-2020', 7.3, N'Khá'),
-('BD02', 'N20DCCN097', '01_2021-2022', 8.0, N'Giỏi'),
-('BD03', 'N21DCCN055', '01_2021-2022', 8.9, N'Giỏi'),
-('BD04', 'N18DCQT023', '01_2021-2022', 8.4, N'Giỏi')
+INSERT INTO BANGDIEMHOCKY(maSV, maHK, diemTB, xeploai) VALUES 
+('N18DCQT023', '01_2018-2019', 0.0, N'Yếu'), ('N18DCQT023', '02_2018-2019', 0.0, N'Yếu'),
+('N18DCQT023', '01_2019-2020', 0.0, N'Yếu'), ('N18DCQT023', '02_2019-2020', 0.0, N'Yếu'),
+('N18DCQT023', '01_2020-2021', 0.0, N'Yếu'), ('N18DCQT023', '02_2020-2021', 0.0, N'Yếu'),
+('N18DCQT023', '01_2021-2022', 8.4, N'Giỏi'), ('N18DCQT023', '02_2021-2022', 0.0, N'Yếu'),
+('N18DCQT023', '01_2022-2023', 0.0, N'Yếu'), ('N18DCQT023', '01_2022-2023', 0.0, N'Yếu'),
+('N18DCQT023', '01_2023-2024', 0.0, N'Yếu'), ('N18DCQT023', '01_2023-2024', 0.0, N'Yếu'),
+
+('N19DCVT001', '01_2019-2020', 0.0, N'Yếu'), ('N19DCVT001', '02_2019-2020', 0.0, N'Yếu'),
+('N19DCVT001', '01_2020-2021', 0.0, N'Yếu'), ('N19DCVT001', '02_2020-2021', 0.0, N'Yếu'),
+('N19DCVT001', '01_2021-2022', 0.0, N'Yếu'), ('N19DCVT001', '02_2021-2022', 0.0, N'Yếu'),
+('N19DCVT001', '01_2022-2023', 0.0, N'Yếu'), ('N19DCVT001', '01_2022-2023', 0.0, N'Yếu'),
+('N19DCVT001', '01_2023-2024', 0.0, N'Yếu'), ('N19DCVT001', '01_2023-2024', 0.0, N'Yếu'),
+
+('N18DCCN025', '01_2018-2019', 0.0, N'Yếu'), ('N18DCCN025', '02_2018-2019', 0.0, N'Yếu'),
+('N18DCCN025', '01_2019-2020', 7.3, N'Khá'), ('N18DCCN025', '02_2019-2020', 0.0, N'Yếu'),
+('N18DCCN025', '01_2020-2021', 0.0, N'Yếu'), ('N18DCCN025', '02_2020-2021', 0.0, N'Yếu'),
+('N18DCCN025', '01_2021-2022', 0.0, N'Yếu'), ('N18DCCN025', '02_2021-2022', 0.0, N'Yếu'),
+('N18DCCN025', '01_2022-2023', 0.0, N'Yếu'), ('N18DCCN025', '01_2022-2023', 0.0, N'Yếu'),
+('N18DCCN025', '01_2023-2024', 0.0, N'Yếu'), ('N18DCCN025', '01_2023-2024', 0.0, N'Yếu'),
+
+('N20DCCN097', '01_2020-2021', 0.0, N'Yếu'), ('N20DCCN097', '02_2020-2021', 0.0, N'Yếu'),
+('N20DCCN097', '01_2021-2022', 8.0, N'Giỏi'), ('N20DCCN097', '02_2021-2022', 0.0, N'Yếu'),
+('N20DCCN097', '01_2022-2023', 0.0, N'Yếu'), ('N20DCCN097', '01_2022-2023', 0.0, N'Yếu'),
+('N20DCCN097', '01_2023-2024', 0.0, N'Yếu'), ('N20DCCN097', '01_2023-2024', 0.0, N'Yếu'),
+
+('N21DCCN082', '01_2021-2022', 0.0, N'Yếu'), ('N21DCCN082', '02_2021-2022', 0.0, N'Yếu'),
+('N21DCCN082', '01_2022-2023', 0.0, N'Yếu'), ('N21DCCN082', '01_2022-2023', 0.0, N'Yếu'),
+('N21DCCN082', '01_2023-2024', 0.0, N'Yếu'), ('N21DCCN082', '01_2023-2024', 0.0, N'Yếu'),
+
+('N21DCCN078', '01_2021-2022', 0.0, N'Yếu'), ('N21DCCN078', '02_2021-2022', 0.0, N'Yếu'),
+('N21DCCN078', '01_2022-2023', 0.0, N'Yếu'), ('N21DCCN078', '01_2022-2023', 0.0, N'Yếu'),
+('N21DCCN078', '01_2023-2024', 0.0, N'Yếu'), ('N21DCCN078', '01_2023-2024', 0.0, N'Yếu'),
+
+('N21DCCN055', '01_2021-2022', 8.9, N'Giỏi'), ('N21DCCN055', '02_2021-2022', 0.0, N'Yếu'),
+('N21DCCN055', '01_2022-2023', 0.0, N'Yếu'), ('N21DCCN078', '01_2022-2023', 0.0, N'Yếu'),
+('N21DCCN055', '01_2023-2024', 0.0, N'Yếu'), ('N21DCCN078', '01_2023-2024', 0.0, N'Yếu'),
+
+('N22DCDT036', '01_2022-2023', 0.0, N'Yếu'), ('N22DCDT036', '01_2022-2023', 0.0, N'Yếu'),
+('N22DCDT036', '01_2023-2024', 0.0, N'Yếu'), ('N22DCDT036', '01_2023-2024', 0.0, N'Yếu'),
+
+('N22DCDT064', '01_2022-2023', 0.0, N'Yếu'), ('N22DCDT064', '01_2022-2023', 0.0, N'Yếu'),
+('N22DCDT064', '01_2023-2024', 0.0, N'Yếu'), ('N22DCDT064', '01_2023-2024', 0.0, N'Yếu')
 
 --CHI TIET BANG DIEM HOC KY
 go
 INSERT INTO CHITIETBANGDIEMHOCKY VALUES
-('BD01',  7, 7.6, N'Đạt'),
-('BD01', 11, 7.0, N'Đạt'),
-('BD02', 15, 8.0, N'Đạt'),
-('BD04', 15, 8.4, N'Đạt'),
-('BD03', 15, 8.9, N'Đạt')
+('BD025',  7, 7.6, N'Đạt'),
+('BD025', 11, 7.0, N'Đạt'),
+('BD037', 15, 8.0, N'Đạt'),
+('BD007', 15, 8.4, N'Đạt'),
+('BD055', 15, 8.9, N'Đạt')
+
+--DANG KY
+INSERT INTO DANGKY VALUES
+('N18DCCN025', 7),
+('N18DCCN025', 11),
+('N20DCCN097', 15),
+('N21DCCN055', 15),
+('N18DCQT023', 15)
+

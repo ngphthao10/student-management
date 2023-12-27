@@ -63,6 +63,7 @@ public class GiaoDienDangNhap extends javax.swing.JFrame {
         cbHienMK = new javax.swing.JCheckBox();
         btDangNhap = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -77,7 +78,7 @@ public class GiaoDienDangNhap extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, 78));
 
         btOut.setBackground(new java.awt.Color(209, 232, 195));
-        btOut.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-x-30.png")); // NOI18N
+        btOut.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-close-window-30.png")); // NOI18N
         btOut.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btOut.setBorderPainted(false);
         btOut.setFocusPainted(false);
@@ -86,7 +87,7 @@ public class GiaoDienDangNhap extends javax.swing.JFrame {
                 btOutActionPerformed(evt);
             }
         });
-        jPanel1.add(btOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, -1, -1));
+        jPanel1.add(btOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, 30, -1));
 
         jLabel23.setFont(new java.awt.Font("Comic Sans MS", 3, 18)); // NOI18N
         jLabel23.setText("MoliSM");
@@ -133,9 +134,10 @@ public class GiaoDienDangNhap extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 210, 50));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\Image\\icons8-cat-64.png")); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-cat-64.png")); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,6 +221,7 @@ public class GiaoDienDangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField password;

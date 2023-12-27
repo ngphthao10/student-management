@@ -8,7 +8,7 @@ import java.io.File;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import static java.time.temporal.TemporalQueries.localDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Level;
@@ -27,6 +27,7 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
         lbSetName.setText(Controller.controller.taiKhoan.getMaTK() + " - " + Controller.controller.taiKhoan.getTenNguoiDung());
         LoadDatabase loadData = new LoadDatabase();
         loadData.fillComboBox(cmbKhoa, "tenKhoa", "KHOA");
+        tfMaSV.setEditable(false);
         cmbTrangThai.setEnabled(false);
         cmbMaLop.setEnabled(false);
         cmbNganh.setEnabled(false);
@@ -48,7 +49,7 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btOut = new javax.swing.JButton();
         lbSetName = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
@@ -86,6 +87,7 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
         datechNgaySinh = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(209, 232, 195));
 
@@ -98,14 +100,14 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         jLabel5.setText("Thông tin sinh viên");
 
-        jButton1.setBackground(new java.awt.Color(209, 232, 195));
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement\\src\\main\\java\\Image\\icons8-cat-64.png")); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setFocusPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btOut.setBackground(new java.awt.Color(209, 232, 195));
+        btOut.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-cat-64.png")); // NOI18N
+        btOut.setBorder(null);
+        btOut.setBorderPainted(false);
+        btOut.setFocusPainted(false);
+        btOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btOutActionPerformed(evt);
             }
         });
 
@@ -121,17 +123,17 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addComponent(btOut, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
+                .addGap(54, 54, 54)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(555, 555, 555)
+                .addGap(869, 869, 869)
                 .addComponent(lbSetName, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -140,26 +142,27 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lbSetName)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lbSetName)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addComponent(btOut, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
@@ -470,12 +473,15 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,10 +489,10 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 765, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 63, Short.MAX_VALUE))))
+                        .addGap(0, 48, Short.MAX_VALUE))))
         );
 
         pack();
@@ -515,13 +521,22 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
                 tfSDT.setText(sv.getSdt());
                 tfNamNhapHoc.setText(String.valueOf(sv.getNamNhapHoc()));
                 cmbTrangThai.setSelectedItem(sv.getTrangThai());
-                cmbMaLop.setSelectedItem(sv.getMaLop());
+//                cmbMaLop.addItem(sv.getMaLop());
                 try {
-                    Nganh nganh = LoadDatabase.getNganhfromMaLop(sv.getMaLop());
-                    cmbNganh.setSelectedItem(nganh.getTenNganh());
-                    cmbKhoa.setSelectedItem(LoadDatabase.getKhoafromMaNganh(nganh.getMaNganh()));
+                    ArrayList<String> list = LoadDatabase.getNganh_KhoafromMaLop(sv.getMaLop());
+                    if (list == null) {
+                        JOptionPane.showMessageDialog(rootPane, "Không tồn tại tên khoa, tên ngành", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    cmbKhoa.setSelectedItem(list.get(1));
+                    cmbNganh.removeAllItems();
+                    LoadDatabase.fillSubComboBox(cmbNganh, cmbKhoa.getSelectedItem().toString());
+                    cmbNganh.setSelectedItem(list.get(0));
+                    cmbMaLop.removeAllItems();
+                    LoadDatabase.fillSubComboBoxMaLop(cmbMaLop, cmbNganh.getSelectedItem().toString());
+                    cmbMaLop.setSelectedItem(sv.getMaLop());
+                    
                     lbHinhAnh.setIcon(new ImageIcon(sv.getHinhAnh()));
-                    System.out.print(sv.getHinhAnh());
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(ThongTinSinhVien.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -540,7 +555,6 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
     private void btChinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChinhSuaActionPerformed
         if (evt.getSource() == btChinhSua) {
                 // enable
-                tfMaSV.setEditable(true);
                 tfHoTen.setEditable(true);
                 cbNam.setEnabled(true);
                 cbNu.setEnabled(true);
@@ -558,13 +572,13 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
 
     private void btSetImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSetImageActionPerformed
         try {
-            JFileChooser fptr = new JFileChooser("C:\\Users\\PHUONG THAO\\OneDrive\\Documents\\NetBeansProjects\\StudentManagement");
+            JFileChooser fptr = new JFileChooser("D:\\Java\\student-management\\student-management\\AnhTheSinhVien");
 
             fptr.setDialogTitle("Mở file");
             fptr.showOpenDialog(null);
             File fTenAnh = fptr.getSelectedFile();
             String duongDanAnh = fTenAnh.getAbsolutePath();
-            SinhVien sv = LoadDatabase.getThongTinSV(tfMaSV.getText());
+            SinhVien sv = LoadDatabase.getThongTinSV(tfNhapMa.getText());
             if (duongDanAnh.contains("anhnam") && sv.getPhai().equalsIgnoreCase("Nam")) {
                 lbHinhAnh.setIcon(new ImageIcon(duongDanAnh));
             }
@@ -609,8 +623,24 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
             try {
                 String maSV = tfNhapMa.getText();
                 SinhVien sv = updateSinhVien();
+                
+                tfMaSV.setEnabled(false);
+                tfHoTen.setEnabled(false);
+                tfEmail.setEnabled(false);
+                tfSDT.setEnabled(false);
+                btChinhSua.setEnabled(false);
+                cmbTrangThai.setEnabled(false);
+                cmbMaLop.setEnabled(false);
+                cmbNganh.setEnabled(false);
+                cmbKhoa.setEnabled(false);
+                cbNam.setEnabled(false);
+                cbNu.setEnabled(false);
+                btLuuThongTin.setEnabled(false);
+                datechNgaySinh.setEnabled(false);
+                btSetImage.setEnabled(false);
+                
                 if (sv == null) {
-                    JOptionPane.showMessageDialog(null, "Lưu thông tin thất bại", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Lưu thông tin thất bại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 Controller.UpdateData.updateSinhVien(maSV, sv);
@@ -620,21 +650,20 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btLuuThongTinActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOutActionPerformed
         HomePage hp = new HomePage(Controller.controller.taiKhoan.getMaNDN());
         hp.setExtendedState(MAXIMIZED_BOTH);
         hp.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btOutActionPerformed
     
     public SinhVien updateSinhVien() {
         try { 
-            String maSV = tfNhapMa.getText();
+            String maSV = tfNhapMa.getText().toUpperCase();
             SinhVien sv = Controller.LoadDatabase.getThongTinSV(maSV);
             
             sv.setMaSV(tfMaSV.getText());
             String[] hoTen = tfHoTen.getText().split(" ");
-            System.out.println(hoTen);
             if (hoTen.length <= 1) {
                 JOptionPane.showMessageDialog(rootPane, "Bạn phải nhập họ tên có 2 chữ trở lên!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
                 return null;
@@ -677,7 +706,7 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
             }
             sv.setEmail(tfEmail.getText());
             if (tfSDT.getText().equals("") == true) {
-                sv.setSdt(tfSDT.getText());
+                sv.setSdt(null);
             }
             else if (tfSDT.getText().charAt(0) != '0' || tfSDT.getText().matches("\\d{10,11}") == false) {
                 JOptionPane.showMessageDialog(rootPane, "Số điện thoại không hợp lệ!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
@@ -691,6 +720,7 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
             sv.setNamNhapHoc(Integer.parseInt("20".concat(sv.getMaSV().substring(1, 3))));
             tfNamNhapHoc.setText(String.valueOf(sv.getNamNhapHoc()));
             sv.setTrangThai(String.valueOf(cmbTrangThai.getSelectedItem()));
+            sv.setHinhAnh(lbHinhAnh.getIcon().toString());
             return sv;
             
         } catch (ParseException ex) {
@@ -738,6 +768,7 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btChinhSua;
     private javax.swing.JButton btLuuThongTin;
+    private javax.swing.JButton btOut;
     private javax.swing.JButton btSetImage;
     private javax.swing.JButton btTimKiem;
     private javax.swing.JCheckBox cbNam;
@@ -747,7 +778,6 @@ public class ThongTinSinhVien extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbNganh;
     private javax.swing.JComboBox<String> cmbTrangThai;
     private com.toedter.calendar.JDateChooser datechNgaySinh;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

@@ -40,8 +40,8 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
             lbMaLTC.setText(String.valueOf(ltc.getMaLopTC()));
             lbMH.setText(LoadDatabase.getTenMH(ltc.getMaMH()).concat("(" + ltc.getMaMH() + ")"));
             lbHocKy.setText(ltc.getMaHK().substring(1, 2));
-            lbNienKhoa.setText(ltc.getMaHK().substring(3));
-            lbLop.setText(ltc.getMaLop());
+            lbLop.setText(ltc.getMaHK().substring(3));
+            lbNienKhoa.setText(ltc.getMaLop());
             lbNhom.setText(String.valueOf(ltc.getNhom()));
             lbGiangVien.setText(LoadDatabase.getTenGiangVienFromLTC(ltc.getMaLopTC()));
             lbSVmin.setText(String.valueOf(ltc.getSvMin()));
@@ -82,9 +82,9 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         lbMaLTC = new javax.swing.JLabel();
-        lbLop = new javax.swing.JLabel();
-        lbGiangVien = new javax.swing.JLabel();
         lbNienKhoa = new javax.swing.JLabel();
+        lbGiangVien = new javax.swing.JLabel();
+        lbLop = new javax.swing.JLabel();
         lbSVmax = new javax.swing.JLabel();
         lbSVmin = new javax.swing.JLabel();
         lbNhom = new javax.swing.JLabel();
@@ -93,7 +93,7 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        btOut = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDSSVDK = new javax.swing.JTable();
 
@@ -145,14 +145,14 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
         lbMaLTC.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
         lbMaLTC.setForeground(new java.awt.Color(0, 102, 51));
 
-        lbLop.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
-        lbLop.setForeground(new java.awt.Color(0, 102, 51));
+        lbNienKhoa.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
+        lbNienKhoa.setForeground(new java.awt.Color(0, 102, 51));
 
         lbGiangVien.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
         lbGiangVien.setForeground(new java.awt.Color(0, 102, 51));
 
-        lbNienKhoa.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
-        lbNienKhoa.setForeground(new java.awt.Color(0, 102, 51));
+        lbLop.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
+        lbLop.setForeground(new java.awt.Color(0, 102, 51));
 
         lbSVmax.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
         lbSVmax.setForeground(new java.awt.Color(0, 102, 51));
@@ -191,8 +191,8 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lbHocKy, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lbLop, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lbNienKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbLop, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lbGiangVien, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lbMaLTC, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lbSVmin, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -235,7 +235,7 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
                             .addComponent(lbHocKy, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel10))
-                    .addComponent(lbLop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbNienKhoa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel14)
@@ -247,8 +247,8 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(lbNienKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE))
+                        .addComponent(lbLop, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel12)
@@ -281,13 +281,14 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jButton1.setBackground(new java.awt.Color(209, 232, 195));
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setFocusPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btOut.setBackground(new java.awt.Color(209, 232, 195));
+        btOut.setIcon(new javax.swing.ImageIcon("D:\\Java\\student-management\\student-management\\Image\\icons8-cat-64.png")); // NOI18N
+        btOut.setBorder(null);
+        btOut.setBorderPainted(false);
+        btOut.setFocusPainted(false);
+        btOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btOutActionPerformed(evt);
             }
         });
 
@@ -296,7 +297,8 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addContainerGap()
+                .addComponent(btOut, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -311,20 +313,17 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1))
                 .addContainerGap())
-            .addComponent(jSeparator1)
         );
 
         tbDSSVDK.setModel(new javax.swing.table.DefaultTableModel(
@@ -372,12 +371,12 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOutActionPerformed
         HomePage hp = new HomePage(Controller.controller.taiKhoan.getMaNDN());
         hp.setExtendedState(MAXIMIZED_BOTH);
         hp.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btOutActionPerformed
     
     public void showData(int maLopTC) {
         try {
@@ -439,8 +438,8 @@ public class DanhSachSVDKLopTinChi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btOut;
     private javax.swing.JCheckBox cbHuyLop;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

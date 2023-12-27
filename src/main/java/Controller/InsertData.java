@@ -39,9 +39,7 @@ public class InsertData {
     
     public static boolean insertSinhVien(SinhVien sv) throws ClassNotFoundException {
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            String sqlCommand = "INSERT INTO SINHVIEN VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String sqlCommand = "INSERT INTO SINHVIEN VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             DataConnection.createStatement();
             PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
             ps.setString(1, sv.getMaSV());
@@ -55,6 +53,7 @@ public class InsertData {
             ps.setString(9, sv.getMaLop());
             ps.setInt(10, sv.getNamNhapHoc());
             ps.setString(11, sv.getTrangThai());
+            ps.setString(12, null);
             
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Thêm sinh viên thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
@@ -63,7 +62,7 @@ public class InsertData {
         } catch (SQLException ex) {
             Logger.getLogger(InsertData.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Thêm sinh viên thất bại!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Thêm sinh viên thất bại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
 
@@ -232,5 +231,26 @@ public class InsertData {
         JOptionPane.showMessageDialog(null, "Thêm chi tiết bảng điểm học kỳ thất bại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
+    
+    public static boolean insertBangDiemHocKy(BangDiemHocKy bdhk) throws ClassNotFoundException {
+        try {
+            String sqlCommand = "INSERT INTO BANGDIEMHOCKY(maSV, maHK, diemTB, xeploai) VALUES (?, ?, ?, ?)";
+            createStatement();
+            PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
+            ps.setString(1, bdhk.getMaSV());
+            ps.setString(2, bdhk.getMaHK());
+            ps.setFloat(3, bdhk.getDiemTB());
+            ps.setString(4, bdhk.getXepLoai());
+            
+            if (ps.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Thêm bảng điểm học kỳ thành công!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Thêm bảng điểm học kỳ thất bại!!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        return false;
+    } 
    
 }

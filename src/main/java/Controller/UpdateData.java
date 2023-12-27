@@ -48,7 +48,7 @@ public class UpdateData {
     }
     
     public static boolean updateSinhVien(String maSV, SinhVien sv) throws ClassNotFoundException {
-        String sqlCommand = "update SINHVIEN set maSV = ?, hoSV = ?, tenlotSV = ?, tenSV = ?, phai = ?, ngaySinh = ?, email = ?, sdt = ?, maLop = ?, namNhapHoc = ?, trangThai = ? WHERE maSV = ?";
+        String sqlCommand = "update SINHVIEN set maSV = ?, hoSV = ?, tenlotSV = ?, tenSV = ?, phai = ?, ngaySinh = ?, email = ?, sdt = ?, maLop = ?, namNhapHoc = ?, trangThai = ?, hinhAnh = ? WHERE maSV = ?";
         try {
             DataConnection.createStatement();
             PreparedStatement ps = DataConnection.connection.prepareStatement(sqlCommand);
@@ -63,16 +63,17 @@ public class UpdateData {
             ps.setString(9, sv.getMaLop());
             ps.setInt(10, sv.getNamNhapHoc());
             ps.setString(11, sv.getTrangThai());
-            ps.setString(12, maSV);
+            ps.setString(12, sv.getHinhAnh());
+            ps.setString(13, maSV);
             
             if (ps.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Sửa môn học thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Sửa sinh viên thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 return true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(UpdateData.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Sửa môn học thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Sửa sinh viên thất bại!", "Báo lỗi", JOptionPane.ERROR_MESSAGE);
         return false;
     }
     
@@ -213,7 +214,11 @@ public class UpdateData {
     }
     
     public static boolean updateChiTietBangDiemHocKy(String maSV, int maLTC, float diem, String ketQua) throws ClassNotFoundException {
-        String query = "UPDATE CHITIETBANGDIEMHOCKY SET diem = ?, ketQua = ? WHERE maLTC = ? AND maBD = (SELECT maBD FROM BANGDIEMHOCKY WHERE maSV = ?)";
+        String query = "UPDATE CHITIETBANGDIEMHOCKY SET diem = ?, ketQua = ? WHERE \n" +
+                        "maBD = (SELECT CHITIETBANGDIEMHOCKY.maBD FROM BANGDIEMHOCKY\n" +
+                        "JOIN CHITIETBANGDIEMHOCKY ON BANGDIEMHOCKY.maBD = CHITIETBANGDIEMHOCKY.maBD\n" +
+                        "WHERE maLTC = ? AND maSV = ?)\n" +
+                        "AND maLTC = ?;";
         try {
             DataConnection.createStatement();
             PreparedStatement ps = DataConnection.connection.prepareStatement(query);
@@ -221,6 +226,8 @@ public class UpdateData {
             ps.setString(2, ketQua);
             ps.setInt(3, maLTC);
             ps.setString(4, maSV);
+            ps.setInt(5, maLTC);
+            
             return ps.executeUpdate() > 0;
             
         } catch (SQLException ex) {
