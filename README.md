@@ -1,3 +1,8 @@
+<p align="center">
+  <a href="https://ptithcm.edu.vn/" title="Học viên Công nghệ Bưu chính viễn thông cơ sở tại Tp Hồ Chí Minh" style="border: none;">
+    <img src="https://daihoconline.edu.vn/wp-content/uploads/2022/12/logo_bcvt_transparent_Original_White-background_600px.png" alt="Học viện Công nghệ Bưu chính viễn thông">
+  </a>
+</p>
 
 # Phần mềm Quản lý Sinh Viên
 
