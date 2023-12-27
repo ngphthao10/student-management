@@ -30,6 +30,7 @@
 * NetBeans IDE 2021 - JDK 17
 * Microsoft SQL Server Management Studio 2019
 * MSSQL-JDBC <version> 11.2.3.jre17
+* Mở SQL Server 2019 Configuration Manager => SQL Server Network => Chỉnh TCP/IP enable và TCP port: 1433 => restart
 * Component JCalender https://toedter.com/jcalendar/
   
 ### Bước 1: Khởi tạo database
