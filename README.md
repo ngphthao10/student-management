@@ -40,4 +40,6 @@
 ### Bước 2: Thực thi chương trình
 
 * Mở file src/main/java/Controller/DataConnection.java để đổi sqlInstanceName thành Server name và password (nếu cần)
-* Run file src/main/java/View/GiaoDienDangNhap.java, tên đăng nhập và mật khẩu có sẵn trong Database 
+* Do không thể khắc phục lỗi khi bỏ source của icon nên code trên lại để link icon của máy cá nhân -> nên đổi lại source file của icon trước khi run
+* Run file src/main/java/View/GiaoDienDangNhap.java, tên đăng nhập và mật khẩu có sẵn trong Database
+* Lưu ý: Các nút tắt trong từng màn hình là một icon
